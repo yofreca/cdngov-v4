@@ -164,20 +164,54 @@
 }
 
 /* Modo de alto contraste para accesibilidad */
+/* Solo aplica al contenido principal (main) para no afectar header/nav/footer */
+
 body.high-contrast {
+  background-color: #000 !important;
+}
+
+/* Aplicar alto contraste SOLO al contenido principal */
+body.high-contrast main {
   background-color: #000 !important;
   color: #ffff00 !important;
 }
 
-body.high-contrast * {
+body.high-contrast main * {
   background-color: #000 !important;
   color: #ffff00 !important;
   border-color: #ffff00 !important;
 }
 
-/* Excepciones para elementos que NO deben cambiar en alto contraste */
+/* Links en el contenido principal */
+body.high-contrast main a {
+  color: #00ffff !important;
+  text-decoration: underline !important;
+}
 
-/* Barra de accesibilidad */
+/* Botones en el contenido principal */
+body.high-contrast main button {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+}
+
+/* Inputs en el contenido principal */
+body.high-contrast main input,
+body.high-contrast main textarea,
+body.high-contrast main select {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+}
+
+/* Imágenes en main mantienen visibilidad */
+body.high-contrast main img,
+body.high-contrast main svg {
+  opacity: 0.8 !important;
+  filter: grayscale(100%) contrast(1.2) !important;
+}
+
+/* Barra de accesibilidad mantiene su diseño original */
 body.high-contrast .accessibility-bar,
 body.high-contrast .accessibility-bar * {
   background-color: var(--color-govco-marino) !important;
@@ -187,18 +221,6 @@ body.high-contrast .accessibility-bar * {
 
 body.high-contrast .accessibility-bar button:hover {
   background-color: var(--color-govco-azul-oscuro) !important;
-}
-
-/* Header, Navbar y Footer mantienen sus colores */
-body.high-contrast header,
-body.high-contrast header *,
-body.high-contrast nav,
-body.high-contrast nav *,
-body.high-contrast footer,
-body.high-contrast footer * {
-  background-color: revert !important;
-  color: revert !important;
-  border-color: revert !important;
 }
 
 /* ScrollToTop mantiene su diseño */
@@ -215,35 +237,6 @@ body.high-contrast .skip-link {
   background-color: var(--color-govco-marino) !important;
   color: white !important;
   border-color: white !important;
-}
-
-/* Imágenes y SVGs no se filtran */
-body.high-contrast img,
-body.high-contrast svg {
-  opacity: 1 !important;
-  filter: none !important;
-}
-
-/* Links en el contenido principal (no en header/nav/footer) */
-body.high-contrast main a {
-  color: #00ffff !important;
-  text-decoration: underline !important;
-}
-
-/* Botones en el contenido principal (no en barra de accesibilidad) */
-body.high-contrast main button:not(.accessibility-bar button):not(.scroll-to-top button) {
-  background-color: #000 !important;
-  color: #ffff00 !important;
-  border: 2px solid #ffff00 !important;
-}
-
-/* Inputs en el contenido principal */
-body.high-contrast main input,
-body.high-contrast main textarea,
-body.high-contrast main select {
-  background-color: #000 !important;
-  color: #ffff00 !important;
-  border: 2px solid #ffff00 !important;
 }
 
 /* Modos de daltonismo para accesibilidad */
