@@ -136,7 +136,7 @@ export function AccessibilityBar() {
         role="toolbar"
         aria-label="Herramientas de accesibilidad"
       >
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 items-end">
           {/* Contraste */}
           <button
             onClick={toggleContrast}
