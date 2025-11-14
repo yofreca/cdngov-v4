@@ -138,10 +138,10 @@ export function AccessibilityBar() {
         aria-label="Herramientas de accesibilidad"
         style={{
           top: '50vh',
-          marginTop: '-152px' // Mitad de la altura aproximada de la barra (304px / 2)
+          marginTop: '-152px'
         }}
       >
-        <div className="flex flex-col gap-2 items-end py-4 pr-2">
+        <div className="flex flex-col gap-2 items-end py-4 pr-2 relative">
           {/* Contraste */}
           <button
             onClick={toggleContrast}
@@ -196,52 +196,33 @@ export function AccessibilityBar() {
           </button>
 
           {/* Daltonismo */}
-          <button
-            onClick={() => setShowColorBlindMenu(!showColorBlindMenu)}
-            className="group relative h-12 w-12 flex items-center justify-center overflow-hidden rounded-l-lg shadow-lg transition-all duration-300 ease-in-out hover:w-44 hover:pr-1"
-            style={{
-              backgroundColor:
-                colorBlindMode !== 'none'
-                  ? 'var(--color-govco-azul-oscuro)'
-                  : 'var(--color-govco-marino)',
-            }}
-            aria-label="Modo daltonismo"
-            aria-expanded={showColorBlindMenu}
-          >
-            <span className="absolute left-3 text-sm text-white font-medium opacity-0 whitespace-nowrap transition-opacity duration-300 delay-75 group-hover:opacity-100 pointer-events-none">
-              Daltonismo
-            </span>
-            <span className="absolute right-3 text-xl text-white transition-all duration-300 group-hover:right-3" aria-hidden="true">
-              👁️
-            </span>
-          </button>
+          <div className="relative">
+            <button
+              onClick={() => setShowColorBlindMenu(!showColorBlindMenu)}
+              className="group relative h-12 w-12 flex items-center justify-center overflow-hidden rounded-l-lg shadow-lg transition-all duration-300 ease-in-out hover:w-44 hover:pr-1"
+              style={{
+                backgroundColor:
+                  colorBlindMode !== 'none'
+                    ? 'var(--color-govco-azul-oscuro)'
+                    : 'var(--color-govco-marino)',
+              }}
+              aria-label="Modo daltonismo"
+              aria-expanded={showColorBlindMenu}
+            >
+              <span className="absolute left-3 text-sm text-white font-medium opacity-0 whitespace-nowrap transition-opacity duration-300 delay-75 group-hover:opacity-100 pointer-events-none">
+                Daltonismo
+              </span>
+              <span className="absolute right-3 text-xl text-white transition-all duration-300 group-hover:right-3" aria-hidden="true">
+                👁️
+              </span>
+            </button>
 
-          {/* Resetear */}
-          <button
-            onClick={resetPreferences}
-            className="group relative h-12 w-12 flex items-center justify-center overflow-hidden rounded-l-lg shadow-lg transition-all duration-300 ease-in-out hover:w-44 hover:pr-1"
-            style={{ backgroundColor: 'var(--color-govco-marino)' }}
-            aria-label="Restablecer preferencias de accesibilidad"
-          >
-            <span className="absolute left-3 text-sm text-white font-medium opacity-0 whitespace-nowrap transition-opacity duration-300 delay-75 group-hover:opacity-100 pointer-events-none">
-              Restablecer
-            </span>
-            <span className="absolute right-3 text-xl text-white transition-all duration-300 group-hover:right-3" aria-hidden="true">
-              ↺
-            </span>
-          </button>
-        </div>
-      </div>
-
-      {/* Menú de daltonismo (fuera del contenedor con overflow) */}
-      {showColorBlindMenu && (
-        <div
-          className="fixed right-16 top-1/2 w-48 bg-white rounded-lg shadow-xl border-2 z-50"
-          style={{
-            borderColor: 'var(--color-govco-marino)',
-            transform: 'translateY(-50%)'
-          }}
-        >
+            {/* Menú de daltonismo */}
+            {showColorBlindMenu && (
+              <div
+                className="absolute right-full top-0 mr-2 w-48 bg-white rounded-lg shadow-xl border-2 z-50"
+                style={{ borderColor: 'var(--color-govco-marino)' }}
+              >
                 <button
                   onClick={() => changeColorBlindMode('none')}
                   className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 transition-colors rounded-t-lg"
@@ -288,8 +269,26 @@ export function AccessibilityBar() {
                 >
                   {colorBlindMode === 'tritanopia' ? '✓ ' : ''}Tritanopia
                 </button>
+              </div>
+            )}
+          </div>
+
+          {/* Resetear */}
+          <button
+            onClick={resetPreferences}
+            className="group relative h-12 w-12 flex items-center justify-center overflow-hidden rounded-l-lg shadow-lg transition-all duration-300 ease-in-out hover:w-44 hover:pr-1"
+            style={{ backgroundColor: 'var(--color-govco-marino)' }}
+            aria-label="Restablecer preferencias de accesibilidad"
+          >
+            <span className="absolute left-3 text-sm text-white font-medium opacity-0 whitespace-nowrap transition-opacity duration-300 delay-75 group-hover:opacity-100 pointer-events-none">
+              Restablecer
+            </span>
+            <span className="absolute right-3 text-xl text-white transition-all duration-300 group-hover:right-3" aria-hidden="true">
+              ↺
+            </span>
+          </button>
         </div>
-      )}
+      </div>
 
       {/* Botón Volver Arriba */}
       {showScrollTop && (
