@@ -76,11 +76,38 @@ export function Login() {
     setLoginError(null)
 
     try {
-      // Simular llamada a API de autenticación
-      // En producción, esto llamaría a tu backend
-      await new Promise((resolve, reject) => {
+      // En desarrollo, aceptar cualquier credencial
+      // En producción, esto llamaría a tu backend real
+      if (import.meta.env.DEV) {
+        // MODO DESARROLLO: Aceptar credenciales de prueba O cualquier email/password
+        const isTestCredentials =
+          data.email === 'admin@arn.gov.co' && data.password === 'Admin123!'
+
+        const mockUser = {
+          id: '1',
+          name: isTestCredentials ? 'Administrador ARN' : 'Usuario de Prueba',
+          email: data.email,
+          role: isTestCredentials ? 'admin' : 'user',
+        }
+
+        const mockToken = 'mock-jwt-token-' + Date.now()
+
+        // Simular delay de red
+        await new Promise((resolve) => setTimeout(resolve, 800))
+
+        securityLogger.logSecurityEvent('authentication', 'info', {
+          action: 'login_success_dev',
+          email: data.email,
+        })
+
+        login(mockUser, mockToken, data.rememberMe)
+        navigate(from, { replace: true })
+        return
+      }
+
+      // MODO PRODUCCIÓN: Validar credenciales reales
+      const response: any = await new Promise((resolve, reject) => {
         setTimeout(() => {
-          // Simulación: credenciales de prueba
           if (
             data.email === 'admin@arn.gov.co' &&
             data.password === 'Admin123!'
@@ -99,44 +126,36 @@ export function Login() {
           }
         }, 1000)
       })
-        .then((response: any) => {
-          // Login exitoso
-          securityLogger.logSecurityEvent('authentication', 'info', {
-            action: 'login_success',
-            email: data.email,
-          })
 
-          login(response.user, response.token, data.rememberMe)
-          navigate(from, { replace: true })
-        })
-        .catch((error) => {
-          // Login fallido
-          const newAttemptCount = attemptCount + 1
-          setAttemptCount(newAttemptCount)
-
-          securityLogger.logSecurityEvent('authentication', 'warning', {
-            action: 'login_failed',
-            email: data.email,
-            attempt: newAttemptCount,
-          })
-
-          if (newAttemptCount >= MAX_ATTEMPTS) {
-            setLoginError(
-              'Demasiados intentos fallidos. Por favor, recupere su contraseña.'
-            )
-          } else {
-            setLoginError(
-              'Correo electrónico o contraseña incorrectos. ' +
-                `Le quedan ${MAX_ATTEMPTS - newAttemptCount} intentos.`
-            )
-          }
-        })
-    } catch (error) {
-      setLoginError('Error al iniciar sesión. Por favor, intente nuevamente.')
-      securityLogger.logSecurityEvent('authentication', 'error', {
-        action: 'login_error',
-        error: error instanceof Error ? error.message : 'Unknown error',
+      // Login exitoso
+      securityLogger.logSecurityEvent('authentication', 'info', {
+        action: 'login_success',
+        email: data.email,
       })
+
+      login(response.user, response.token, data.rememberMe)
+      navigate(from, { replace: true })
+    } catch (error) {
+      // Login fallido
+      const newAttemptCount = attemptCount + 1
+      setAttemptCount(newAttemptCount)
+
+      securityLogger.logSecurityEvent('authentication', 'warning', {
+        action: 'login_failed',
+        email: data.email,
+        attempt: newAttemptCount,
+      })
+
+      if (newAttemptCount >= MAX_ATTEMPTS) {
+        setLoginError(
+          'Demasiados intentos fallidos. Por favor, recupere su contraseña.'
+        )
+      } else {
+        setLoginError(
+          'Correo electrónico o contraseña incorrectos. ' +
+            `Le quedan ${MAX_ATTEMPTS - newAttemptCount} intentos.`
+        )
+      }
     } finally {
       setIsSubmitting(false)
     }
@@ -203,11 +222,16 @@ export function Login() {
           {import.meta.env.DEV && (
             <div
               className="rounded-md p-4"
-              style={{ backgroundColor: '#fef3c7' }}
+              style={{ backgroundColor: '#e0f2fe' }}
               role="note"
             >
               <p className="text-xs text-gray-700">
-                <strong>Credenciales de prueba:</strong>
+                <strong>🔓 MODO DESARROLLO</strong>
+                <br />
+                ✅ Acepta cualquier email y contraseña
+                <br />
+                <br />
+                <strong>Credenciales admin de prueba:</strong>
                 <br />
                 Email: admin@arn.gov.co
                 <br />
