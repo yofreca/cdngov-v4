@@ -131,17 +131,24 @@ export function AccessibilityBar() {
 
   return (
     <>
-      {/* Barra de Accesibilidad */}
+      {/* Barra de Accesibilidad - Wrapper de posicionamiento */}
       <div
-        className="accessibility-bar fixed right-0 z-50"
-        role="toolbar"
-        aria-label="Herramientas de accesibilidad"
+        className="fixed right-0 z-50 pointer-events-none"
         style={{
-          top: '50%',
-          transform: 'translateY(-50%)'
+          top: 0,
+          bottom: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-end'
         }}
       >
-        <div className="flex flex-col gap-2 items-end py-4 pr-2">
+        {/* Contenido de la barra */}
+        <div
+          className="pointer-events-auto"
+          role="toolbar"
+          aria-label="Herramientas de accesibilidad"
+        >
+          <div className="flex flex-col gap-2 items-end py-4 pr-2">
           {/* Contraste */}
           <button
             onClick={toggleContrast}
@@ -230,6 +237,7 @@ export function AccessibilityBar() {
               ↺
             </span>
           </button>
+          </div>
         </div>
       </div>
 
