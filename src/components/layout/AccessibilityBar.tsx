@@ -28,6 +28,21 @@ export function AccessibilityBar() {
 
   const [showColorBlindMenu, setShowColorBlindMenu] = useState(false)
 
+  // Funciones auxiliares
+  const applyColorBlindFilter = (mode: ColorBlindMode) => {
+    // Remover clases anteriores
+    document.body.classList.remove(
+      'colorblind-protanopia',
+      'colorblind-deuteranopia',
+      'colorblind-tritanopia'
+    )
+
+    // Aplicar nueva clase
+    if (mode !== 'none') {
+      document.body.classList.add(`colorblind-${mode}`)
+    }
+  }
+
   // Aplicar preferencias guardadas al cargar
   useEffect(() => {
     document.documentElement.style.fontSize = `${fontSize}px`
@@ -40,6 +55,7 @@ export function AccessibilityBar() {
 
     // Aplicar filtro de daltonismo
     applyColorBlindFilter(colorBlindMode)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const increaseFontSize = () => {
@@ -70,20 +86,6 @@ export function AccessibilityBar() {
     } else {
       document.body.classList.remove('high-contrast')
       localStorage.setItem('accessibility-high-contrast', 'false')
-    }
-  }
-
-  const applyColorBlindFilter = (mode: ColorBlindMode) => {
-    // Remover clases anteriores
-    document.body.classList.remove(
-      'colorblind-protanopia',
-      'colorblind-deuteranopia',
-      'colorblind-tritanopia'
-    )
-
-    // Aplicar nueva clase
-    if (mode !== 'none') {
-      document.body.classList.add(`colorblind-${mode}`)
     }
   }
 
