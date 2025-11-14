@@ -37,18 +37,17 @@ export function AppRoutes() {
   return (
     <Suspense fallback={<LoadingSpinner fullScreen message="Cargando página..." />}>
       <Routes>
-        {/* Rutas de autenticación (sin layout) */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/registro" element={<Register />} />
-        <Route path="/recuperar-contrasena" element={<ForgotPassword />} />
-
-        {/* Rutas públicas con layout */}
+        {/* Todas las rutas con layout (incluye header y footer) */}
         <Route element={<MainLayout />}>
+          {/* Rutas públicas */}
           <Route path="/" element={<Home />} />
           <Route path="/componentes" element={<ComponentsDemo />} />
-
-          {/* Formulario - ahora puede ser público o protegido según necesidad */}
           <Route path="/formulario" element={<FormExample />} />
+
+          {/* Rutas de autenticación */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/registro" element={<Register />} />
+          <Route path="/recuperar-contrasena" element={<ForgotPassword />} />
 
           {/* Rutas protegidas - requieren autenticación */}
           <Route
