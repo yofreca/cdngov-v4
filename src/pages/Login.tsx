@@ -56,8 +56,9 @@ export function Login() {
     },
   })
 
-  const from = (location.state as { from?: { pathname: string } })?.from
-    ?.pathname || '/'
+  // Determinar dónde redirigir después del login
+  const from =
+    (location.state as { from?: { pathname: string } })?.from?.pathname || '/dashboard'
 
   const onSubmit = async (data: LoginFormData) => {
     // Verificar límite de intentos (protección contra fuerza bruta)
@@ -100,8 +101,16 @@ export function Login() {
           email: data.email,
         })
 
+        // Guardar credenciales en el contexto
         login(mockUser, mockToken, data.rememberMe)
-        navigate(from, { replace: true })
+
+        // Log para debugging
+        console.log('Login exitoso, redirigiendo a:', from)
+
+        // Navegar después del login
+        setTimeout(() => {
+          navigate(from, { replace: true })
+        }, 100)
         return
       }
 
@@ -134,7 +143,14 @@ export function Login() {
       })
 
       login(response.user, response.token, data.rememberMe)
-      navigate(from, { replace: true })
+
+      // Log para debugging
+      console.log('Login exitoso (producción), redirigiendo a:', from)
+
+      // Navegar después del login
+      setTimeout(() => {
+        navigate(from, { replace: true })
+      }, 100)
     } catch (error) {
       // Login fallido
       const newAttemptCount = attemptCount + 1
