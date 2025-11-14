@@ -140,7 +140,7 @@ export function AccessibilityBar() {
           {/* Contraste */}
           <button
             onClick={toggleContrast}
-            className="group relative h-12 w-12 flex items-center justify-center overflow-hidden rounded-l-lg shadow-lg transition-all duration-300 ease-in-out hover:w-44"
+            className="group relative h-12 w-12 flex items-center justify-center overflow-hidden rounded-l-lg shadow-lg transition-all duration-300 ease-in-out hover:w-44 hover:pr-1"
             style={{
               backgroundColor: highContrast
                 ? 'var(--color-govco-azul-oscuro)'
@@ -150,10 +150,10 @@ export function AccessibilityBar() {
               highContrast ? 'Desactivar alto contraste' : 'Activar alto contraste'
             }
           >
-            <span className="absolute left-3 text-sm text-white font-medium opacity-0 whitespace-nowrap transition-opacity duration-300 group-hover:opacity-100 pointer-events-none">
+            <span className="absolute left-3 text-sm text-white font-medium opacity-0 whitespace-nowrap transition-opacity duration-300 delay-75 group-hover:opacity-100 pointer-events-none">
               Contraste
             </span>
-            <span className="text-xl text-white transition-all duration-300 group-hover:ml-16" aria-hidden="true">
+            <span className="absolute right-3 text-xl text-white transition-all duration-300 group-hover:right-3" aria-hidden="true">
               ⚫⚪
             </span>
           </button>
@@ -162,14 +162,14 @@ export function AccessibilityBar() {
           <button
             onClick={decreaseFontSize}
             disabled={fontSize <= 12}
-            className="group relative h-12 w-12 flex items-center justify-center overflow-hidden rounded-l-lg shadow-lg transition-all duration-300 ease-in-out hover:w-44 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="group relative h-12 w-12 flex items-center justify-center overflow-hidden rounded-l-lg shadow-lg transition-all duration-300 ease-in-out hover:w-44 hover:pr-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:w-12"
             style={{ backgroundColor: 'var(--color-govco-marino)' }}
             aria-label="Reducir tamaño de letra"
           >
-            <span className="absolute left-3 text-sm text-white font-medium opacity-0 whitespace-nowrap transition-opacity duration-300 group-hover:opacity-100 pointer-events-none">
+            <span className="absolute left-3 text-sm text-white font-medium opacity-0 whitespace-nowrap transition-opacity duration-300 delay-75 group-hover:opacity-100 pointer-events-none">
               Reducir letra
             </span>
-            <span className="text-lg text-white font-bold transition-all duration-300 group-hover:ml-20" aria-hidden="true">
+            <span className="absolute right-3 text-lg text-white font-bold transition-all duration-300 group-hover:right-3" aria-hidden="true">
               A-
             </span>
           </button>
@@ -178,14 +178,14 @@ export function AccessibilityBar() {
           <button
             onClick={increaseFontSize}
             disabled={fontSize >= 20}
-            className="group relative h-12 w-12 flex items-center justify-center overflow-hidden rounded-l-lg shadow-lg transition-all duration-300 ease-in-out hover:w-44 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="group relative h-12 w-12 flex items-center justify-center overflow-hidden rounded-l-lg shadow-lg transition-all duration-300 ease-in-out hover:w-44 hover:pr-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:w-12"
             style={{ backgroundColor: 'var(--color-govco-marino)' }}
             aria-label="Aumentar tamaño de letra"
           >
-            <span className="absolute left-3 text-sm text-white font-medium opacity-0 whitespace-nowrap transition-opacity duration-300 group-hover:opacity-100 pointer-events-none">
+            <span className="absolute left-3 text-sm text-white font-medium opacity-0 whitespace-nowrap transition-opacity duration-300 delay-75 group-hover:opacity-100 pointer-events-none">
               Aumentar letra
             </span>
-            <span className="text-xl text-white font-bold transition-all duration-300 group-hover:ml-20" aria-hidden="true">
+            <span className="absolute right-3 text-xl text-white font-bold transition-all duration-300 group-hover:right-3" aria-hidden="true">
               A+
             </span>
           </button>
@@ -194,7 +194,7 @@ export function AccessibilityBar() {
           <div className="relative">
             <button
               onClick={() => setShowColorBlindMenu(!showColorBlindMenu)}
-              className="group relative h-12 w-12 flex items-center justify-center overflow-hidden rounded-l-lg shadow-lg transition-all duration-300 ease-in-out hover:w-44"
+              className="group relative h-12 w-12 flex items-center justify-center overflow-hidden rounded-l-lg shadow-lg transition-all duration-300 ease-in-out hover:w-44 hover:pr-1"
               style={{
                 backgroundColor:
                   colorBlindMode !== 'none'
@@ -204,10 +204,10 @@ export function AccessibilityBar() {
               aria-label="Modo daltonismo"
               aria-expanded={showColorBlindMenu}
             >
-              <span className="absolute left-3 text-sm text-white font-medium opacity-0 whitespace-nowrap transition-opacity duration-300 group-hover:opacity-100 pointer-events-none">
+              <span className="absolute left-3 text-sm text-white font-medium opacity-0 whitespace-nowrap transition-opacity duration-300 delay-75 group-hover:opacity-100 pointer-events-none">
                 Daltonismo
               </span>
-              <span className="text-xl text-white transition-all duration-300 group-hover:ml-16" aria-hidden="true">
+              <span className="absolute right-3 text-xl text-white transition-all duration-300 group-hover:right-3" aria-hidden="true">
                 👁️
               </span>
             </button>
@@ -271,14 +271,14 @@ export function AccessibilityBar() {
           {/* Resetear */}
           <button
             onClick={resetPreferences}
-            className="group relative h-12 w-12 flex items-center justify-center overflow-hidden rounded-l-lg shadow-lg transition-all duration-300 ease-in-out hover:w-44"
+            className="group relative h-12 w-12 flex items-center justify-center overflow-hidden rounded-l-lg shadow-lg transition-all duration-300 ease-in-out hover:w-44 hover:pr-1"
             style={{ backgroundColor: 'var(--color-govco-marino)' }}
             aria-label="Restablecer preferencias de accesibilidad"
           >
-            <span className="absolute left-3 text-sm text-white font-medium opacity-0 whitespace-nowrap transition-opacity duration-300 group-hover:opacity-100 pointer-events-none">
+            <span className="absolute left-3 text-sm text-white font-medium opacity-0 whitespace-nowrap transition-opacity duration-300 delay-75 group-hover:opacity-100 pointer-events-none">
               Restablecer
             </span>
-            <span className="text-xl text-white transition-all duration-300 group-hover:ml-16" aria-hidden="true">
+            <span className="absolute right-3 text-xl text-white transition-all duration-300 group-hover:right-3" aria-hidden="true">
               ↺
             </span>
           </button>
@@ -289,14 +289,14 @@ export function AccessibilityBar() {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="group fixed right-4 bottom-4 h-12 w-12 flex items-center justify-center overflow-hidden rounded-full shadow-lg transition-all duration-300 ease-in-out hover:w-40 hover:rounded-lg z-50"
+          className="group fixed right-4 bottom-4 h-12 w-12 flex items-center justify-center overflow-hidden rounded-full shadow-lg transition-all duration-300 ease-in-out hover:w-40 hover:rounded-lg hover:pr-1 z-50"
           style={{ backgroundColor: 'var(--color-govco-verde-azulado)' }}
           aria-label="Volver arriba"
         >
-          <span className="absolute left-3 text-sm text-white font-medium opacity-0 whitespace-nowrap transition-opacity duration-300 group-hover:opacity-100 pointer-events-none">
+          <span className="absolute left-3 text-sm text-white font-medium opacity-0 whitespace-nowrap transition-opacity duration-300 delay-75 group-hover:opacity-100 pointer-events-none">
             Volver arriba
           </span>
-          <span className="text-2xl text-white transition-all duration-300 group-hover:ml-20" aria-hidden="true">
+          <span className="absolute right-3 text-2xl text-white transition-all duration-300 group-hover:right-3" aria-hidden="true">
             ↑
           </span>
         </button>
