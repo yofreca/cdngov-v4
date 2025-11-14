@@ -7,10 +7,13 @@ type ColorBlindMode = 'none' | 'protanopia' | 'deuteranopia' | 'tritanopia'
  * - Contraste alto/bajo
  * - Aumentar/disminuir tamaño de letra
  * - Modo daltonismo (protanopia, deuteranopia, tritanopia)
+ * - Botón volver arriba
  * - Persistencia de preferencias en localStorage
- * - Diseño: Azul Gov.co con iconos blancos
+ * - Diseño compacto: Solo iconos, texto visible al hacer hover
+ * - Animación: icono se desplaza a la izquierda y aparece texto
  */
 export function AccessibilityBar() {
+  const [showScrollTop, setShowScrollTop] = useState(false)
   // Inicializar estados con valores guardados en localStorage
   const [fontSize, setFontSize] = useState<number>(() => {
     const saved = localStorage.getItem('accessibility-font-size')
@@ -108,211 +111,196 @@ export function AccessibilityBar() {
     localStorage.removeItem('accessibility-colorblind-mode')
   }
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
+  // Detectar scroll para mostrar/ocultar botón "Volver arriba"
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 300)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <div
-      className="accessibility-bar fixed right-0 top-1/2 -translate-y-1/2 z-50"
-      role="toolbar"
-      aria-label="Herramientas de accesibilidad"
-    >
+    <>
+      {/* Barra de Accesibilidad */}
       <div
-        className="rounded-l-lg shadow-lg overflow-hidden"
-        style={{ backgroundColor: 'var(--color-govco-marino)' }}
+        className="accessibility-bar fixed right-0 top-1/2 -translate-y-1/2 z-50"
+        role="toolbar"
+        aria-label="Herramientas de accesibilidad"
       >
-        {/* Contraste */}
-        <button
-          onClick={toggleContrast}
-          className="w-full px-2 py-2 flex flex-col items-center justify-center transition-colors border-b border-white/20"
-          style={{
-            backgroundColor: highContrast
-              ? 'var(--color-govco-azul-oscuro)'
-              : 'transparent',
-          }}
-          onMouseEnter={(e) => {
-            if (!highContrast) {
-              e.currentTarget.style.backgroundColor =
-                'var(--color-govco-azul-oscuro)'
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (!highContrast) {
-              e.currentTarget.style.backgroundColor = 'transparent'
-            }
-          }}
-          aria-label={
-            highContrast ? 'Desactivar alto contraste' : 'Activar alto contraste'
-          }
-          title="Contraste"
-        >
-          <span className="text-lg text-white" aria-hidden="true">
-            ⚫⚪
-          </span>
-          <span className="text-[10px] text-center text-white font-medium leading-tight">
-            Contraste
-          </span>
-        </button>
-
-        {/* Reducir letra */}
-        <button
-          onClick={decreaseFontSize}
-          disabled={fontSize <= 12}
-          className="w-full px-2 py-2 flex flex-col items-center justify-center transition-colors border-b border-white/20 disabled:opacity-50 disabled:cursor-not-allowed"
-          onMouseEnter={(e) => {
-            if (fontSize > 12) {
-              e.currentTarget.style.backgroundColor =
-                'var(--color-govco-azul-oscuro)'
-            }
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'transparent'
-          }}
-          aria-label="Reducir tamaño de letra"
-          title="Reducir letra"
-        >
-          <span className="text-base text-white font-bold" aria-hidden="true">
-            A-
-          </span>
-          <span className="text-[10px] text-center text-white font-medium leading-tight">
-            Reducir
-          </span>
-        </button>
-
-        {/* Aumentar letra */}
-        <button
-          onClick={increaseFontSize}
-          disabled={fontSize >= 20}
-          className="w-full px-2 py-2 flex flex-col items-center justify-center transition-colors border-b border-white/20 disabled:opacity-50 disabled:cursor-not-allowed"
-          onMouseEnter={(e) => {
-            if (fontSize < 20) {
-              e.currentTarget.style.backgroundColor =
-                'var(--color-govco-azul-oscuro)'
-            }
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'transparent'
-          }}
-          aria-label="Aumentar tamaño de letra"
-          title="Aumentar letra"
-        >
-          <span className="text-lg text-white font-bold" aria-hidden="true">
-            A+
-          </span>
-          <span className="text-[10px] text-center text-white font-medium leading-tight">
-            Aumentar
-          </span>
-        </button>
-
-        {/* Daltonismo */}
-        <div className="relative">
+        <div className="flex flex-col gap-1">
+          {/* Contraste */}
           <button
-            onClick={() => setShowColorBlindMenu(!showColorBlindMenu)}
-            className="w-full px-2 py-2 flex flex-col items-center justify-center transition-colors border-b border-white/20"
+            onClick={toggleContrast}
+            className="group relative h-12 w-12 flex items-center justify-end overflow-hidden rounded-l-lg shadow-lg transition-all duration-300 ease-in-out hover:w-48 border-b border-white/20"
             style={{
-              backgroundColor:
-                colorBlindMode !== 'none'
-                  ? 'var(--color-govco-azul-oscuro)'
-                  : 'transparent',
+              backgroundColor: highContrast
+                ? 'var(--color-govco-azul-oscuro)'
+                : 'var(--color-govco-marino)',
             }}
-            onMouseEnter={(e) => {
-              if (colorBlindMode === 'none') {
-                e.currentTarget.style.backgroundColor =
-                  'var(--color-govco-azul-oscuro)'
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (colorBlindMode === 'none') {
-                e.currentTarget.style.backgroundColor = 'transparent'
-              }
-            }}
-            aria-label="Modo daltonismo"
-            aria-expanded={showColorBlindMenu}
-            title="Daltonismo"
+            aria-label={
+              highContrast ? 'Desactivar alto contraste' : 'Activar alto contraste'
+            }
           >
-            <span className="text-lg text-white" aria-hidden="true">
-              👁️
+            <span className="absolute left-3 text-sm text-white font-medium opacity-0 whitespace-nowrap transition-opacity duration-300 group-hover:opacity-100">
+              Contraste
             </span>
-            <span className="text-[10px] text-center text-white font-medium leading-tight">
-              Daltonismo
+            <span className="flex items-center justify-center w-12 h-12 text-xl text-white transition-transform duration-300 group-hover:translate-x-0" aria-hidden="true">
+              ⚫⚪
             </span>
           </button>
 
-          {/* Menú de daltonismo */}
-          {showColorBlindMenu && (
-            <div
-              className="absolute right-full top-0 mr-2 w-48 bg-white rounded-lg shadow-xl border-2"
-              style={{ borderColor: 'var(--color-govco-marino)' }}
-            >
-              <button
-                onClick={() => changeColorBlindMode('none')}
-                className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 transition-colors rounded-t-lg"
-                style={{
-                  backgroundColor:
-                    colorBlindMode === 'none' ? '#e6effd' : 'transparent',
-                  color: 'var(--color-govco-gris-oscuro)',
-                }}
-              >
-                ✓ Normal
-              </button>
-              <button
-                onClick={() => changeColorBlindMode('protanopia')}
-                className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 transition-colors border-t"
-                style={{
-                  backgroundColor:
-                    colorBlindMode === 'protanopia' ? '#e6effd' : 'transparent',
-                  color: 'var(--color-govco-gris-oscuro)',
-                }}
-              >
-                {colorBlindMode === 'protanopia' ? '✓ ' : ''}Protanopia
-              </button>
-              <button
-                onClick={() => changeColorBlindMode('deuteranopia')}
-                className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 transition-colors border-t"
-                style={{
-                  backgroundColor:
-                    colorBlindMode === 'deuteranopia'
-                      ? '#e6effd'
-                      : 'transparent',
-                  color: 'var(--color-govco-gris-oscuro)',
-                }}
-              >
-                {colorBlindMode === 'deuteranopia' ? '✓ ' : ''}Deuteranopia
-              </button>
-              <button
-                onClick={() => changeColorBlindMode('tritanopia')}
-                className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 transition-colors border-t rounded-b-lg"
-                style={{
-                  backgroundColor:
-                    colorBlindMode === 'tritanopia' ? '#e6effd' : 'transparent',
-                  color: 'var(--color-govco-gris-oscuro)',
-                }}
-              >
-                {colorBlindMode === 'tritanopia' ? '✓ ' : ''}Tritanopia
-              </button>
-            </div>
-          )}
-        </div>
+          {/* Reducir letra */}
+          <button
+            onClick={decreaseFontSize}
+            disabled={fontSize <= 12}
+            className="group relative h-12 w-12 flex items-center justify-end overflow-hidden rounded-l-lg shadow-lg transition-all duration-300 ease-in-out hover:w-48 disabled:opacity-50 disabled:cursor-not-allowed border-b border-white/20"
+            style={{ backgroundColor: 'var(--color-govco-marino)' }}
+            aria-label="Reducir tamaño de letra"
+          >
+            <span className="absolute left-3 text-sm text-white font-medium opacity-0 whitespace-nowrap transition-opacity duration-300 group-hover:opacity-100">
+              Reducir letra
+            </span>
+            <span className="flex items-center justify-center w-12 h-12 text-lg text-white font-bold transition-transform duration-300 group-hover:translate-x-0" aria-hidden="true">
+              A-
+            </span>
+          </button>
 
-        {/* Resetear */}
+          {/* Aumentar letra */}
+          <button
+            onClick={increaseFontSize}
+            disabled={fontSize >= 20}
+            className="group relative h-12 w-12 flex items-center justify-end overflow-hidden rounded-l-lg shadow-lg transition-all duration-300 ease-in-out hover:w-48 disabled:opacity-50 disabled:cursor-not-allowed border-b border-white/20"
+            style={{ backgroundColor: 'var(--color-govco-marino)' }}
+            aria-label="Aumentar tamaño de letra"
+          >
+            <span className="absolute left-3 text-sm text-white font-medium opacity-0 whitespace-nowrap transition-opacity duration-300 group-hover:opacity-100">
+              Aumentar letra
+            </span>
+            <span className="flex items-center justify-center w-12 h-12 text-xl text-white font-bold transition-transform duration-300 group-hover:translate-x-0" aria-hidden="true">
+              A+
+            </span>
+          </button>
+
+          {/* Daltonismo */}
+          <div className="relative">
+            <button
+              onClick={() => setShowColorBlindMenu(!showColorBlindMenu)}
+              className="group relative h-12 w-12 flex items-center justify-end overflow-hidden rounded-l-lg shadow-lg transition-all duration-300 ease-in-out hover:w-48 border-b border-white/20"
+              style={{
+                backgroundColor:
+                  colorBlindMode !== 'none'
+                    ? 'var(--color-govco-azul-oscuro)'
+                    : 'var(--color-govco-marino)',
+              }}
+              aria-label="Modo daltonismo"
+              aria-expanded={showColorBlindMenu}
+            >
+              <span className="absolute left-3 text-sm text-white font-medium opacity-0 whitespace-nowrap transition-opacity duration-300 group-hover:opacity-100">
+                Daltonismo
+              </span>
+              <span className="flex items-center justify-center w-12 h-12 text-xl text-white transition-transform duration-300 group-hover:translate-x-0" aria-hidden="true">
+                👁️
+              </span>
+            </button>
+
+            {/* Menú de daltonismo */}
+            {showColorBlindMenu && (
+              <div
+                className="absolute right-full top-0 mr-2 w-48 bg-white rounded-lg shadow-xl border-2"
+                style={{ borderColor: 'var(--color-govco-marino)' }}
+              >
+                <button
+                  onClick={() => changeColorBlindMode('none')}
+                  className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 transition-colors rounded-t-lg"
+                  style={{
+                    backgroundColor:
+                      colorBlindMode === 'none' ? '#e6effd' : 'transparent',
+                    color: 'var(--color-govco-gris-oscuro)',
+                  }}
+                >
+                  {colorBlindMode === 'none' ? '✓ ' : ''}Normal
+                </button>
+                <button
+                  onClick={() => changeColorBlindMode('protanopia')}
+                  className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 transition-colors border-t"
+                  style={{
+                    backgroundColor:
+                      colorBlindMode === 'protanopia' ? '#e6effd' : 'transparent',
+                    color: 'var(--color-govco-gris-oscuro)',
+                  }}
+                >
+                  {colorBlindMode === 'protanopia' ? '✓ ' : ''}Protanopia
+                </button>
+                <button
+                  onClick={() => changeColorBlindMode('deuteranopia')}
+                  className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 transition-colors border-t"
+                  style={{
+                    backgroundColor:
+                      colorBlindMode === 'deuteranopia'
+                        ? '#e6effd'
+                        : 'transparent',
+                    color: 'var(--color-govco-gris-oscuro)',
+                  }}
+                >
+                  {colorBlindMode === 'deuteranopia' ? '✓ ' : ''}Deuteranopia
+                </button>
+                <button
+                  onClick={() => changeColorBlindMode('tritanopia')}
+                  className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 transition-colors border-t rounded-b-lg"
+                  style={{
+                    backgroundColor:
+                      colorBlindMode === 'tritanopia' ? '#e6effd' : 'transparent',
+                    color: 'var(--color-govco-gris-oscuro)',
+                  }}
+                >
+                  {colorBlindMode === 'tritanopia' ? '✓ ' : ''}Tritanopia
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Resetear */}
+          <button
+            onClick={resetPreferences}
+            className="group relative h-12 w-12 flex items-center justify-end overflow-hidden rounded-l-lg shadow-lg transition-all duration-300 ease-in-out hover:w-48"
+            style={{ backgroundColor: 'var(--color-govco-marino)' }}
+            aria-label="Restablecer preferencias de accesibilidad"
+          >
+            <span className="absolute left-3 text-sm text-white font-medium opacity-0 whitespace-nowrap transition-opacity duration-300 group-hover:opacity-100">
+              Restablecer
+            </span>
+            <span className="flex items-center justify-center w-12 h-12 text-xl text-white transition-transform duration-300 group-hover:translate-x-0" aria-hidden="true">
+              ↺
+            </span>
+          </button>
+        </div>
+      </div>
+
+      {/* Botón Volver Arriba */}
+      {showScrollTop && (
         <button
-          onClick={resetPreferences}
-          className="w-full px-2 py-2 flex flex-col items-center justify-center transition-colors"
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor =
-              'var(--color-govco-azul-oscuro)'
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'transparent'
-          }}
-          aria-label="Restablecer preferencias de accesibilidad"
-          title="Restablecer"
+          onClick={scrollToTop}
+          className="group fixed right-4 bottom-4 h-12 w-12 flex items-center justify-end overflow-hidden rounded-lg shadow-lg transition-all duration-300 ease-in-out hover:w-48 z-50"
+          style={{ backgroundColor: 'var(--color-govco-verde-azulado)' }}
+          aria-label="Volver arriba"
         >
-          <span className="text-lg text-white" aria-hidden="true">
-            ↺
+          <span className="absolute left-3 text-sm text-white font-medium opacity-0 whitespace-nowrap transition-opacity duration-300 group-hover:opacity-100">
+            Volver arriba
           </span>
-          <span className="text-[10px] text-center text-white font-medium leading-tight">
-            Restablecer
+          <span className="flex items-center justify-center w-12 h-12 text-2xl text-white transition-transform duration-300 group-hover:translate-x-0" aria-hidden="true">
+            ↑
           </span>
         </button>
-      </div>
-    </div>
+      )}
+    </>
   )
 }
