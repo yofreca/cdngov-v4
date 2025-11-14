@@ -132,12 +132,11 @@ export function AccessibilityBar() {
     <>
       {/* Barra de Accesibilidad */}
       <div
-        className="accessibility-bar fixed right-0 top-1/2 -translate-y-1/2 z-50 max-h-screen overflow-y-auto py-4"
+        className="accessibility-bar fixed right-0 top-1/2 -translate-y-1/2 z-50 py-4"
         role="toolbar"
         aria-label="Herramientas de accesibilidad"
-        style={{ maxHeight: 'calc(100vh - 2rem)' }}
       >
-        <div className="flex flex-col gap-2 items-end">
+        <div className="flex flex-col gap-2 items-end max-h-screen overflow-y-auto pr-2" style={{ maxHeight: 'calc(100vh - 2rem)' }}>
           {/* Contraste */}
           <button
             onClick={toggleContrast}
@@ -155,7 +154,7 @@ export function AccessibilityBar() {
               Contraste
             </span>
             <span className="absolute right-3 text-xl text-white transition-all duration-300 group-hover:right-3" aria-hidden="true">
-              ⚫⚪
+              ◐
             </span>
           </button>
 
@@ -290,7 +289,7 @@ export function AccessibilityBar() {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="group fixed right-4 bottom-4 h-12 w-12 flex items-center justify-center overflow-hidden rounded-full shadow-lg transition-all duration-300 ease-in-out hover:w-40 hover:rounded-lg hover:pr-1 z-50"
+          className="group fixed right-4 bottom-8 h-12 w-12 flex items-center justify-center overflow-hidden rounded-full shadow-lg transition-all duration-300 ease-in-out hover:w-40 hover:rounded-lg hover:pr-1 z-40"
           style={{ backgroundColor: 'var(--color-govco-verde-azulado)' }}
           aria-label="Volver arriba"
         >
