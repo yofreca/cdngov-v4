@@ -12,7 +12,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { Button } from '@components/common/Button'
-import { passwordSchema, cedulaSchema, phoneSchema } from '@utils/validations'
+import { passwordSchema, cedulaSchema, telefonoMovilSchema } from '@utils/validations'
 import { securityLogger } from '@utils/securityLogger'
 
 // Esquema de validación completo para registro
@@ -35,7 +35,7 @@ const registerSchema = z
         'El apellido solo puede contener letras'
       ),
     cedula: cedulaSchema,
-    phone: phoneSchema,
+    phone: telefonoMovilSchema,
     email: z
       .string()
       .min(1, 'El correo electrónico es requerido')
