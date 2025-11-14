@@ -7,7 +7,7 @@
  */
 
 import { api } from './api'
-import { securityLogger } from '@utils/securityLogger'
+import { securityLogger, SecurityEventType, SecurityLevel } from '@utils/securityLogger'
 
 export interface User {
   id: string

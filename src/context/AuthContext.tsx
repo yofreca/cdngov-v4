@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { authService, type User } from '@services/authService'
-import { securityLogger } from '@utils/securityLogger'
+import { securityLogger, SecurityEventType, SecurityLevel } from '@utils/securityLogger'
 
 interface AuthContextType {
   user: User | null
@@ -44,34 +44,42 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             if (newToken) {
               setUser(storedUser)
-              securityLogger.logSecurityEvent('authentication', 'info', {
-                action: 'session_restored_after_refresh',
-                userId: storedUser.id,
-              })
+              securityLogger.log(
+                SecurityEventType.LOGIN_SUCCESS,
+                SecurityLevel.INFO,
+                'Sesión restaurada después de renovar token',
+                { userId: storedUser.id }
+              )
             } else {
               // No se pudo renovar, limpiar todo
               authService.clearAuthData()
-              securityLogger.logSecurityEvent('authentication', 'warning', {
-                action: 'session_expired_and_cleanup',
-                userId: storedUser.id,
-              })
+              securityLogger.log(
+                SecurityEventType.LOGOUT,
+                SecurityLevel.WARNING,
+                'Sesión expirada y datos limpiados',
+                { userId: storedUser.id }
+              )
             }
           } else {
             // Token válido, restaurar sesión
             setUser(storedUser)
-            securityLogger.logSecurityEvent('authentication', 'info', {
-              action: 'session_restored',
-              userId: storedUser.id,
-            })
+            securityLogger.log(
+              SecurityEventType.LOGIN_SUCCESS,
+              SecurityLevel.INFO,
+              'Sesión restaurada desde storage',
+              { userId: storedUser.id }
+            )
           }
         }
       } catch (error) {
         // Si hay error, limpiar todo por seguridad
         authService.clearAuthData()
-        securityLogger.logSecurityEvent('authentication', 'error', {
-          action: 'session_restore_error',
-          error: error instanceof Error ? error.message : 'Unknown error',
-        })
+        securityLogger.log(
+          SecurityEventType.API_ERROR,
+          SecurityLevel.ERROR,
+          'Error al restaurar sesión',
+          { error: error instanceof Error ? error.message : 'Unknown error' }
+        )
       } finally {
         setIsLoading(false)
       }
@@ -115,10 +123,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
     authService.setAuthData(user, token, undefined, rememberMe)
     setUser(user)
 
-    securityLogger.logSecurityEvent('authentication', 'info', {
-      action: 'login_context_updated',
-      userId: user.id,
-    })
+    securityLogger.log(
+      SecurityEventType.LOGIN_SUCCESS,
+      SecurityLevel.INFO,
+      'Contexto de autenticación actualizado',
+      { userId: user.id }
+    )
   }
 
   const logout = async () => {
@@ -126,17 +136,22 @@ export function AuthProvider({ children }: AuthProviderProps) {
       await authService.logout()
       setUser(null)
 
-      securityLogger.logSecurityEvent('authentication', 'info', {
-        action: 'logout_context_updated',
-      })
+      securityLogger.log(
+        SecurityEventType.LOGOUT,
+        SecurityLevel.INFO,
+        'Logout exitoso, contexto actualizado',
+        {}
+      )
     } catch (error) {
       // Limpiar datos locales incluso si falla
       setUser(null)
 
-      securityLogger.logSecurityEvent('authentication', 'warning', {
-        action: 'logout_error',
-        error: error instanceof Error ? error.message : 'Unknown error',
-      })
+      securityLogger.log(
+        SecurityEventType.API_ERROR,
+        SecurityLevel.WARNING,
+        'Error al hacer logout',
+        { error: error instanceof Error ? error.message : 'Unknown error' }
+      )
     }
   }
 
@@ -149,10 +164,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
       authService.setAuthData(updatedUser, token, undefined, rememberMe)
     }
 
-    securityLogger.logSecurityEvent('authentication', 'info', {
-      action: 'user_updated',
-      userId: updatedUser.id,
-    })
+    securityLogger.log(
+      SecurityEventType.LOGIN_SUCCESS,
+      SecurityLevel.INFO,
+      'Información de usuario actualizada',
+      { userId: updatedUser.id }
+    )
   }
 
   const value: AuthContextType = {
