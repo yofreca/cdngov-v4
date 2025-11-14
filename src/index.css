@@ -162,3 +162,34 @@
     color: white;
   }
 }
+
+/* Modo de alto contraste para accesibilidad */
+body.high-contrast {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+}
+
+body.high-contrast * {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+  border-color: #ffff00 !important;
+}
+
+body.high-contrast a {
+  color: #00ffff !important;
+  text-decoration: underline !important;
+}
+
+body.high-contrast button {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+}
+
+body.high-contrast input,
+body.high-contrast textarea,
+body.high-contrast select {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+}
