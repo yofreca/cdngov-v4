@@ -1,3 +1,7 @@
+import logoArnImg from '@assets/images/logo-arn.png'
+import headerGovcoImg from '@assets/images/header_govco.png'
+import colombiaSvg from '@assets/images/CO.svg'
+
 /**
  * Componente Footer siguiendo el diseño Gov.co/ARN
  * - Información completa de la entidad
@@ -24,22 +28,11 @@ export function Footer() {
                 </h3>
               </div>
               <div className="flex-shrink-0">
-                <div
-                  className="w-32 h-auto p-3 rounded"
-                  style={{
-                    backgroundColor: 'var(--color-govco-gris-muy-claro)',
-                  }}
-                >
-                  <span
-                    className="text-xl font-bold block text-center"
-                    style={{ color: 'var(--color-govco-marino)' }}
-                  >
-                    ARN
-                  </span>
-                  <span className="text-xs block text-center text-gray-600">
-                    Logo
-                  </span>
-                </div>
+                <img
+                  src={logoArnImg}
+                  alt="Agencia para la Reincorporación y la Normalización - ARN"
+                  className="w-32 md:w-40 h-auto"
+                />
               </div>
             </div>
           </div>
@@ -316,20 +309,28 @@ export function Footer() {
               href="https://www.colombia.co/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:opacity-80 transition-opacity"
+              className="hover:opacity-80 transition-opacity"
               title="Página Colombia"
             >
-              <span className="text-sm font-medium">COLOMBIA.CO</span>
+              <img
+                src={colombiaSvg}
+                alt="Colombia.co"
+                className="h-10 md:h-12"
+              />
             </a>
             <span className="hidden md:inline text-white/30">|</span>
             <a
               href="https://www.gov.co/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:opacity-80 transition-opacity"
+              className="hover:opacity-80 transition-opacity"
               title="Página Gov.co"
             >
-              <span className="text-sm font-medium">GOV.CO</span>
+              <img
+                src={headerGovcoImg}
+                alt="GOV.CO"
+                className="h-6 md:h-8"
+              />
             </a>
           </div>
         </div>

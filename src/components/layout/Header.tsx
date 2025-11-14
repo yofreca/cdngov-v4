@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import headerGovcoImg from '@assets/images/header_govco.png'
+import logoArnImg from '@assets/images/logo-arn.png'
 
 export interface HeaderProps {
   title?: string
@@ -38,9 +40,11 @@ export function Header({
               title="GOV.CO"
               className="flex items-center"
             >
-              <span className="text-white text-sm md:text-base font-medium">
-                GOV.CO
-              </span>
+              <img
+                src={headerGovcoImg}
+                alt="GOV.CO"
+                className="h-6 md:h-8"
+              />
             </a>
             {showMenu && (
               <button
@@ -64,24 +68,13 @@ export function Header({
       >
         <div className="container-govco">
           <div className="flex items-center gap-6">
-            <div className="flex-shrink-0 w-32 md:w-40">
+            <div className="flex-shrink-0 w-32 md:w-48">
               <a href="/" className="block">
-                <div
-                  className="w-full h-auto p-3 rounded"
-                  style={{
-                    backgroundColor: 'var(--color-govco-gris-muy-claro)',
-                  }}
-                >
-                  <span
-                    className="text-xl font-bold block text-center"
-                    style={{ color: 'var(--color-govco-marino)' }}
-                  >
-                    ARN
-                  </span>
-                  <span className="text-xs block text-center text-gray-600">
-                    Logo
-                  </span>
-                </div>
+                <img
+                  src={logoArnImg}
+                  alt="Agencia para la Reincorporación y la Normalización - ARN"
+                  className="w-full h-auto"
+                />
               </a>
             </div>
             <div className="flex-grow">
