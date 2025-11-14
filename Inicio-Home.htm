@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="es-ES" style="font-size: 16px;" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths"><head>
+    <title>Inicio - Sistema de Apoyo para la Reincorporación (SARA)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="application-name" content="SARA">
+    <meta name="msapplication-TileColor" content="#c5202c">
+    <meta name="msapplication-square70x70logo" content="/Images/Tiles/sara_icon_tiny.png">
+    <meta name="msapplication-square150x150logo" content="/Images/Tiles/sara_icon_square.png">
+    <meta name="msapplication-wide310x150logo" content="/Images/Tiles/sara_icon_wide.png">
+    <meta name="msapplication-square310x310logo" content="/Images/Tiles/sara_icon_large.png">
+    <link rel="shortcut icon" type="image/x-icon" href="https://sara.reincorporacion.gov.co/Images/favicon.ico">
+    <link rel="icon" type="image/png" href="https://sara.reincorporacion.gov.co/Images/SARA_icon.png">
+    <link href="Inicio-Home_files/jqueryui.css" rel="stylesheet">
+
+    <link href="Inicio-Home_files/css.css" rel="stylesheet">
+
+    <link href="Inicio-Home_files/site.css" rel="stylesheet">
+
+    <link href="Inicio-Home_files/bootstrap-datepicker.css" rel="stylesheet">
+
+    <script src="Inicio-Home_files/modernizr"></script>
+
+    <script src="Inicio-Home_files/jquery"></script>
+
+    <script src="Inicio-Home_files/knockout"></script>
+
+    <script src="Inicio-Home_files/bootstrap"></script>
+
+    <script src="Inicio-Home_files/knockstrap"></script>
+
+    <script src="Inicio-Home_files/bootstrap-datepicker"></script>
+
+    <script src="Inicio-Home_files/bootstrap-datepicker.es.min.js"></script>
+    <script src="Inicio-Home_files/site"></script>
+
+    <script src="Inicio-Home_files/ClientContext"></script>
+    
+</head>
+<body>
+    <div class="sara-main">
+        <header>
+            <div role="banner" class="gov-co-banner">
+    <div class="container">
+        <div class="row">
+            <div class="col col-12">
+                <a href="https://www.gov.co/" target="_blank" title="GOV.CO">
+                    <img src="Inicio-Home_files/header_govco.png" alt="GOV.CO">
+                </a>
+                <button class="show-main-menu btn btn-sm btn-default d-md-none d-inline-block float-right" title="Menú">
+                    <span class="fa fa-bars" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+            <div role="banner" class="main-banner d-none d-lg-inline">
+    <div class="container px-0">
+        <div class="d-table">
+            <div class="d-table-row">
+                <div class="d-table-cell align-top w-30">
+                    <a class="d-block mx-0 my-2 p-0" href="https://sara.reincorporacion.gov.co/es-419">
+                        <img class="w-100 h-auto m-0 p-0" src="Inicio-Home_files/logo-arn.png" alt="ARN">
+                    </a>
+                </div>
+                <div class="d-table-cell align-middle w-70 pl-3">
+                    <h1 title="Sistema de Apoyo para la Reincorporación (SARA)" class="m-0 p-0">
+                        Sistema de Apoyo para la Reincorporación (SARA)
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        </header>
+        <div>
+            <div>
+                <section role="navigation">
+                    <div class="govco-nav-entidades bg-light m-0 p-0">
+    <div class="container px-0">
+        <nav class="navbar navbar-light bg-light navbar-expand m-0 p-0">
+            <button class="show-main-menu btn btn-light d-none d-md-inline-block">
+                <span class="fa fa-bars" aria-hidden="true"></span>
+                <span>Menú</span>
+            </button>
+            <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" title="Bienvenido! ">
+                            <span class="fa fa-user" aria-hidden="true"></span>
+                            Bienvenido
+                            <span class="caret" aria-hidden="true"></span>
+                        </a>
+                        <div class="dropdown-menu" role="menu">
+                            <a class="dropdown-item" role="menuitem" href="https://sara.reincorporacion.gov.co/es-ES/Account/Login" title="Iniciar sesión">
+                                <span class="fa fa-sign-in" aria-hidden="true"></span>
+                                <span>Iniciar sesión</span>
+                            </a>
+                            <a class="dropdown-item" role="menuitem" href="https://sara.reincorporacion.gov.co/es-ES/Account/ForgotYourPassword" title="¿Ha perdido su contraseña?">
+                                <span class="fa fa-key" aria-hidden="true"></span>
+                                <span>¿Ha perdido su contraseña?</span>
+                            </a>
+                        </div>
+                    </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" title="Idioma">
+                        <span class="fa fa-flag" aria-hidden="true"></span>
+                        <span class="d-none d-md-inline">Idioma</span>
+                        <span class="caret" aria-hidden="true"></span>
+                    </a>
+                    
+
+<div class="dropdown-menu" role="menu">
+        <a class="dropdown-item" role="menuitem" href="https://sara.reincorporacion.gov.co/es-ES/Home/SetLang?lng=en&amp;sourceUrl=%2F" title="English">English</a>
+        <a class="dropdown-item" role="menuitem" href="https://sara.reincorporacion.gov.co/es-ES/Home/SetLang?lng=es&amp;sourceUrl=%2F" title="Español">Español</a>
+</div>
+
+
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+                </section>
+                <section role="main">
+                    <div class="container">
+                        
+<nav aria-label="breadcrumb">
+    </nav>
+<h2 class="mb-2">Inicio</h2>
+
+                    </div>
+                    <div class="container">
+                        
+
+
+<div class="jumbotron gov-co-links">
+    <div class="heading-h1">Bienvenido!</div>
+    <div>
+            <span>Bienvenido al Sistema de Apoyo a la Reincorporación (SARA). Para continuar, por favor seleccione una opción del <a href="#" class="show-main-menu">menú</a>, o haga clic en <a href="https://sara.reincorporacion.gov.co/es-ES/Account/Login">iniciar una sesión</a>.</span>
+    </div>
+</div>
+                    </div>
+                </section>
+                <footer class="gov-co-footer">
+    <div class="container">
+        <div class="row bg-white p-4 gov-co-footer-content mx-2 mx-sm-0">
+            <div class="col-12 logo">
+                <div class="row">
+                    <div class="col-12 col-lg-8">
+                        <h3 class="logo-title">
+                            Agencia para la Reincorporación y la Normalización - ARN
+                        </h3>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <img class="img-responsive logo-image" src="Inicio-Home_files/logo-arn.png" alt="Logotipo de la Agencia para la Reincorporación y la Normalización">
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <h4>Sede Principal</h4>
+                <p>Dirección: Carrera 9 No. 11 - 66 - Bogotá, Colombia.</p>
+                <p>Código Postal: 110221</p>
+                <p><a href="tel:+57 601 4430020" title="PBX: +57 601 4430020">PBX: +57 601 4430020.</a></p>
+                <p>Horario de Atención Call Center:</p>
+                <p>Lunes a viernes de 8:00 a.m. a 6:00 p.m. Sábados de 8:00 a.m. a 1:00 p.m.</p>
+                <p>Correspondencia: Lunes a viernes de 8:00 a.m. a 4:00 p.m., Piso 2.</p>
+                <p>Fax +57 601 4430020 - Opción 5.</p>
+                <p class="mt-4">Línea anticorrupción: <a href="tel:018000911516">01-800-091-1516</a></p>
+                <p>Línea nacional gratuita: <a href="tel:018000911516">01-800-091-1516</a></p>
+                <p>Celular: <a href="tel:#516">#516</a>, Claro y Movistar.</p>
+                <p><a target="_blank" href="http://www.reincorporacion.gov.co/es/atencion/Paginas/chat.aspx" title="Ir al chat">Chat de atención al ciudadano</a></p>
+                <p>Lunes a viernes de 8:00 a.m. a 6:00 p.m. Sábados de 8:00 a.m. a 1:00 p.m.</p>
+            </div>
+            <div class="col-12">
+                <h4>Servicios a la Ciudadanía</h4>
+                <p><a target="_blank" title="Ir a Encuesta de satisfacción" href="http://www.reincorporacion.gov.co/es/Lists/Encuestadesatisfacciondelosusuariosdeinformaciones/NewForm.aspx?Source=http%3A%2F%2Fwww%2Ereincorporacion%2Egov%2Eco%2Fes%2FLists%2FEncuestadesatisfacciondelosusuariosdeinformaciones%2Foverview%2Easpx">Encuesta de satisfacción.</a></p>
+                <p><a target="_blank" title="Ir a Encuesta de usabilidad" href="http://www.reincorporacion.gov.co/es/atencion/Lists/EncuestaUsabilidad/NewForm.aspx"> Encuesta de usabilidad.</a></p>
+                <p><a target="_blank" title="Ir a ley de transparencia y acceso a la información" href="https://www.reincorporacion.gov.co/es/transparencia/Paginas/default.aspx">Transparencia y acceso a la información pública.</a></p>
+                <p><a target="_blank" title="Ir a pqrsd" href="http://www.reincorporacion.gov.co/es/atencion/Paginas/pqrsd.aspx">Peticiones, Quejas, Reclamos, Sugerencia y Denuncias (PQRS-D).</a></p>
+                <p class="mt-4"><a target="_blank" href="http://www.reincorporacion.gov.co/es/atencion/Paginas/sedes.aspx" title="Sedes regionales ARN" alt="Sedes regionales ARN">Sedes Regionales ARN.</a></p>
+                <p><a target="_blank" title="Ir a Preguntas frecuentes" href="http://www.reincorporacion.gov.co/es/atencion/Paginas/faqs.aspx">Preguntas Frecuentes.</a></p>
+                <p>Correo electrónico: <a href="mailto:atencion@reincorporacion.gov.co" title="correo">atencion@reincorporacion.gov.co</a>.</p>
+                <p>Notificaciones judiciales: <a href="mailto:buzondenotificacionesjudiciales@reincorporacion.gov.co" title="correo">buzondenotificacionesjudiciales@reincorporacion.gov.co</a>.</p>
+                <p>Correo anticorrupción:  <a href="mailto:soytransparente@reincorporacion.gov.co" title="correo">soytransparente@reincorporacion.gov.co</a></p>
+                <p><a target="_blank" title="Ir a Informe de cumplimiento de accesibilidad" href="http://www.reincorporacion.gov.co/es/atencion/Paginas/Accesibilidad-web-ARN.aspx">Informe de cumplimiento de accesibilidad</a></p>
+            </div>
+            <div class="col-12 my-4">
+                <p>
+                    <a target="_blank" class="social_icon mr-1 align-middle" title="Facebook" href="https://www.facebook.com/ARNColombia/">
+                        <i class="fa fa-facebook"></i> 
+                        <span>@ARNColombia</span>
+                    </a>
+                    <a target="_blank" class="social_icon mr-1 align-middle" title="Twitter" href="https://twitter.com/ARNColombia/">
+                        <i class="fa fa-twitter"></i>
+                        <span>@ARNColombia</span>
+                    </a>
+                    <a target="_blank" class="social_icon mr-1 align-middle" title="Instragram" href="https://www.instagram.com/arncolombia/">
+                        <i class="fa fa-instagram"></i>
+                        <span>@ARNColombia</span>
+                    </a>
+                    <a target="_blank" class="social_icon mr-1 align-middle" title="Youtube" href="http://www.youtube.com/user/ReintegracionACR">
+                        <i class="fa fa-youtube-play"></i>
+                        <span>@ARNColombia</span>
+                    </a>
+                    <a target="_blank" class="social_icon mr-1 align-middle" title="RSS ARN" href="https://www.reincorporacion.gov.co/_layouts/15/feed.aspx?xsl=1&amp;web=%2Fes&amp;page=0dc7c673-a43d-43ce-ac84-cf42045b93b1&amp;wp=6c6afb1b-6a5e-4420-80cc-7ca95e129b79">
+                        <i class="fa fa-rss"></i>
+                        <span>RSS ARN</span>
+                    </a>
+                </p>
+            </div>
+            <div class="col-12 text-center">
+                <h5 class="mb-2">Enlaces de interés</h5>
+                <p>
+                    <a target="_blank" class="m-1" href="http://www.reincorporacion.gov.co/es/agencia/Paginas/equipo.aspx" title="Ir a Contacto con funcionario">
+                        Contacto con funcionarios
+                    </a>
+                    |
+                    <a target="_blank" class="m-1" href="https://www.reincorporacion.gov.co/es/atencion/Paginas/Terminos-y-condiciones.aspx" title="Ir a Contacto a Políticas de la información">
+                        Términos y Condiciones
+                    </a>
+                    |
+                    <a target="_blank" class="m-1" href="https://www.reincorporacion.gov.co/es/atencion/Paginas/politica-de-privacidad.aspx" title="Ir al Aviso de privacidad">
+                        Política de Privacidad y Tratamiento de Datos Personales
+                    </a>
+                    |
+                    <a target="_blank" class="m-1" href="https://www.reincorporacion.gov.co/es/Paginas/Licencia-Abierta-Datos-Abiertos.aspx" title="Ir a Licencia abierta de datos abiertos">
+                        Licencia Abierta de Datos Abiertos
+                    </a>
+                    |
+                    <a target="_blank" class="m-1" href="https://www.reincorporacion.gov.co/es/atencion/Paginas/politica-cookies.aspx" title="Ir a la política de cookies">
+                        Política de Cookies
+                    </a>
+                    |
+                    <a target="_blank" class="m-1" href="https://www.reincorporacion.gov.co/es/agencia/Paginas/entidades.aspx" title="Ir a las Entidades del sector">
+                        Entidades del sector
+                    </a>
+                    |
+                    <a target="_blank" class="m-1" href="https://www.reincorporacion.gov.co/es/Paginas/Map.aspx" title="Ir al mapa del sitio">
+                        Mapa del sitio
+                    </a>
+                    |
+                    <a target="_blank" class="m-1" href="https://correo.reincorporacion.gov.co/owa/" title="Ir al correo ARN">
+                        Correo ARN
+                    </a>
+                    |
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="gov-co-banner mt-4">
+        <div class="container">
+            <div class="col-md-6 col-sm-12 text-md-left text-sm-center text-center">
+                <a target="_blank" class="link-co mr-2" href="https://www.colombia.co/" title="Página Colombia">
+                    <img src="Inicio-Home_files/CO.svg" alt="Página Colombia">
+                </a>
+                <a target="_blank" class="link-gov-co" href="https://www.gov.co/" title="Página Gov.co">
+                    <img src="Inicio-Home_files/header_govco.png" alt="Página Gov.co">
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+            </div>
+        </div>
+        <div>
+            
+<div class="scroll-to-top show-scrollTop">
+    <button class="scroll-to-top-btn">
+        <span class="govco-icon govco-icon-shortu-arrow-n btn-svg-up-hover"></span>
+        <span class="label-button-star-up">Volver arriba</span>
+    </button>
+</div>
+<script src="Inicio-Home_files/accesibility-bar"></script>
+
+        </div>
+        <div class="sidenav-overlay">
+</div>
+<nav class="sidenav">
+    <div class="sidenav-content">
+        <div class="sidenav-header">
+            <div class="row">
+                <h3><img src="Inicio-Home_files/sara_icon_square.png" alt="SARA" class="sidenav-icon text-white"> SARA</h3>
+                <button type="button" class="closebtn btn btn-sm btn-default" title="Cerrar">
+                    <span class="fa fa-close" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+        <div class="sidenav-body">
+            
+
+
+<ul class="list-unstyled components" id="sara_main_menu_accordion">
+        <li>
+                <a href="https://sara.reincorporacion.gov.co/es-ES" title="Página de inicio" class="active">Inicio</a>
+        </li>
+        <li>
+                <a href="#Index_OtherServices" title="Otros servicios" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle w-100">
+                    <span class="dropdown-toggle-indicator">
+                        <span class="fa fa-caret-right"></span>
+                    </span>
+                    Otros servicios
+                </a>
+                <ul class="collapse list-unstyled" id="Index_OtherServices" data-parent="#sara_main_menu_accordion">
+                    <li>
+                        <a href="https://sara.reincorporacion.gov.co/es-ES/OtherServices" title="Otros servicios">Otros servicios</a>
+                    </li>
+        <li>
+                <a href="https://sara.reincorporacion.gov.co/es-ES/OtherServices/CertificadoContractual" title="Generación de Certificaciones Contractuales">Generación de Certificaciones Contractuales</a>
+        </li>
+        <li>
+                <a href="https://sara.reincorporacion.gov.co/es-ES/OtherServices/CertificadoIngresos" title="Generación de Certificado de Ingresos y Retenciones">Generación de Certificado de Ingresos y Retenciones</a>
+        </li>
+        <li>
+                <a href="https://sara.reincorporacion.gov.co/es-ES/OtherServices/VerificarCertificacionContractual" title="Verificación de Certificación Contractual">Verificación de Certificación Contractual</a>
+        </li>
+        <li>
+                <a href="https://sara.reincorporacion.gov.co/es-ES/OtherServices/VerificarCodigoPersonaEnProceso" title="Verificación de Certificado de Persona en Proceso">Verificación de Certificado de Persona en Proceso</a>
+        </li>
+        <li>
+                <a href="https://sara.reincorporacion.gov.co/es-ES/OtherServices/VerificarCodigoLibretaMilitar" title="Verificación de Certificado para el Trámite de Libreta Militar">Verificación de Certificado para el Trámite de Libreta Militar</a>
+        </li>
+        <li>
+                <a href="https://sara.reincorporacion.gov.co/es-ES/OtherServices/CertificadoOACP" title="Verificar el estado y obtener la constancia de acreditación de una Persona en Proceso de Reincorporación">Verificar el estado y obtener la constancia de acreditación de una Persona en Proceso de Reincorporación</a>
+        </li>
+                </ul>
+        </li>
+        <li>
+                <a href="https://sara.reincorporacion.gov.co/es-ES/Home/About" title="Acerca de SARA">Acerca de...</a>
+        </li>
+</ul>
+
+        </div>
+    </div>
+</nav>
+<script>(function(n){n(document).on("sara.show.sidenav",function(){n(".sidenav").addClass("active");n(".sidenav-overlay").addClass("active");n("body").addClass("sidenav-active")});n(document).on("sara.hide.sidenav",function(){n(".sidenav").removeClass("active");n(".sidenav-overlay").removeClass("active");n("body").removeClass("sidenav-active")});n(".closebtn").on("click",function(){n(document).trigger("sara.hide.sidenav")});n(".sidenav-overlay").on("click",function(){n(document).trigger("sara.hide.sidenav")});n(".show-main-menu").on("click",function(t){t.preventDefault();n(document).trigger("sara.show.sidenav")})})(jQuery)</script>
+        <script>(function(n,t){var i=function(){n("body").removeAttr("style")},r;n(document).on("hidden.bs.modal",i);t.setDefaults({locale:"es"});n.fn.datepicker.defaults.language="es";n.loading={newId:function(){return(new Date).getTime()},show:function(r){n(t.dialog({title:"Obteniendo los datos. Esto no deber&#237;a tardar mucho...",message:'<div class="progress"><div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"><\/div><\/div>',onEscape:!1,closeButton:!1,callback:n.noop,animate:!1})).attr("id","modal_"+r).on("hidden.bs.modal",function(){i();n(this).remove()})},hide:function(t){n("#modal_"+t).modal("hide")}};n.ajaxSetup({cache:!1,beforeSend:function(t){t._id=n.loading.newId();n.loading.show(t._id)},complete:function(t){t._id&&n.loading.hide(t._id);t.status==403&&(t.statusText=="Unauthorized"?bootbox.alert("Su sesi&#243;n ha expirado. Por favor inicie sesi&#243;n de nuevo.",function(){n.loading.show(n.loading.newId());window.location.href="/es-ES/Account/Login"}):t.statusText=="Forbidden"&&bootbox.alert("Se le ha denegado el acceso a esta funcionalidad."))}});r=function(){var t=n(".sidenav a[href='/es-ES']"),i=t.closest("ul.collapse");i.length>0&&i.collapse("show");t.toggleClass("active")};r()})(jQuery,bootbox)</script>
+        
+    </div>
+
+<div class="accessibility-bar accesiblock block--gov-accessibility position-inherit" role="toolbar">
+    <div class="block-options navbar-expanded">
+        <a class="contrast-ref">
+            <span class="govco-icon govco-icon-contrast-n"></span>
+            <label>Contraste</label>
+        </a>
+        <a class="min-fontsize">
+            <span class="govco-icon govco-icon-less-size-n"></span>
+            <label class="align-middle">Reducir letra</label>
+        </a>
+        <a class="max-fontsize">
+            <span class="govco-icon govco-icon-more-size-n"></span>
+            <label class="align-middle">Aumentar letra</label>
+        </a>
+    </div>
+</div></body></html>

@@ -1,0 +1,14 @@
+var SARA;
+    (function (SARA) {
+        (function (ClientContext) {
+            var reCaptchaConfig = {
+                v3: {
+                    siteKey: "6LdnuDQjAAAAAFuLMnUNDH9LoAZCLvD3qTY-rBN5",
+                    tokenHeaderName: "ReCaptchaVerificationToken"
+                }
+            }
+            ClientContext.siteAbsoluteUrl = "https://sara.reincorporacion.gov.co/";
+            ClientContext.siteRelativeUrl = "/";
+            ClientContext.reCaptchaConfig = reCaptchaConfig;
+        })(SARA.ClientContext || (SARA.ClientContext = {}));
+    })(SARA || (SARA = {}));
