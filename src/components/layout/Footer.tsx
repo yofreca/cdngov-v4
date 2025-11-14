@@ -13,7 +13,7 @@ import colombiaSvg from '@assets/images/CO.svg'
  */
 export function Footer() {
   return (
-    <footer className="gov-co-footer mt-auto bg-gray-50">
+    <footer id="footer" className="gov-co-footer mt-auto bg-gray-50">
       <div className="container-govco">
         <div className="bg-white p-6 md:p-8 rounded-lg shadow-sm my-4">
           {/* Logo y Título */}

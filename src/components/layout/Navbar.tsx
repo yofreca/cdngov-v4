@@ -27,6 +27,7 @@ export function Navbar() {
 
   return (
     <nav
+      id="main-navigation"
       style={{ backgroundColor: 'var(--color-govco-marino)' }}
       className="relative"
       role="navigation"
