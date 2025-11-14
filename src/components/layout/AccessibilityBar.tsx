@@ -121,7 +121,7 @@ export function AccessibilityBar() {
         {/* Contraste */}
         <button
           onClick={toggleContrast}
-          className="w-full px-4 py-3 flex flex-col items-center justify-center transition-colors border-b border-white/20"
+          className="w-full px-2 py-2 flex flex-col items-center justify-center transition-colors border-b border-white/20"
           style={{
             backgroundColor: highContrast
               ? 'var(--color-govco-azul-oscuro)'
@@ -143,10 +143,10 @@ export function AccessibilityBar() {
           }
           title="Contraste"
         >
-          <span className="text-2xl mb-1 text-white" aria-hidden="true">
+          <span className="text-lg text-white" aria-hidden="true">
             ⚫⚪
           </span>
-          <span className="text-xs text-center text-white font-medium">
+          <span className="text-[10px] text-center text-white font-medium leading-tight">
             Contraste
           </span>
         </button>
@@ -155,7 +155,7 @@ export function AccessibilityBar() {
         <button
           onClick={decreaseFontSize}
           disabled={fontSize <= 12}
-          className="w-full px-4 py-3 flex flex-col items-center justify-center transition-colors border-b border-white/20 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full px-2 py-2 flex flex-col items-center justify-center transition-colors border-b border-white/20 disabled:opacity-50 disabled:cursor-not-allowed"
           onMouseEnter={(e) => {
             if (fontSize > 12) {
               e.currentTarget.style.backgroundColor =
@@ -168,10 +168,10 @@ export function AccessibilityBar() {
           aria-label="Reducir tamaño de letra"
           title="Reducir letra"
         >
-          <span className="text-xl mb-1 text-white font-bold" aria-hidden="true">
+          <span className="text-base text-white font-bold" aria-hidden="true">
             A-
           </span>
-          <span className="text-xs text-center text-white font-medium">
+          <span className="text-[10px] text-center text-white font-medium leading-tight">
             Reducir
           </span>
         </button>
@@ -180,7 +180,7 @@ export function AccessibilityBar() {
         <button
           onClick={increaseFontSize}
           disabled={fontSize >= 20}
-          className="w-full px-4 py-3 flex flex-col items-center justify-center transition-colors border-b border-white/20 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full px-2 py-2 flex flex-col items-center justify-center transition-colors border-b border-white/20 disabled:opacity-50 disabled:cursor-not-allowed"
           onMouseEnter={(e) => {
             if (fontSize < 20) {
               e.currentTarget.style.backgroundColor =
@@ -193,10 +193,10 @@ export function AccessibilityBar() {
           aria-label="Aumentar tamaño de letra"
           title="Aumentar letra"
         >
-          <span className="text-2xl mb-1 text-white font-bold" aria-hidden="true">
+          <span className="text-lg text-white font-bold" aria-hidden="true">
             A+
           </span>
-          <span className="text-xs text-center text-white font-medium">
+          <span className="text-[10px] text-center text-white font-medium leading-tight">
             Aumentar
           </span>
         </button>
@@ -205,7 +205,7 @@ export function AccessibilityBar() {
         <div className="relative">
           <button
             onClick={() => setShowColorBlindMenu(!showColorBlindMenu)}
-            className="w-full px-4 py-3 flex flex-col items-center justify-center transition-colors border-b border-white/20"
+            className="w-full px-2 py-2 flex flex-col items-center justify-center transition-colors border-b border-white/20"
             style={{
               backgroundColor:
                 colorBlindMode !== 'none'
@@ -227,10 +227,10 @@ export function AccessibilityBar() {
             aria-expanded={showColorBlindMenu}
             title="Daltonismo"
           >
-            <span className="text-2xl mb-1 text-white" aria-hidden="true">
+            <span className="text-lg text-white" aria-hidden="true">
               👁️
             </span>
-            <span className="text-xs text-center text-white font-medium">
+            <span className="text-[10px] text-center text-white font-medium leading-tight">
               Daltonismo
             </span>
           </button>
@@ -294,7 +294,7 @@ export function AccessibilityBar() {
         {/* Resetear */}
         <button
           onClick={resetPreferences}
-          className="w-full px-4 py-3 flex flex-col items-center justify-center transition-colors"
+          className="w-full px-2 py-2 flex flex-col items-center justify-center transition-colors"
           onMouseEnter={(e) => {
             e.currentTarget.style.backgroundColor =
               'var(--color-govco-azul-oscuro)'
@@ -305,10 +305,10 @@ export function AccessibilityBar() {
           aria-label="Restablecer preferencias de accesibilidad"
           title="Restablecer"
         >
-          <span className="text-2xl mb-1 text-white" aria-hidden="true">
+          <span className="text-lg text-white" aria-hidden="true">
             ↺
           </span>
-          <span className="text-xs text-center text-white font-medium">
+          <span className="text-[10px] text-center text-white font-medium leading-tight">
             Restablecer
           </span>
         </button>

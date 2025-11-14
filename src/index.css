@@ -175,12 +175,30 @@ body.high-contrast * {
   border-color: #ffff00 !important;
 }
 
+/* Excepciones para elementos que NO deben cambiar en alto contraste */
+body.high-contrast .accessibility-bar,
+body.high-contrast .accessibility-bar * {
+  background-color: var(--color-govco-marino) !important;
+  color: white !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+body.high-contrast .accessibility-bar button:hover {
+  background-color: var(--color-govco-azul-oscuro) !important;
+}
+
+body.high-contrast img,
+body.high-contrast svg {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
 body.high-contrast a {
   color: #00ffff !important;
   text-decoration: underline !important;
 }
 
-body.high-contrast button {
+body.high-contrast button:not(.accessibility-bar button) {
   background-color: #000 !important;
   color: #ffff00 !important;
   border: 2px solid #ffff00 !important;
