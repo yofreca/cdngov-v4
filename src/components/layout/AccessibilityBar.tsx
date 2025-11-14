@@ -138,10 +138,7 @@ export function AccessibilityBar() {
         aria-label="Herramientas de accesibilidad"
         style={{
           top: '50%',
-          transform: 'translateY(-50%)',
-          maxHeight: 'calc(100vh - 2rem)',
-          overflowY: 'auto',
-          overflowX: 'visible'
+          transform: 'translateY(-50%)'
         }}
       >
         <div className="flex flex-col gap-2 items-end py-4 pr-2">
