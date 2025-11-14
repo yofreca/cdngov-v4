@@ -133,12 +133,18 @@ export function AccessibilityBar() {
     <>
       {/* Barra de Accesibilidad */}
       <div
-        className="accessibility-bar fixed right-0 top-1/2 -translate-y-1/2 z-50 py-4 max-h-screen overflow-y-auto"
+        className="accessibility-bar fixed right-0 z-50"
         role="toolbar"
         aria-label="Herramientas de accesibilidad"
-        style={{ maxHeight: 'calc(100vh - 2rem)' }}
+        style={{
+          top: '50%',
+          transform: 'translateY(-50%)',
+          maxHeight: 'calc(100vh - 2rem)',
+          overflowY: 'auto',
+          overflowX: 'visible'
+        }}
       >
-        <div className="flex flex-col gap-2 items-end pr-2">
+        <div className="flex flex-col gap-2 items-end py-4 pr-2">
           {/* Contraste */}
           <button
             onClick={toggleContrast}
