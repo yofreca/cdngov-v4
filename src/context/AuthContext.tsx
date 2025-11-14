@@ -24,9 +24,6 @@ interface AuthProviderProps {
  * - Manejo de tokens JWT
  * - Validación automática de tokens
  * - Renovación automática de tokens
- *
- * En React 19, createContext ya no requiere un Provider wrapper,
- * pero lo mantenemos para compatibilidad y claridad
  */
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null)
@@ -167,7 +164,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     updateUser,
   }
 
-  return <AuthContext value={value}>{children}</AuthContext>
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
 /**
