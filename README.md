@@ -26,17 +26,30 @@ Para desarrollo con Node 18, el servidor de desarrollo (`npm run dev`) debería 
 ## 🛠️ Instalación
 
 ```bash
-# Navegar a la carpeta del proyecto
-cd govco-react-app
+# Clonar el repositorio
+git clone https://github.com/yofreca/cdngov-v4.git
+cd cdngov-v4
 
-# Instalar dependencias
+# Instalar dependencias (IMPORTANTE: ejecutar siempre después de clonar)
 npm install
 
 # Iniciar servidor de desarrollo
 npm run dev
 ```
 
-El servidor se abrirá automáticamente en http://localhost:3000
+El servidor se abrirá automáticamente en http://localhost:5173
+
+⚠️ **Solución de Problemas:**
+
+Si recibes el error `Failed to resolve import "@axe-core/react"`:
+```bash
+# Ejecuta npm install para instalar todas las dependencias
+npm install
+
+# Si el problema persiste, borra node_modules y reinstala
+rm -rf node_modules package-lock.json
+npm install
+```
 
 ## 📜 Scripts Disponibles
 
