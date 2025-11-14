@@ -89,7 +89,7 @@ export function Navbar() {
                 </Button>
               </div>
             ) : (
-              <Link to="/formulario">
+              <Link to="/login">
                 <Button
                   variant="outline"
                   size="sm"
@@ -181,7 +181,7 @@ export function Navbar() {
               </div>
             ) : (
               <Link
-                to="/formulario"
+                to="/login"
                 onClick={() => setIsMenuOpen(false)}
                 className="block mt-4"
               >
