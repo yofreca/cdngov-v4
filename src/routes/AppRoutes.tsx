@@ -6,13 +6,14 @@ import { FormExample } from '@pages/FormExample'
 import { Login } from '@pages/Login'
 import { Register } from '@pages/Register'
 import { ForgotPassword } from '@pages/ForgotPassword'
+import { Dashboard } from '@pages/Dashboard'
 import { NotFound } from '@pages/NotFound'
 import { ProtectedRoute } from '@components/auth/ProtectedRoute'
 
 /**
- * Configuración de rutas de la aplicación - Actualizado Fase 6
+ * Configuración de rutas de la aplicación - Actualizado Fase 7
  * Usa React Router 7 con Routes y Route components
- * Incluye rutas de autenticación y protección de rutas privadas
+ * Incluye rutas de autenticación, protección de rutas privadas y Dashboard
  */
 export function AppRoutes() {
   return (
@@ -35,23 +36,7 @@ export function AppRoutes() {
           path="/dashboard"
           element={
             <ProtectedRoute>
-              <div className="container-govco py-12">
-                <h1
-                  className="text-3xl font-bold mb-6"
-                  style={{ color: 'var(--color-govco-azul-oscuro)' }}
-                >
-                  Dashboard
-                </h1>
-                <div className="bg-white p-6 rounded-lg shadow-md">
-                  <p className="text-gray-700 mb-4">
-                    Bienvenido a su dashboard personal. Esta es una ruta
-                    protegida que requiere autenticación.
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    Solo los usuarios autenticados pueden ver este contenido.
-                  </p>
-                </div>
-              </div>
+              <Dashboard />
             </ProtectedRoute>
           }
         />
