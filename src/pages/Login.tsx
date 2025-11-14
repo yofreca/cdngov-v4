@@ -13,7 +13,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useAuth } from '@context/AuthContext'
 import { Button } from '@components/common/Button'
-import { securityLogger } from '@utils/securityLogger'
+import { securityLogger, SecurityEventType, SecurityLevel } from '@utils/securityLogger'
 
 // Esquema de validación con Zod (seguridad OWASP)
 const loginSchema = z.object({
@@ -66,10 +66,12 @@ export function Login() {
       setLoginError(
         'Demasiados intentos fallidos. Por favor, intente más tarde o recupere su contraseña.'
       )
-      securityLogger.logSecurityEvent('authentication', 'high', {
-        action: 'login_blocked_max_attempts',
-        email: data.email,
-      })
+      securityLogger.log(
+        SecurityEventType.RATE_LIMIT_EXCEEDED,
+        SecurityLevel.CRITICAL,
+        'Login bloqueado por demasiados intentos',
+        { email: data.email }
+      )
       return
     }
 
@@ -96,10 +98,12 @@ export function Login() {
         // Simular delay de red
         await new Promise((resolve) => setTimeout(resolve, 800))
 
-        securityLogger.logSecurityEvent('authentication', 'info', {
-          action: 'login_success_dev',
-          email: data.email,
-        })
+        securityLogger.log(
+          SecurityEventType.LOGIN_SUCCESS,
+          SecurityLevel.INFO,
+          'Login exitoso en modo desarrollo',
+          { email: data.email }
+        )
 
         // Guardar credenciales en el contexto
         login(mockUser, mockToken, data.rememberMe)
@@ -137,10 +141,12 @@ export function Login() {
       })
 
       // Login exitoso
-      securityLogger.logSecurityEvent('authentication', 'info', {
-        action: 'login_success',
-        email: data.email,
-      })
+      securityLogger.log(
+        SecurityEventType.LOGIN_SUCCESS,
+        SecurityLevel.INFO,
+        'Login exitoso',
+        { email: data.email }
+      )
 
       login(response.user, response.token, data.rememberMe)
 
@@ -156,11 +162,12 @@ export function Login() {
       const newAttemptCount = attemptCount + 1
       setAttemptCount(newAttemptCount)
 
-      securityLogger.logSecurityEvent('authentication', 'warning', {
-        action: 'login_failed',
-        email: data.email,
-        attempt: newAttemptCount,
-      })
+      securityLogger.log(
+        SecurityEventType.LOGIN_FAILURE,
+        SecurityLevel.WARNING,
+        'Intento de login fallido',
+        { email: data.email, attempt: newAttemptCount }
+      )
 
       if (newAttemptCount >= MAX_ATTEMPTS) {
         setLoginError(
