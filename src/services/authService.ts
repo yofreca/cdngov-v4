@@ -74,10 +74,12 @@ class AuthService {
       const userJson = storage.getItem(USER_KEY)
       return userJson ? JSON.parse(userJson) : null
     } catch (error) {
-      securityLogger.logSecurityEvent('authentication', 'warning', {
-        action: 'get_user_error',
-        error: error instanceof Error ? error.message : 'Unknown error',
-      })
+      securityLogger.log(
+        SecurityEventType.API_ERROR,
+        SecurityLevel.WARNING,
+        'Error al obtener usuario de storage',
+        { error: error instanceof Error ? error.message : 'Unknown error' }
+      )
       return null
     }
   }
@@ -101,10 +103,12 @@ class AuthService {
       localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken)
     }
 
-    securityLogger.logSecurityEvent('authentication', 'info', {
-      action: 'auth_data_stored',
-      userId: user.id,
-    })
+    securityLogger.log(
+      SecurityEventType.LOGIN_SUCCESS,
+      SecurityLevel.INFO,
+      'Datos de autenticación almacenados',
+      { userId: user.id }
+    )
   }
 
   /**
@@ -118,9 +122,12 @@ class AuthService {
     sessionStorage.removeItem(USER_KEY)
     localStorage.removeItem(REMEMBER_ME_KEY)
 
-    securityLogger.logSecurityEvent('authentication', 'info', {
-      action: 'auth_data_cleared',
-    })
+    securityLogger.log(
+      SecurityEventType.LOGOUT,
+      SecurityLevel.INFO,
+      'Datos de autenticación limpiados',
+      {}
+    )
   }
 
   /**
