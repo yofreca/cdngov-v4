@@ -15,11 +15,22 @@ export function Navbar() {
   const location = useLocation()
   const { isAuthenticated, logout, user } = useAuth()
 
-  const links = [
+  // Links públicos
+  const publicLinks = [
     { path: '/', label: 'Inicio' },
     { path: '/componentes', label: 'Componentes' },
     { path: '/formulario', label: 'Formulario' },
   ]
+
+  // Links para usuarios autenticados
+  const authenticatedLinks = [
+    { path: '/', label: 'Inicio' },
+    { path: '/componentes', label: 'Componentes' },
+    { path: '/dashboard', label: 'Dashboard' },
+    { path: '/formulario', label: 'Formulario' },
+  ]
+
+  const links = isAuthenticated ? authenticatedLinks : publicLinks
 
   const isActive = (path: string) => location.pathname === path
 
