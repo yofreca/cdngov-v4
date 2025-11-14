@@ -132,9 +132,10 @@ export function AccessibilityBar() {
     <>
       {/* Barra de Accesibilidad */}
       <div
-        className="accessibility-bar fixed right-0 top-1/2 -translate-y-1/2 z-50"
+        className="accessibility-bar fixed right-0 top-1/2 -translate-y-1/2 z-50 max-h-screen overflow-y-auto py-4"
         role="toolbar"
         aria-label="Herramientas de accesibilidad"
+        style={{ maxHeight: 'calc(100vh - 2rem)' }}
       >
         <div className="flex flex-col gap-2 items-end">
           {/* Contraste */}
