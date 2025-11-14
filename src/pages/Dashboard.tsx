@@ -8,7 +8,8 @@
 
 import { useState } from 'react'
 import { StatsCard } from '@components/dashboard/StatsCard'
-import { DataTable, Column } from '@components/dashboard/DataTable'
+import { DataTable } from '@components/dashboard/DataTable'
+import type { Column } from '@components/dashboard/DataTable'
 import { Button } from '@components/common/Button'
 
 interface UserData {
