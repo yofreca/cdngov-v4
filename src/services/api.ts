@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
+import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 import DOMPurify from 'dompurify'
 
 // Configuración base de la API
@@ -98,7 +98,7 @@ apiClient.interceptors.response.use(
     return response
   },
   async (error: AxiosError) => {
-    const originalRequest = error.config as AxiosRequestConfig & {
+    const originalRequest = error.config as InternalAxiosRequestConfig & {
       _retry?: number
     }
 
@@ -173,19 +173,19 @@ apiClient.interceptors.response.use(
  * Métodos HTTP seguros con tipado
  */
 export const api = {
-  get: <T = unknown>(url: string, config?: AxiosRequestConfig) =>
+  get: <T = unknown>(url: string, config?: InternalAxiosRequestConfig) =>
     apiClient.get<T>(url, config),
 
-  post: <T = unknown>(url: string, data?: unknown, config?: AxiosRequestConfig) =>
+  post: <T = unknown>(url: string, data?: unknown, config?: InternalAxiosRequestConfig) =>
     apiClient.post<T>(url, data, config),
 
-  put: <T = unknown>(url: string, data?: unknown, config?: AxiosRequestConfig) =>
+  put: <T = unknown>(url: string, data?: unknown, config?: InternalAxiosRequestConfig) =>
     apiClient.put<T>(url, data, config),
 
-  patch: <T = unknown>(url: string, data?: unknown, config?: AxiosRequestConfig) =>
+  patch: <T = unknown>(url: string, data?: unknown, config?: InternalAxiosRequestConfig) =>
     apiClient.patch<T>(url, data, config),
 
-  delete: <T = unknown>(url: string, config?: AxiosRequestConfig) =>
+  delete: <T = unknown>(url: string, config?: InternalAxiosRequestConfig) =>
     apiClient.delete<T>(url, config),
 }
 
