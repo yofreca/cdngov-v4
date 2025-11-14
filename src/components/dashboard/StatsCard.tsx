@@ -1,8 +1,11 @@
+import { memo, useMemo } from 'react'
+
 /**
  * StatsCard - Tarjeta de estadísticas para Dashboard
  * - Diseño Gov.co con colores oficiales
  * - Accesibilidad WCAG 2.1 AA
  * - Animaciones suaves
+ * - Optimizado con React.memo para evitar re-renders innecesarios
  */
 
 interface StatsCardProps {
@@ -17,7 +20,7 @@ interface StatsCardProps {
   description?: string
 }
 
-export function StatsCard({
+export const StatsCard = memo(function StatsCard({
   title,
   value,
   icon,
@@ -25,34 +28,36 @@ export function StatsCard({
   color = 'blue',
   description,
 }: StatsCardProps) {
-  const colorClasses = {
-    blue: {
-      bg: 'bg-blue-50',
-      border: 'border-govco-marino',
-      text: 'text-govco-marino',
-      iconBg: 'bg-govco-marino',
-    },
-    green: {
-      bg: 'bg-green-50',
-      border: 'border-govco-verde-azulado',
-      text: 'text-govco-verde-azulado',
-      iconBg: 'bg-govco-verde-azulado',
-    },
-    yellow: {
-      bg: 'bg-yellow-50',
-      border: 'border-govco-amarillo',
-      text: 'text-govco-amarillo',
-      iconBg: 'bg-govco-amarillo',
-    },
-    red: {
-      bg: 'bg-red-50',
-      border: 'border-govco-rojo',
-      text: 'text-govco-rojo',
-      iconBg: 'bg-govco-rojo',
-    },
-  }
-
-  const colors = colorClasses[color]
+  // Memoizar el objeto de colores para evitar recrearlo en cada render
+  const colors = useMemo(() => {
+    const colorClasses = {
+      blue: {
+        bg: 'bg-blue-50',
+        border: 'border-govco-marino',
+        text: 'text-govco-marino',
+        iconBg: 'bg-govco-marino',
+      },
+      green: {
+        bg: 'bg-green-50',
+        border: 'border-govco-verde-azulado',
+        text: 'text-govco-verde-azulado',
+        iconBg: 'bg-govco-verde-azulado',
+      },
+      yellow: {
+        bg: 'bg-yellow-50',
+        border: 'border-govco-amarillo',
+        text: 'text-govco-amarillo',
+        iconBg: 'bg-govco-amarillo',
+      },
+      red: {
+        bg: 'bg-red-50',
+        border: 'border-govco-rojo',
+        text: 'text-govco-rojo',
+        iconBg: 'bg-govco-rojo',
+      },
+    }
+    return colorClasses[color]
+  }, [color])
 
   return (
     <div
@@ -97,4 +102,4 @@ export function StatsCard({
       </div>
     </div>
   )
-}
+})

@@ -5,9 +5,10 @@
  * - Paginación
  * - Accesibilidad WCAG 2.1 AA
  * - Diseño Gov.co
+ * - Optimizado con React.memo y useMemo
  */
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, memo, useCallback } from 'react'
 import { Button } from '@components/common/Button'
 
 export interface Column<T> {
@@ -28,7 +29,7 @@ interface DataTableProps<T> {
   onRowClick?: (item: T) => void
 }
 
-export function DataTable<T extends Record<string, unknown>>({
+function DataTableComponent<T extends Record<string, unknown>>({
   data,
   columns,
   itemsPerPage = 10,
@@ -79,7 +80,8 @@ export function DataTable<T extends Record<string, unknown>>({
   const endIndex = startIndex + itemsPerPage
   const paginatedData = sortedData.slice(startIndex, endIndex)
 
-  const handleSort = (key: keyof T | string) => {
+  // Memoizar funciones para evitar recrearlas en cada render
+  const handleSort = useCallback((key: keyof T | string) => {
     setSortConfig((current) => {
       if (current?.key === key) {
         return {
@@ -89,18 +91,18 @@ export function DataTable<T extends Record<string, unknown>>({
       }
       return { key, direction: 'asc' }
     })
-  }
+  }, [])
 
-  const handlePageChange = (page: number) => {
+  const handlePageChange = useCallback((page: number) => {
     setCurrentPage(page)
-  }
+  }, [])
 
-  const renderCell = (item: T, column: Column<T>) => {
+  const renderCell = useCallback((item: T, column: Column<T>) => {
     if (column.render) {
       return column.render(item)
     }
     return String(item[column.key as keyof T] ?? '')
-  }
+  }, [])
 
   return (
     <div className="w-full">
@@ -278,3 +280,7 @@ export function DataTable<T extends Record<string, unknown>>({
     </div>
   )
 }
+
+// Exportar con memo para optimizar re-renders
+// Nota: React.memo con genéricos requiere esta sintaxis
+export const DataTable = memo(DataTableComponent) as typeof DataTableComponent
