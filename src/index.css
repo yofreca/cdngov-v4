@@ -170,6 +170,18 @@ body.high-contrast {
   background-color: #000 !important;
 }
 
+/* PROTEGER Header, Nav y Footer del modo alto contraste */
+body.high-contrast header,
+body.high-contrast header *:not(img):not(svg),
+body.high-contrast nav,
+body.high-contrast nav *:not(img):not(svg),
+body.high-contrast footer,
+body.high-contrast footer *:not(img):not(svg) {
+  background-color: unset !important;
+  color: unset !important;
+  border-color: unset !important;
+}
+
 /* Aplicar alto contraste SOLO al contenido principal */
 body.high-contrast main {
   background-color: #000 !important;
