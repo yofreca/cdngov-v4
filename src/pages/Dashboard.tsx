@@ -2,11 +2,12 @@
  * Dashboard - Página principal de gestión de datos
  * - Estadísticas y métricas clave
  * - Tabla de datos con filtrado y paginación
+ * - useOptimistic de React 19 para actualizaciones optimistas
  * - Diseño Gov.co
  * - Accesibilidad WCAG 2.1 AA
  */
 
-import { useState } from 'react'
+import { useState, useOptimistic, useTransition } from 'react'
 import { StatsCard } from '@components/dashboard/StatsCard'
 import { DataTable } from '@components/dashboard/DataTable'
 import type { Column } from '@components/dashboard/DataTable'
@@ -89,8 +90,52 @@ const mockUsers: UserData[] = [
   },
 ]
 
+// Simular API call para actualizar usuario
+async function updateUserStatus(userId: number, newStatus: 'Activo' | 'Inactivo') {
+  // Simular delay de red (en producción sería una llamada al backend)
+  await new Promise((resolve) => setTimeout(resolve, 1000))
+  return { userId, newStatus }
+}
+
 export function Dashboard() {
-  const [users] = useState<UserData[]>(mockUsers)
+  const [users, setUsers] = useState<UserData[]>(mockUsers)
+  const [isPending, startTransition] = useTransition()
+
+  // useOptimistic: actualiza la UI inmediatamente mientras espera la confirmación del servidor
+  const [optimisticUsers, updateOptimisticUsers] = useOptimistic(
+    users,
+    (state, { userId, newStatus }: { userId: number; newStatus: 'Activo' | 'Inactivo' }) => {
+      return state.map((user) =>
+        user.id === userId ? { ...user, estado: newStatus } : user
+      )
+    }
+  )
+
+  // Función para cambiar el estado de un usuario
+  const handleToggleUserStatus = async (user: UserData) => {
+    const newStatus: 'Activo' | 'Inactivo' = user.estado === 'Activo' ? 'Inactivo' : 'Activo'
+
+    // Actualización optimista - UI se actualiza inmediatamente
+    updateOptimisticUsers({ userId: user.id, newStatus })
+
+    // Transición para manejar la actualización real
+    startTransition(async () => {
+      try {
+        // Llamada al servidor (simulada)
+        await updateUserStatus(user.id, newStatus)
+
+        // Actualizar el estado real después de la confirmación del servidor
+        setUsers((prev) =>
+          prev.map((u) => (u.id === user.id ? { ...u, estado: newStatus } : u))
+        )
+
+        console.log(`✅ Usuario ${user.nombre} ahora está ${newStatus}`)
+      } catch (error) {
+        console.error('❌ Error al actualizar usuario:', error)
+        // En caso de error, useOptimistic revertirá automáticamente
+      }
+    })
+  }
 
   // Definición de columnas para la tabla
   const columns: Column<UserData>[] = [
@@ -133,15 +178,31 @@ export function Dashboard() {
       header: 'Estado',
       sortable: true,
       render: (user) => (
-        <span
-          className={`px-3 py-1 rounded-full text-xs font-medium ${
-            user.estado === 'Activo'
-              ? 'bg-green-100 text-green-800'
-              : 'bg-gray-100 text-gray-800'
-          }`}
-        >
-          {user.estado}
-        </span>
+        <div className="flex items-center gap-2">
+          <span
+            className={`px-3 py-1 rounded-full text-xs font-medium ${
+              user.estado === 'Activo'
+                ? 'bg-green-100 text-green-800'
+                : 'bg-gray-100 text-gray-800'
+            }`}
+          >
+            {user.estado}
+          </span>
+          <button
+            onClick={(e) => {
+              e.stopPropagation() // Evitar que se active el click de la fila
+              handleToggleUserStatus(user)
+            }}
+            disabled={isPending}
+            className={`text-xs px-2 py-1 rounded hover:bg-gray-200 transition-colors ${
+              isPending ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
+            }`}
+            title={`Cambiar a ${user.estado === 'Activo' ? 'Inactivo' : 'Activo'}`}
+            aria-label={`Cambiar estado de ${user.nombre} a ${user.estado === 'Activo' ? 'Inactivo' : 'Activo'}`}
+          >
+            {isPending ? '⏳' : '🔄'}
+          </button>
+        </div>
       ),
     },
     {
@@ -158,9 +219,9 @@ export function Dashboard() {
   }
 
   const handleExport = () => {
-    // Generar CSV
+    // Generar CSV usando datos optimistas
     const headers = columns.map((col) => col.header).join(',')
-    const rows = users.map((user) =>
+    const rows = optimisticUsers.map((user) =>
       columns
         .map((col) => {
           const value = user[col.key as keyof UserData]
@@ -181,17 +242,20 @@ export function Dashboard() {
     <div className="container-govco py-8">
       {/* Header */}
       <header className="mb-8">
-        <h1 className="text-3xl font-bold text-govco-marino mb-2">Dashboard</h1>
+        <h1 className="text-3xl font-bold text-govco-marino mb-2">
+          Dashboard
+          {isPending && <span className="ml-3 text-sm text-gray-500">⏳ Actualizando...</span>}
+        </h1>
         <p className="text-gray-600">
           Panel de control y gestión de datos del sistema
         </p>
       </header>
 
-      {/* Stats Cards */}
+      {/* Stats Cards - usan optimisticUsers para reflejar cambios inmediatos */}
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <StatsCard
           title="Total Usuarios"
-          value={users.length}
+          value={optimisticUsers.length}
           icon="👥"
           color="blue"
           trend={{ value: 12, isPositive: true }}
@@ -199,7 +263,7 @@ export function Dashboard() {
         />
         <StatsCard
           title="Usuarios Activos"
-          value={users.filter((u) => u.estado === 'Activo').length}
+          value={optimisticUsers.filter((u) => u.estado === 'Activo').length}
           icon="✓"
           color="green"
           trend={{ value: 8, isPositive: true }}
@@ -207,14 +271,14 @@ export function Dashboard() {
         />
         <StatsCard
           title="Administradores"
-          value={users.filter((u) => u.rol === 'Administrador').length}
+          value={optimisticUsers.filter((u) => u.rol === 'Administrador').length}
           icon="⚙️"
           color="yellow"
           description="Usuarios con rol de administrador"
         />
         <StatsCard
           title="Usuarios Inactivos"
-          value={users.filter((u) => u.estado === 'Inactivo').length}
+          value={optimisticUsers.filter((u) => u.estado === 'Inactivo').length}
           icon="⊗"
           color="red"
           trend={{ value: 5, isPositive: false }}
@@ -222,7 +286,7 @@ export function Dashboard() {
         />
       </section>
 
-      {/* Data Table */}
+      {/* Data Table - usa optimisticUsers para actualizaciones instantáneas */}
       <section className="bg-white rounded-lg p-6 shadow-md">
         <div className="flex justify-between items-center mb-6">
           <div>
@@ -230,7 +294,7 @@ export function Dashboard() {
               Gestión de Usuarios
             </h2>
             <p className="text-sm text-gray-600">
-              Administra los usuarios del sistema
+              Administra los usuarios del sistema. Click en 🔄 para cambiar el estado.
             </p>
           </div>
 
@@ -250,7 +314,7 @@ export function Dashboard() {
         </div>
 
         <DataTable
-          data={users}
+          data={optimisticUsers}
           columns={columns}
           itemsPerPage={5}
           searchPlaceholder="Buscar por nombre, email, rol..."
@@ -261,8 +325,9 @@ export function Dashboard() {
       {/* Additional Info */}
       <footer className="mt-8 text-sm text-gray-500">
         <p>
-          💡 <strong>Tip:</strong> Haz clic en las cabeceras de columna para ordenar
-          los datos. Haz clic en una fila para ver los detalles del usuario.
+          💡 <strong>Tip:</strong> Haz clic en 🔄 para cambiar el estado del usuario
+          (React 19 useOptimistic). La UI se actualiza inmediatamente mientras se procesa
+          en el servidor.
         </p>
       </footer>
     </div>
