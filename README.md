@@ -298,7 +298,7 @@ npm run test:coverage # Reporte de cobertura
 
 ### Guías de Desarrollo
 
-- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Guía para contribuidores
+- **[docs/CONTRIBUTING.md](docs/CONTRIBUTING.md)** - Guía para contribuidores
   - Código de conducta
   - Flujo de trabajo de desarrollo
   - Estándares de código y estilo
@@ -339,7 +339,7 @@ npm run test:coverage # Reporte de cobertura
 
 ### Historial
 
-- **[CHANGELOG.md](CHANGELOG.md)** - Historial de versiones
+- **[docs/CHANGELOG.md](docs/CHANGELOG.md)** - Historial de versiones
   - Todos los cambios por versión
   - Semantic versioning
 
