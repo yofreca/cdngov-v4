@@ -294,6 +294,55 @@ npm run test:coverage # Reporte de cobertura
 
 📚 **Documentación completa**: [docs/TESTING.md](docs/TESTING.md)
 
+## 📚 Documentación
+
+### Guías de Desarrollo
+
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Guía para contribuidores
+  - Código de conducta
+  - Flujo de trabajo de desarrollo
+  - Estándares de código y estilo
+  - Testing y Pull Requests
+  - Conventional commits
+
+- **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** - Arquitectura del proyecto
+  - Stack tecnológico
+  - Estructura del proyecto
+  - Patrones de diseño
+  - Flujo de datos
+  - Decisiones arquitectónicas
+
+- **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** - Guía de deployment
+  - Build de producción
+  - Deployment en Netlify, Vercel, AWS, Nginx
+  - CI/CD con GitHub Actions
+  - Monitoreo y optimizaciones
+  - Troubleshooting
+
+### Documentación Técnica
+
+- **[docs/TESTING.md](docs/TESTING.md)** - Estrategia de testing
+  - Configuración de Vitest
+  - Mejores prácticas
+  - Coverage y métricas
+
+- **[docs/PERFORMANCE_OPTIMIZATIONS.md](docs/PERFORMANCE_OPTIMIZATIONS.md)** - Optimizaciones
+  - Lazy loading y code splitting
+  - React.memo y hooks
+  - Métricas de performance
+
+- **[docs/REACT_19_FEATURES.md](docs/REACT_19_FEATURES.md)** - Features React 19
+  - useOptimistic()
+  - use() hook
+  - useTransition()
+  - Ejemplos y patrones
+
+### Historial
+
+- **[CHANGELOG.md](CHANGELOG.md)** - Historial de versiones
+  - Todos los cambios por versión
+  - Semantic versioning
+
 ## 🚧 Estado de las Fases
 
 - ✅ Fase 1: Configuración Inicial (COMPLETADA)
@@ -355,10 +404,16 @@ npm run test:coverage # Reporte de cobertura
   - Scripts: test, test:ui, test:run, test:coverage
   - Documentación completa de estrategia de testing
   - Pendiente: Tests de servicios, hooks y componentes restantes
-- ⏳ Fase 11: Documentación Final (PENDIENTE)
+- ✅ Fase 11: Documentación Final (COMPLETADA)
+  - CONTRIBUTING.md - Guía completa para contribuidores
+  - docs/ARCHITECTURE.md - Arquitectura y patrones de diseño
+  - docs/DEPLOYMENT.md - Guía de deployment para múltiples plataformas
+  - CHANGELOG.md - Historial completo de versiones
+  - Documentación de todas las fases anteriores
+  - README actualizado con todos los links
 - ⏳ Fase 12: Deploy y CI/CD (PENDIENTE)
 
-**Progreso Total: 79% (9.75 de 12 fases)**
+**Progreso Total: 91% (11 de 12 fases)**
 
 ## 📝 Licencia
 
