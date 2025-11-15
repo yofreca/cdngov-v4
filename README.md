@@ -61,6 +61,10 @@ npm run lint         # Ejecutar ESLint
 npm run lint:fix     # Corregir errores de ESLint
 npm run format       # Formatear código con Prettier
 npm run format:check # Verificar formateo
+npm run test         # Ejecutar tests en modo watch
+npm run test:ui      # Ejecutar tests con interfaz gráfica
+npm run test:run     # Ejecutar todos los tests una vez
+npm run test:coverage # Generar reporte de cobertura
 ```
 
 ## 📁 Estructura del Proyecto
@@ -252,6 +256,44 @@ function UsersList() {
 
 📚 **Documentación completa**: [docs/REACT_19_FEATURES.md](docs/REACT_19_FEATURES.md)
 
+## 🧪 Testing
+
+La aplicación implementa una estrategia completa de testing con Vitest y React Testing Library:
+
+### Stack de Testing
+- **Vitest** (v4.0.9) - Framework de testing ultrarrápido
+- **React Testing Library** (v16.3.0) - Testing de componentes React 19
+- **@testing-library/jest-dom** - Matchers adicionales
+- **@testing-library/user-event** - Simulación de interacciones
+
+### Estadísticas
+```
+Tests Totales: 106
+Tests Pasando: 91 (85.8%)
+Cobertura Actual: ~40% (objetivo: 80%)
+```
+
+### Tests Implementados
+- ✅ **Button Component** (27 tests) - Variantes, tamaños, estados, accesibilidad
+- ✅ **LoadingSpinner Component** (19 tests) - Tamaños, fullScreen, accesibilidad
+- ✅ **Validaciones** (60 tests) - OWASP, validaciones colombianas, sanitización XSS
+
+### Scripts de Testing
+```bash
+npm run test         # Modo watch interactivo
+npm run test:ui      # Interfaz gráfica
+npm run test:run     # Ejecutar una vez
+npm run test:coverage # Reporte de cobertura
+```
+
+### Tipos de Tests
+1. **Tests Unitarios** - Componentes y funciones individuales
+2. **Tests de Seguridad** - Validaciones OWASP, sanitización XSS
+3. **Tests de Accesibilidad** - WCAG 2.1 AA compliance
+4. **Tests de Integración** - (próximamente) Flows completos
+
+📚 **Documentación completa**: [docs/TESTING.md](docs/TESTING.md)
+
 ## 🚧 Estado de las Fases
 
 - ✅ Fase 1: Configuración Inicial (COMPLETADA)
@@ -305,11 +347,18 @@ function UsersList() {
   - Mejora del 95% en tiempo de respuesta percibido (1s → <50ms)
   - Reducción del 95% de código para operaciones async
   - Documentación completa de todas las features implementadas
-- ⏳ Fase 10: Testing Completo (PENDIENTE)
+- 🔄 Fase 10: Testing Completo (75% - EN PROGRESO)
+  - Vitest configurado con React Testing Library
+  - 106 tests implementados (91 pasando, 85.8% éxito)
+  - Tests unitarios para Button, LoadingSpinner, validaciones
+  - Setup completo con mocks de localStorage, sessionStorage, IntersectionObserver
+  - Scripts: test, test:ui, test:run, test:coverage
+  - Documentación completa de estrategia de testing
+  - Pendiente: Tests de servicios, hooks y componentes restantes
 - ⏳ Fase 11: Documentación Final (PENDIENTE)
 - ⏳ Fase 12: Deploy y CI/CD (PENDIENTE)
 
-**Progreso Total: 75% (9 de 12 fases)**
+**Progreso Total: 79% (9.75 de 12 fases)**
 
 ## 📝 Licencia
 
