@@ -25,7 +25,11 @@ const Dashboard = lazy(() =>
 const NotFound = lazy(() =>
   import('@pages/NotFound').then((module) => ({ default: module.NotFound }))
 )
-
+const React19Features = lazy(() =>
+  import('@components/examples/React19Features').then((module) => ({
+    default: module.React19Features,
+  }))
+)
 
 /**
  * Configuración de rutas de la aplicación - Optimizado con Lazy Loading
@@ -43,6 +47,7 @@ export function AppRoutes() {
           <Route path="/" element={<Home />} />
           <Route path="/componentes" element={<ComponentsDemo />} />
           <Route path="/formulario" element={<FormExample />} />
+          <Route path="/react-19" element={<React19Features />} />
 
           {/* Rutas de autenticación */}
           <Route path="/login" element={<Login />} />

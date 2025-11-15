@@ -19,6 +19,7 @@ export function Navbar() {
   const publicLinks = [
     { path: '/', label: 'Inicio' },
     { path: '/componentes', label: 'Componentes' },
+    { path: '/react-19', label: 'React 19' },
     { path: '/formulario', label: 'Formulario' },
   ]
 
@@ -26,6 +27,7 @@ export function Navbar() {
   const authenticatedLinks = [
     { path: '/', label: 'Inicio' },
     { path: '/componentes', label: 'Componentes' },
+    { path: '/react-19', label: 'React 19' },
     { path: '/dashboard', label: 'Dashboard' },
     { path: '/formulario', label: 'Formulario' },
   ]
