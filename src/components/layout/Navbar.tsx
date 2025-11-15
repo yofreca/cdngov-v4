@@ -15,11 +15,24 @@ export function Navbar() {
   const location = useLocation()
   const { isAuthenticated, logout, user } = useAuth()
 
-  const links = [
+  // Links públicos
+  const publicLinks = [
     { path: '/', label: 'Inicio' },
     { path: '/componentes', label: 'Componentes' },
+    { path: '/react-19', label: 'React 19' },
     { path: '/formulario', label: 'Formulario' },
   ]
+
+  // Links para usuarios autenticados
+  const authenticatedLinks = [
+    { path: '/', label: 'Inicio' },
+    { path: '/componentes', label: 'Componentes' },
+    { path: '/react-19', label: 'React 19' },
+    { path: '/dashboard', label: 'Dashboard' },
+    { path: '/formulario', label: 'Formulario' },
+  ]
+
+  const links = isAuthenticated ? authenticatedLinks : publicLinks
 
   const isActive = (path: string) => location.pathname === path
 
@@ -27,6 +40,7 @@ export function Navbar() {
 
   return (
     <nav
+      id="main-navigation"
       style={{ backgroundColor: 'var(--color-govco-marino)' }}
       className="relative"
       role="navigation"
@@ -77,7 +91,7 @@ export function Navbar() {
                 </Button>
               </div>
             ) : (
-              <Link to="/formulario">
+              <Link to="/login">
                 <Button
                   variant="outline"
                   size="sm"
@@ -169,7 +183,7 @@ export function Navbar() {
               </div>
             ) : (
               <Link
-                to="/formulario"
+                to="/login"
                 onClick={() => setIsMenuOpen(false)}
                 className="block mt-4"
               >

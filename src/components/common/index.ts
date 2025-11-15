@@ -27,3 +27,7 @@ export type {
   CardContentProps,
   CardFooterProps,
 } from './Card'
+
+export { ErrorBoundary } from './ErrorBoundary'
+export { LoadingSpinner } from './LoadingSpinner'
+export { LazyImage } from './LazyImage'

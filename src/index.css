@@ -162,3 +162,124 @@
     color: white;
   }
 }
+
+/* Modo de alto contraste para accesibilidad */
+/* Solo aplica al contenido principal (main) para no afectar header/nav/footer */
+
+body.high-contrast {
+  background-color: #000 !important;
+}
+
+/* PROTEGER Header, Nav y Footer del modo alto contraste */
+body.high-contrast header,
+body.high-contrast header *:not(img):not(svg),
+body.high-contrast nav,
+body.high-contrast nav *:not(img):not(svg),
+body.high-contrast footer,
+body.high-contrast footer *:not(img):not(svg) {
+  background-color: unset !important;
+  color: unset !important;
+  border-color: unset !important;
+}
+
+/* Aplicar alto contraste SOLO al contenido principal */
+body.high-contrast main {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+}
+
+body.high-contrast main * {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+  border-color: #ffff00 !important;
+}
+
+/* Links en el contenido principal */
+body.high-contrast main a {
+  color: #00ffff !important;
+  text-decoration: underline !important;
+}
+
+/* Botones en el contenido principal */
+body.high-contrast main button {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+}
+
+/* Inputs en el contenido principal */
+body.high-contrast main input,
+body.high-contrast main textarea,
+body.high-contrast main select {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+}
+
+/* Imágenes en main mantienen visibilidad */
+body.high-contrast main img,
+body.high-contrast main svg {
+  opacity: 0.8 !important;
+  filter: grayscale(100%) contrast(1.2) !important;
+}
+
+/* Barra de accesibilidad mantiene su diseño original */
+body.high-contrast .accessibility-bar,
+body.high-contrast .accessibility-bar * {
+  background-color: var(--color-govco-marino) !important;
+  color: white !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+body.high-contrast .accessibility-bar button:hover {
+  background-color: var(--color-govco-azul-oscuro) !important;
+}
+
+/* ScrollToTop mantiene su diseño */
+body.high-contrast .scroll-to-top,
+body.high-contrast .scroll-to-top * {
+  background-color: var(--color-govco-marino) !important;
+  color: white !important;
+}
+
+/* SkipLinks mantiene su diseño */
+body.high-contrast .skip-links,
+body.high-contrast .skip-links *,
+body.high-contrast .skip-link {
+  background-color: var(--color-govco-marino) !important;
+  color: white !important;
+  border-color: white !important;
+}
+
+/* Modos de daltonismo para accesibilidad */
+
+/* Protanopia (deficiencia de rojo) */
+body.colorblind-protanopia {
+  filter: url('#protanopia-filter');
+}
+
+body.colorblind-protanopia::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  /* Simulación de protanopia con filtro SVG inline */
+  background: transparent;
+}
+
+/* Deuteranopia (deficiencia de verde) */
+body.colorblind-deuteranopia {
+  filter: grayscale(0.3) hue-rotate(180deg) saturate(0.8);
+}
+
+/* Tritanopia (deficiencia de azul) */
+body.colorblind-tritanopia {
+  filter: grayscale(0.2) hue-rotate(90deg) saturate(0.7);
+}
+
+/* Alternativa más precisa con SVG filters (opcional) */
+/* Se pueden agregar filtros SVG más precisos según necesidad */

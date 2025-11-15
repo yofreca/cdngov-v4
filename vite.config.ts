@@ -7,6 +7,26 @@ import path from 'path'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
 
+  // Configuración de Vitest para testing
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/test/setup.ts',
+    css: true,
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
+      exclude: [
+        'node_modules/',
+        'src/test/',
+        '**/*.d.ts',
+        '**/*.config.*',
+        '**/mockData',
+        'dist/',
+      ],
+    },
+  },
+
   // Alias para imports más limpios
   resolve: {
     alias: {
@@ -20,6 +40,7 @@ export default defineConfig({
       '@context': path.resolve(__dirname, './src/context'),
       '@styles': path.resolve(__dirname, './src/styles'),
       '@routes': path.resolve(__dirname, './src/routes'),
+      '@test': path.resolve(__dirname, './src/test'),
     },
   },
 
