@@ -16,19 +16,11 @@ export function Footer() {
   return (
     <footer id="footer" className="gov-co-footer mt-auto" style={{ backgroundColor: 'var(--color-govco-gris-muy-claro)' }}>
       <div
-        className="py-6 md:py-8"
-        style={{
-          background: `linear-gradient(to right,
-            var(--color-govco-marino) 0%,
-            var(--color-govco-marino) 30px,
-            transparent 30px,
-            transparent calc(100% - 30px),
-            var(--color-govco-marino) calc(100% - 30px),
-            var(--color-govco-marino) 100%)`
-        }}
+        className="py-6 md:py-8 px-[30px]"
+        style={{ backgroundColor: 'var(--color-govco-marino)' }}
       >
-        <div className="max-w-[80rem] mx-auto px-0">
-          <div className="bg-white shadow-sm mx-[30px] px-6 py-6 md:px-8 md:py-8">
+        <div className="max-w-[80rem] mx-auto">
+          <div className="bg-white shadow-sm px-6 py-6 md:px-8 md:py-8">
           {/* Logo y Título */}
           <div className="mb-6">
             <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
