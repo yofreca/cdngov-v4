@@ -27,7 +27,7 @@ export function MainLayout() {
       {/* <Navbar /> */}
 
       {/* Contenido principal */}
-      <main id="main-content" className="flex-1" tabIndex={-1}>
+      <main id="main-content" className="flex-1 pb-24 md:pb-32" tabIndex={-1}>
         <Outlet />
       </main>
 
