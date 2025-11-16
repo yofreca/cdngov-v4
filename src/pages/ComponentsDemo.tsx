@@ -11,8 +11,6 @@ import {
   CardHeader,
   CardContent,
   CardFooter,
-  Header,
-  Footer,
 } from '@components'
 
 /**
@@ -40,15 +38,7 @@ export function ComponentsDemo() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: 'var(--color-govco-gris-muy-claro)' }}>
-      {/* Header */}
-      <Header
-        title="Sistema de Diseño Gov.co"
-        subtitle="Componentes React 19 + Tailwind CSS 4"
-      />
-
-      {/* Contenido principal */}
-      <main className="container-govco py-8 flex-1">
+    <div className="container-govco py-8">
         <div className="space-y-8">
           {/* Introducción */}
           <Card variant="elevated">
@@ -284,16 +274,6 @@ export function ComponentsDemo() {
             </CardContent>
           </Card>
         </div>
-      </main>
-
-      {/* Footer */}
-      <Footer
-        links={[
-          { label: 'Términos y Condiciones', href: '#' },
-          { label: 'Política de Privacidad', href: '#' },
-          { label: 'Contacto', href: '#' },
-        ]}
-      />
     </div>
   )
 }
