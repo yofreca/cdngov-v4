@@ -27,8 +27,8 @@ export function Footer() {
             var(--color-govco-marino) 100%)`
         }}
       >
-        <div className="container-govco px-0">
-          <div className="bg-white p-6 md:p-8 shadow-sm mx-[30px]">
+        <div className="max-w-[80rem] mx-auto px-0">
+          <div className="bg-white shadow-sm mx-[30px] px-6 py-6 md:px-8 md:py-8">
           {/* Logo y Título */}
           <div className="mb-6">
             <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
