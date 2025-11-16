@@ -301,7 +301,7 @@ export function Footer() {
 
       {/* Fondo azul que empieza a la mitad de la caja blanca */}
       <div
-        className="-mt-32 md:-mt-40 pt-32 md:pt-40 pb-6 md:pb-8 px-[30px]"
+        className="-mt-16 md:-mt-20 pt-16 md:pt-20 pb-6 md:pb-8 px-[30px]"
         style={{ backgroundColor: 'var(--color-govco-marino)' }}
       >
         {/* Espacio para que el fondo azul esté detrás de la caja */}
