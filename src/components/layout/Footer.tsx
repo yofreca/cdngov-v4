@@ -1,6 +1,7 @@
 import logoArnImg from '@assets/images/logo-arn.png'
 import headerGovcoImg from '@assets/images/header_govco.png'
 import colombiaSvg from '@assets/images/CO.svg'
+import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa'
 
 /**
  * Componente Footer siguiendo el diseño Gov.co/ARN
@@ -13,15 +14,16 @@ import colombiaSvg from '@assets/images/CO.svg'
  */
 export function Footer() {
   return (
-    <footer id="footer" className="gov-co-footer mt-auto bg-gray-50">
-      <div className="container-govco">
-        <div
-          className="bg-white p-6 md:p-8 rounded-lg shadow-sm my-4"
-          style={{
-            borderLeft: '30px solid var(--color-govco-marino)',
-            borderRight: '30px solid var(--color-govco-marino)'
-          }}
-        >
+    <footer id="footer" className="gov-co-footer mt-auto" style={{ backgroundColor: 'var(--color-govco-gris-muy-claro)' }}>
+      <div className="py-6 md:py-8">
+        <div className="container-govco">
+          <div
+            className="bg-white p-6 md:p-8 rounded-lg shadow-sm"
+            style={{
+              borderLeft: '30px solid var(--color-govco-marino)',
+              borderRight: '30px solid var(--color-govco-marino)'
+            }}
+          >
           {/* Logo y Título */}
           <div className="mb-6">
             <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
@@ -208,45 +210,45 @@ export function Footer() {
                 href="https://www.facebook.com/ARNColombia/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 text-sm hover:bg-gray-100 rounded transition-colors"
-                style={{ color: 'var(--color-govco-marino)' }}
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full hover:opacity-80 transition-opacity"
+                style={{ backgroundColor: 'var(--color-govco-marino)' }}
                 title="Facebook ARN Colombia"
+                aria-label="Facebook ARN Colombia"
               >
-                <span>📘</span>
-                <span>@ARNColombia</span>
+                <FaFacebook className="w-5 h-5 text-white" />
               </a>
               <a
                 href="https://twitter.com/ARNColombia/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 text-sm hover:bg-gray-100 rounded transition-colors"
-                style={{ color: 'var(--color-govco-marino)' }}
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full hover:opacity-80 transition-opacity"
+                style={{ backgroundColor: 'var(--color-govco-marino)' }}
                 title="Twitter ARN Colombia"
+                aria-label="Twitter ARN Colombia"
               >
-                <span>🐦</span>
-                <span>@ARNColombia</span>
+                <FaTwitter className="w-5 h-5 text-white" />
               </a>
               <a
                 href="https://www.instagram.com/arncolombia/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 text-sm hover:bg-gray-100 rounded transition-colors"
-                style={{ color: 'var(--color-govco-marino)' }}
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full hover:opacity-80 transition-opacity"
+                style={{ backgroundColor: 'var(--color-govco-marino)' }}
                 title="Instagram ARN Colombia"
+                aria-label="Instagram ARN Colombia"
               >
-                <span>📷</span>
-                <span>@ARNColombia</span>
+                <FaInstagram className="w-5 h-5 text-white" />
               </a>
               <a
                 href="http://www.youtube.com/user/ReintegracionACR"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 text-sm hover:bg-gray-100 rounded transition-colors"
-                style={{ color: 'var(--color-govco-marino)' }}
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full hover:opacity-80 transition-opacity"
+                style={{ backgroundColor: 'var(--color-govco-marino)' }}
                 title="YouTube ARN Colombia"
+                aria-label="YouTube ARN Colombia"
               >
-                <span>📹</span>
-                <span>@ARNColombia</span>
+                <FaYoutube className="w-5 h-5 text-white" />
               </a>
             </div>
           </div>
@@ -301,13 +303,14 @@ export function Footer() {
               </a>
             </div>
           </div>
+          </div>
         </div>
       </div>
 
       {/* Banner GOV.CO Inferior */}
       <div
         style={{ backgroundColor: 'var(--color-govco-azul-oscuro)' }}
-        className="py-4 mt-4"
+        className="py-4"
       >
         <div className="container-govco">
           <div className="flex flex-col md:flex-row items-center justify-center md:justify-start gap-4">

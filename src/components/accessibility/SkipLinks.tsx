@@ -129,6 +129,7 @@ export const SkipLinks: React.FC<SkipLinksProps> = ({
                   visibleLinkId === link.id
                     ? 'translateY(0)'
                     : 'translateY(-100%)',
+                pointerEvents: visibleLinkId === link.id ? 'auto' : 'none',
               }}
             >
               {link.label}
@@ -167,7 +168,6 @@ export const SkipLinks: React.FC<SkipLinksProps> = ({
           margin-left: 1rem;
           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
           transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
-          pointer-events: auto;
         }
 
         .skip-link:hover {
