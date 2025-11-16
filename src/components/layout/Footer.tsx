@@ -15,12 +15,8 @@ import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa'
 export function Footer() {
   return (
     <footer id="footer" className="gov-co-footer mt-auto" style={{ backgroundColor: 'var(--color-govco-gris-muy-claro)' }}>
-      <div
-        className="pt-24 md:pt-32 pb-6 md:pb-8 px-[30px]"
-        style={{ backgroundColor: 'var(--color-govco-marino)' }}
-      >
-        <div className="max-w-[80rem] mx-auto">
-          <div className="bg-white shadow-sm rounded-lg px-6 py-6 md:px-8 md:py-8 -mt-20 md:-mt-28">
+      <div className="max-w-[80rem] mx-auto px-[30px]">
+        <div className="bg-white shadow-sm rounded-lg px-6 py-6 md:px-8 md:py-8 relative z-10">
           {/* Logo y Título */}
           <div className="mb-6">
             <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
@@ -300,8 +296,15 @@ export function Footer() {
               </a>
             </div>
           </div>
-          </div>
         </div>
+      </div>
+
+      {/* Fondo azul que empieza a la mitad de la caja blanca */}
+      <div
+        className="-mt-32 md:-mt-40 pt-32 md:pt-40 pb-6 md:pb-8 px-[30px]"
+        style={{ backgroundColor: 'var(--color-govco-marino)' }}
+      >
+        {/* Espacio para que el fondo azul esté detrás de la caja */}
       </div>
 
       {/* Banner GOV.CO Inferior */}
