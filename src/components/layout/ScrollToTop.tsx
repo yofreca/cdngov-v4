@@ -36,18 +36,28 @@ export function ScrollToTop() {
   return (
     <>
       {isVisible && (
-        <div className="scroll-to-top fixed bottom-4 right-4 z-40">
+        <div className="scroll-to-top fixed bottom-8 right-4 z-40">
           <button
             onClick={scrollToTop}
-            className="flex flex-col items-center justify-center px-2 py-2 rounded-lg shadow-lg transition-all hover:shadow-xl hover:scale-105"
+            className="flex items-center justify-center w-12 h-12 rounded-full shadow-lg transition-all hover:shadow-xl hover:scale-105"
             style={{ backgroundColor: 'var(--color-govco-marino)' }}
             aria-label="Volver arriba"
             title="Volver arriba"
           >
-            <span className="text-white text-lg">↑</span>
-            <span className="text-white text-[10px] font-medium leading-tight">
-              Arriba
-            </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={3}
+              stroke="white"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4.5 15.75l7.5-7.5 7.5 7.5"
+              />
+            </svg>
           </button>
         </div>
       )}
