@@ -17,7 +17,13 @@ export function Footer() {
     <footer id="footer" className="gov-co-footer mt-auto" style={{ backgroundColor: 'var(--color-govco-gris-muy-claro)' }}>
       <div className="py-6 md:py-8">
         <div className="container-govco">
-          <div className="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+          <div
+            className="bg-white p-6 md:p-8 rounded-lg shadow-sm"
+            style={{
+              borderLeft: '30px solid var(--color-govco-marino)',
+              borderRight: '30px solid var(--color-govco-marino)'
+            }}
+          >
           {/* Logo y Título */}
           <div className="mb-6">
             <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
