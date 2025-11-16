@@ -15,7 +15,13 @@ export function Footer() {
   return (
     <footer id="footer" className="gov-co-footer mt-auto bg-gray-50">
       <div className="container-govco">
-        <div className="bg-white p-6 md:p-8 rounded-lg shadow-sm my-4">
+        <div
+          className="bg-white p-6 md:p-8 rounded-lg shadow-sm my-4"
+          style={{
+            borderLeft: '30px solid var(--color-govco-marino)',
+            borderRight: '30px solid var(--color-govco-marino)'
+          }}
+        >
           {/* Logo y Título */}
           <div className="mb-6">
             <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
