@@ -14,9 +14,10 @@ import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa'
  */
 export function Footer() {
   return (
-    <footer id="footer" className="gov-co-footer mt-auto">
-      <div className="bg-white py-6 md:py-8">
+    <footer id="footer" className="gov-co-footer mt-auto" style={{ backgroundColor: 'var(--color-govco-gris-muy-claro)' }}>
+      <div className="py-6 md:py-8">
         <div className="container-govco">
+          <div className="bg-white p-6 md:p-8 rounded-lg shadow-sm">
           {/* Logo y Título */}
           <div className="mb-6">
             <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
@@ -295,6 +296,7 @@ export function Footer() {
                 Mapa del sitio
               </a>
             </div>
+          </div>
           </div>
         </div>
       </div>
