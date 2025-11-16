@@ -20,7 +20,7 @@ export function Footer() {
         style={{ backgroundColor: 'var(--color-govco-marino)' }}
       >
         <div className="max-w-[80rem] mx-auto">
-          <div className="bg-white shadow-sm px-6 py-6 md:px-8 md:py-8">
+          <div className="bg-white shadow-sm rounded-lg px-6 py-6 md:px-8 md:py-8">
           {/* Logo y Título */}
           <div className="mb-6">
             <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
@@ -306,7 +306,7 @@ export function Footer() {
 
       {/* Banner GOV.CO Inferior */}
       <div
-        style={{ backgroundColor: 'var(--color-govco-azul-oscuro)' }}
+        style={{ backgroundColor: 'var(--color-govco-marino)' }}
         className="py-4"
       >
         <div className="container-govco">
