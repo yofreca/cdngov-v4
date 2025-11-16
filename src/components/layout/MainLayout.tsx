@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import { Header } from './Header'
-import { Navbar } from './Navbar'
+// import { Navbar } from './Navbar' // Eliminado - usando menú lateral
 import { Footer } from './Footer'
 import { AccessibilityBar } from './AccessibilityBar'
 import { ScrollToTop } from './ScrollToTop'
@@ -23,8 +23,8 @@ export function MainLayout() {
       {/* Header completo con banners GOV.CO y ARN */}
       <Header />
 
-      {/* Navbar de navegación (opcional, puedes comentar si no lo necesitas) */}
-      <Navbar />
+      {/* Navbar eliminado - usando menú lateral en Header según diseño SARA */}
+      {/* <Navbar /> */}
 
       {/* Contenido principal */}
       <main id="main-content" className="flex-1" tabIndex={-1}>

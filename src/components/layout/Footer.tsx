@@ -1,6 +1,7 @@
 import logoArnImg from '@assets/images/logo-arn.png'
 import headerGovcoImg from '@assets/images/header_govco.png'
 import colombiaSvg from '@assets/images/CO.svg'
+import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa'
 
 /**
  * Componente Footer siguiendo el diseño Gov.co/ARN
@@ -202,45 +203,45 @@ export function Footer() {
                 href="https://www.facebook.com/ARNColombia/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 text-sm hover:bg-gray-100 rounded transition-colors"
-                style={{ color: 'var(--color-govco-marino)' }}
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full hover:opacity-80 transition-opacity"
+                style={{ backgroundColor: 'var(--color-govco-marino)' }}
                 title="Facebook ARN Colombia"
+                aria-label="Facebook ARN Colombia"
               >
-                <span>📘</span>
-                <span>@ARNColombia</span>
+                <FaFacebook className="w-5 h-5 text-white" />
               </a>
               <a
                 href="https://twitter.com/ARNColombia/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 text-sm hover:bg-gray-100 rounded transition-colors"
-                style={{ color: 'var(--color-govco-marino)' }}
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full hover:opacity-80 transition-opacity"
+                style={{ backgroundColor: 'var(--color-govco-marino)' }}
                 title="Twitter ARN Colombia"
+                aria-label="Twitter ARN Colombia"
               >
-                <span>🐦</span>
-                <span>@ARNColombia</span>
+                <FaTwitter className="w-5 h-5 text-white" />
               </a>
               <a
                 href="https://www.instagram.com/arncolombia/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 text-sm hover:bg-gray-100 rounded transition-colors"
-                style={{ color: 'var(--color-govco-marino)' }}
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full hover:opacity-80 transition-opacity"
+                style={{ backgroundColor: 'var(--color-govco-marino)' }}
                 title="Instagram ARN Colombia"
+                aria-label="Instagram ARN Colombia"
               >
-                <span>📷</span>
-                <span>@ARNColombia</span>
+                <FaInstagram className="w-5 h-5 text-white" />
               </a>
               <a
                 href="http://www.youtube.com/user/ReintegracionACR"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 text-sm hover:bg-gray-100 rounded transition-colors"
-                style={{ color: 'var(--color-govco-marino)' }}
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full hover:opacity-80 transition-opacity"
+                style={{ backgroundColor: 'var(--color-govco-marino)' }}
                 title="YouTube ARN Colombia"
+                aria-label="YouTube ARN Colombia"
               >
-                <span>📹</span>
-                <span>@ARNColombia</span>
+                <FaYoutube className="w-5 h-5 text-white" />
               </a>
             </div>
           </div>

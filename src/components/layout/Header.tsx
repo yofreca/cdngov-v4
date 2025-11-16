@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import headerGovcoImg from '@assets/images/header_govco.png'
 import logoArnImg from '@assets/images/logo-arn.png'
+import { SideMenu } from './SideMenu'
 
 export interface HeaderProps {
   title?: string
@@ -22,6 +23,7 @@ export function Header({
 }: HeaderProps) {
   const [showUserMenu, setShowUserMenu] = useState(false)
   const [showLangMenu, setShowLangMenu] = useState(false)
+  const [showSideMenu, setShowSideMenu] = useState(false)
 
   return (
     <header>
@@ -48,6 +50,7 @@ export function Header({
             </a>
             {showMenu && (
               <button
+                onClick={() => setShowSideMenu(true)}
                 className="md:hidden inline-flex items-center px-3 py-1 text-white text-sm border border-white/30 rounded hover:bg-white/10 transition-colors"
                 title="Menú"
                 aria-label="Abrir menú principal"
@@ -103,6 +106,7 @@ export function Header({
           <div className="flex items-center justify-between">
             {showMenu && (
               <button
+                onClick={() => setShowSideMenu(true)}
                 className="hidden md:inline-flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-white/50 rounded transition-colors"
                 aria-label="Mostrar menú"
               >
@@ -187,6 +191,9 @@ export function Header({
           </div>
         </div>
       </div>
+
+      {/* Menú lateral */}
+      <SideMenu isOpen={showSideMenu} onClose={() => setShowSideMenu(false)} />
     </header>
   )
 }
