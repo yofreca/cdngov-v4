@@ -171,31 +171,16 @@ body.high-contrast {
 }
 
 /* PROTEGER Header, Nav y Footer del modo alto contraste */
-/* Mantener colores originales de Gov.co en header */
-body.high-contrast header {
-  background-color: var(--color-govco-azul-oscuro) !important;
-}
-
-body.high-contrast header *:not(img):not(svg) {
-  color: white !important;
-}
-
-/* Nav mantiene diseño original */
-body.high-contrast nav {
-  background-color: var(--color-govco-marino) !important;
-}
-
-body.high-contrast nav *:not(img):not(svg) {
-  color: white !important;
-}
-
-/* Footer mantiene diseño original */
-body.high-contrast footer {
-  background-color: var(--color-govco-azul-oscuro) !important;
-}
-
-body.high-contrast footer *:not(img):not(svg) {
-  color: white !important;
+/* El header y footer NO deben verse afectados por el modo de alto contraste */
+body.high-contrast header,
+body.high-contrast header *,
+body.high-contrast nav,
+body.high-contrast nav *,
+body.high-contrast footer,
+body.high-contrast footer * {
+  background-color: revert !important;
+  color: revert !important;
+  border-color: revert !important;
 }
 
 /* Aplicar alto contraste SOLO al contenido principal */
