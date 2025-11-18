@@ -1,4 +1,7 @@
-export { Home } from './Home'
-export { ComponentsDemo } from './ComponentsDemo'
-export { FormExample } from './FormExample'
-export { NotFound } from './NotFound'
+// All pages have been migrated to feature modules:
+// - Auth pages: @feature/auth
+// - Home page: @feature/home
+// - Dashboard: @feature/dashboard
+// - Demo pages (ComponentsDemo, FormExample, NotFound): @feature/demo
+
+export {}

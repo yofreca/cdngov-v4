@@ -28,7 +28,7 @@ Object.defineProperty(window, 'matchMedia', {
 })
 
 // Mock de IntersectionObserver (para LazyImage tests)
-global.IntersectionObserver = class IntersectionObserver {
+;(globalThis as any).IntersectionObserver = class IntersectionObserver {
   constructor() {}
   disconnect() {}
   observe() {}
@@ -36,7 +36,7 @@ global.IntersectionObserver = class IntersectionObserver {
     return []
   }
   unobserve() {}
-} as any
+}
 
 // Mock de localStorage
 const localStorageMock = {
@@ -45,7 +45,7 @@ const localStorageMock = {
   removeItem: vi.fn(),
   clear: vi.fn(),
 }
-global.localStorage = localStorageMock as any
+;(globalThis as any).localStorage = localStorageMock
 
 // Mock de sessionStorage
 const sessionStorageMock = {
@@ -54,7 +54,7 @@ const sessionStorageMock = {
   removeItem: vi.fn(),
   clear: vi.fn(),
 }
-global.sessionStorage = sessionStorageMock as any
+;(globalThis as any).sessionStorage = sessionStorageMock
 
 // Suprimir warnings específicos en los tests
 const originalError = console.error

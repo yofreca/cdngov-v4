@@ -9,7 +9,7 @@
  */
 
 import { useState, useMemo, memo, useCallback } from 'react'
-import { Button } from '@components/common/Button'
+import { Button } from '@shared/components/ui'
 
 export interface Column<T> {
   key: keyof T | string
@@ -227,7 +227,7 @@ function DataTableComponent<T extends Record<string, unknown>>({
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
               variant="secondary"
-              size="small"
+              size="sm"
               aria-label="Página anterior"
             >
               Anterior
@@ -255,7 +255,7 @@ function DataTableComponent<T extends Record<string, unknown>>({
                     <Button
                       onClick={() => handlePageChange(page)}
                       variant={page === currentPage ? 'primary' : 'secondary'}
-                      size="small"
+                      size="sm"
                       aria-label={`Página ${page}`}
                       aria-current={page === currentPage ? 'page' : undefined}
                     >
@@ -269,7 +269,7 @@ function DataTableComponent<T extends Record<string, unknown>>({
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
               variant="secondary"
-              size="small"
+              size="sm"
               aria-label="Página siguiente"
             >
               Siguiente

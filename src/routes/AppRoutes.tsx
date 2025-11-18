@@ -1,29 +1,29 @@
 import { lazy, Suspense } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { MainLayout } from '@components/layout/MainLayout'
+import { MainLayout } from '@feature/layout'
 import { ProtectedRoute } from '@components/auth/ProtectedRoute'
-import { LoadingSpinner } from '@components/common/LoadingSpinner'
+import { LoadingSpinner } from '@shared/components/ui'
 
 // Lazy loading de páginas para mejorar performance
-const Home = lazy(() => import('@pages/Home').then((module) => ({ default: module.Home })))
+const Home = lazy(() => import('@feature/home/pages/Home').then((module) => ({ default: module.Home })))
 const ComponentsDemo = lazy(() =>
-  import('@pages/ComponentsDemo').then((module) => ({ default: module.ComponentsDemo }))
+  import('@feature/demo/pages/ComponentsDemo').then((module) => ({ default: module.ComponentsDemo }))
 )
 const FormExample = lazy(() =>
-  import('@pages/FormExample').then((module) => ({ default: module.FormExample }))
+  import('@feature/demo/pages/FormExample').then((module) => ({ default: module.FormExample }))
 )
-const Login = lazy(() => import('@pages/Login').then((module) => ({ default: module.Login })))
+const Login = lazy(() => import('@feature/auth/pages/Login').then((module) => ({ default: module.Login })))
 const Register = lazy(() =>
-  import('@pages/Register').then((module) => ({ default: module.Register }))
+  import('@feature/auth/pages/Register').then((module) => ({ default: module.Register }))
 )
 const ForgotPassword = lazy(() =>
-  import('@pages/ForgotPassword').then((module) => ({ default: module.ForgotPassword }))
+  import('@feature/auth/pages/ForgotPassword').then((module) => ({ default: module.ForgotPassword }))
 )
 const Dashboard = lazy(() =>
-  import('@pages/Dashboard').then((module) => ({ default: module.Dashboard }))
+  import('@feature/dashboard/pages/Dashboard').then((module) => ({ default: module.Dashboard }))
 )
 const NotFound = lazy(() =>
-  import('@pages/NotFound').then((module) => ({ default: module.NotFound }))
+  import('@feature/demo/pages/NotFound').then((module) => ({ default: module.NotFound }))
 )
 const React19Features = lazy(() =>
   import('@components/examples/React19Features').then((module) => ({

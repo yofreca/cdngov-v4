@@ -5,27 +5,31 @@
  * Registra eventos de seguridad sin exponer información sensible
  */
 
-export enum SecurityEventType {
-  LOGIN_SUCCESS = 'LOGIN_SUCCESS',
-  LOGIN_FAILURE = 'LOGIN_FAILURE',
-  LOGOUT = 'LOGOUT',
-  PASSWORD_CHANGE = 'PASSWORD_CHANGE',
-  PASSWORD_RESET_REQUEST = 'PASSWORD_RESET_REQUEST',
-  UNAUTHORIZED_ACCESS = 'UNAUTHORIZED_ACCESS',
-  PERMISSION_DENIED = 'PERMISSION_DENIED',
-  API_ERROR = 'API_ERROR',
-  VALIDATION_ERROR = 'VALIDATION_ERROR',
-  FILE_UPLOAD = 'FILE_UPLOAD',
-  SUSPICIOUS_ACTIVITY = 'SUSPICIOUS_ACTIVITY',
-  RATE_LIMIT_EXCEEDED = 'RATE_LIMIT_EXCEEDED',
-}
+export const SecurityEventType = {
+  LOGIN_SUCCESS: 'LOGIN_SUCCESS',
+  LOGIN_FAILURE: 'LOGIN_FAILURE',
+  LOGOUT: 'LOGOUT',
+  PASSWORD_CHANGE: 'PASSWORD_CHANGE',
+  PASSWORD_RESET_REQUEST: 'PASSWORD_RESET_REQUEST',
+  UNAUTHORIZED_ACCESS: 'UNAUTHORIZED_ACCESS',
+  PERMISSION_DENIED: 'PERMISSION_DENIED',
+  API_ERROR: 'API_ERROR',
+  VALIDATION_ERROR: 'VALIDATION_ERROR',
+  FILE_UPLOAD: 'FILE_UPLOAD',
+  SUSPICIOUS_ACTIVITY: 'SUSPICIOUS_ACTIVITY',
+  RATE_LIMIT_EXCEEDED: 'RATE_LIMIT_EXCEEDED',
+} as const
 
-export enum SecurityLevel {
-  INFO = 'INFO',
-  WARNING = 'WARNING',
-  ERROR = 'ERROR',
-  CRITICAL = 'CRITICAL',
-}
+export type SecurityEventType = typeof SecurityEventType[keyof typeof SecurityEventType]
+
+export const SecurityLevel = {
+  INFO: 'INFO',
+  WARNING: 'WARNING',
+  ERROR: 'ERROR',
+  CRITICAL: 'CRITICAL',
+} as const
+
+export type SecurityLevel = typeof SecurityLevel[keyof typeof SecurityLevel]
 
 interface SecurityEvent {
   timestamp: string
@@ -284,6 +288,18 @@ class SecurityLogger {
    */
   public exportEvents(): string {
     return JSON.stringify(this.events, null, 2)
+  }
+
+  /**
+   * Alias para log() - compatibilidad con llamadas existentes
+   */
+  public logSecurityEvent(
+    type: SecurityEventType,
+    level: SecurityLevel,
+    message: string,
+    metadata?: Record<string, unknown>
+  ): void {
+    this.log(type, level, message, metadata)
   }
 }
 

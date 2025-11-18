@@ -7,9 +7,9 @@
 
 import { Suspense } from 'react'
 import { useDataFetcher, clearUsersCache } from '@hooks/useDataFetcher'
-import { LoadingSpinner } from '@components/common/LoadingSpinner'
-import { Button } from '@components/common/Button'
-import { Card, CardHeader, CardContent } from '@components/common/Card'
+import { LoadingSpinner } from '@shared/components/ui'
+import { Button } from '@shared/components/ui'
+import { Card, CardHeader, CardContent } from '@shared/components/ui'
 
 /**
  * Componente que usa el hook use() de React 19
@@ -112,7 +112,7 @@ export function React19Features() {
             </Suspense>
 
             <div className="mt-4 pt-4 border-t border-gray-200">
-              <Button onClick={handleRefresh} variant="outline" size="small">
+              <Button onClick={handleRefresh} variant="outline" size="sm">
                 🔄 Refrescar datos
               </Button>
             </div>
@@ -175,7 +175,7 @@ function UsersList() {
               y prueba el botón 🔄 para cambiar el estado de los usuarios de forma
               optimista.
             </p>
-            <Button variant="primary" size="small" onClick={() => (window.location.href = '/dashboard')}>
+            <Button variant="primary" size="sm" onClick={() => (window.location.href = '/dashboard')}>
               Ver Dashboard con useOptimistic
             </Button>
           </CardContent>
