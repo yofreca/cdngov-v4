@@ -4,9 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import {
   Card,
-  CardHeader,
   CardContent,
-  CardFooter,
   Input,
   Select,
   Textarea,
@@ -137,11 +135,6 @@ export function FormExample() {
         )}
 
         <Card variant="elevated">
-          <CardHeader
-            title="Información de Contacto"
-            subtitle="Completa el formulario con tus datos"
-          />
-
           <form onSubmit={handleSubmit(onSubmit)}>
             <CardContent>
               <div className="space-y-6">
@@ -232,31 +225,30 @@ export function FormExample() {
                   la legislación colombiana de protección de datos personales
                   (Ley 1581 de 2012).
                 </Alert>
+
+                {/* Botones de acción */}
+                <div className="flex flex-col sm:flex-row gap-3 w-full pt-4">
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    loading={isSubmitting}
+                    disabled={isSubmitting}
+                    fullWidth
+                  >
+                    {isSubmitting ? 'Enviando...' : 'Enviar Formulario'}
+                  </Button>
+
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => reset()}
+                    disabled={isSubmitting}
+                  >
+                    Limpiar
+                  </Button>
+                </div>
               </div>
             </CardContent>
-
-            <CardFooter>
-              <div className="flex flex-col sm:flex-row gap-3 w-full">
-                <Button
-                  type="submit"
-                  variant="primary"
-                  loading={isSubmitting}
-                  disabled={isSubmitting}
-                  fullWidth
-                >
-                  {isSubmitting ? 'Enviando...' : 'Enviar Formulario'}
-                </Button>
-
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => reset()}
-                  disabled={isSubmitting}
-                >
-                  Limpiar
-                </Button>
-              </div>
-            </CardFooter>
           </form>
         </Card>
 
