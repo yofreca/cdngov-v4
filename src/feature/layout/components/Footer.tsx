@@ -86,7 +86,7 @@ export function Footer() {
                 <h4 className="h6 fw-semibold mb-3 text-primary">
                   Servicios a la Ciudadania
                 </h4>
-                <div className="small">
+                <div className="sm">
                   <p className="mb-2">
                     <a
                       href="http://www.reincorporacion.gov.co"

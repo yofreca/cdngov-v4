@@ -11,7 +11,7 @@ import {
   Checkbox,
   Button,
   Alert,
-} from '@components'
+} from '@shared/components/ui'
 
 // Schema de validación con Zod (seguridad OWASP)
 const formSchema = z.object({

@@ -3,8 +3,9 @@
  * Wrapper personalizado con providers necesarios
  */
 
-import { ReactElement } from 'react'
-import { render, RenderOptions } from '@testing-library/react'
+import type { ReactElement } from 'react'
+import { render } from '@testing-library/react'
+import type { RenderOptions } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import { AuthProvider } from '@context/AuthContext'
 

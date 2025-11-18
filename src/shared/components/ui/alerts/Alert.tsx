@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { clsx } from 'clsx'
 
 export interface AlertProps {
@@ -115,7 +115,7 @@ export function Alert({
 
       <div className="flex-grow-1">
         {title && <h5 className="alert-heading fs-6 fw-semibold mb-1">{title}</h5>}
-        <div className="small">{children}</div>
+        <div className="sm">{children}</div>
       </div>
 
       {onClose && (

@@ -12,7 +12,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useAuth } from '@context/AuthContext'
-import { Button } from '@components/common/Button'
+import { Button } from '@shared/components/ui'
 import { securityLogger, SecurityEventType, SecurityLevel } from '@utils/securityLogger'
 
 // Esquema de validación con Zod (seguridad OWASP)

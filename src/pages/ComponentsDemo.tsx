@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardContent,
   CardFooter,
-} from '@components'
+} from '@shared/components/ui'
 
 /**
  * Página de demostración de todos los componentes del sistema de diseño Gov.co

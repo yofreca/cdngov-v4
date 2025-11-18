@@ -11,9 +11,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { Button } from '@components/common/Button'
+import { Button } from '@shared/components/ui'
 import { passwordSchema, cedulaSchema, telefonoMovilSchema } from '@utils/validations'
-import { securityLogger } from '@utils/securityLogger'
+import { securityLogger, SecurityEventType, SecurityLevel } from '@utils/securityLogger'
 
 // Esquema de validación completo para registro
 const registerSchema = z
@@ -135,7 +135,7 @@ export function Register() {
       })
 
       // Registro exitoso
-      securityLogger.logSecurityEvent('authentication', 'info', {
+      securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.INFO, {
         action: 'user_registered',
         email: data.email,
       })
@@ -158,7 +158,7 @@ export function Register() {
           : 'Error al registrar usuario. Por favor, intente nuevamente.'
       )
 
-      securityLogger.logSecurityEvent('authentication', 'warning', {
+      securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.WARNING, {
         action: 'registration_failed',
         email: data.email,
         error: error instanceof Error ? error.message : 'Unknown error',

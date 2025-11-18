@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import { Button } from '@components/common/Button'
-import { Card, CardContent } from '@components/common/Card'
+import { Button } from '@shared/components/ui'
+import { Card, CardContent } from '@shared/components/ui'
 
 /**
  * Página 404 - No Encontrada

@@ -6,7 +6,7 @@
  * - Seguridad OWASP
  */
 
-import { api } from './api'
+// import { api } from './api' // No usado por ahora
 import { securityLogger, SecurityEventType, SecurityLevel } from '@utils/securityLogger'
 
 export interface User {
@@ -147,7 +147,7 @@ class AuthService {
       const decoded = atob(payload)
       return JSON.parse(decoded)
     } catch (error) {
-      securityLogger.logSecurityEvent('authentication', 'warning', {
+      securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.WARNING, {
         action: 'token_decode_error',
         error: error instanceof Error ? error.message : 'Unknown error',
       })
@@ -212,7 +212,7 @@ class AuthService {
           credentials.rememberMe
         )
 
-        securityLogger.logSecurityEvent('authentication', 'info', {
+        securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.INFO, {
           action: 'login_success',
           userId: mockResponse.user.id,
           email: mockResponse.user.email,
@@ -223,7 +223,7 @@ class AuthService {
 
       throw new Error('Credenciales inválidas')
     } catch (error) {
-      securityLogger.logSecurityEvent('authentication', 'warning', {
+      securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.WARNING, {
         action: 'login_failed',
         email: credentials.email,
         error: error instanceof Error ? error.message : 'Unknown error',
@@ -259,7 +259,7 @@ class AuthService {
         expiresIn: 3600,
       }
 
-      securityLogger.logSecurityEvent('authentication', 'info', {
+      securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.INFO, {
         action: 'user_registered',
         userId: mockResponse.user.id,
         email: mockResponse.user.email,
@@ -267,7 +267,7 @@ class AuthService {
 
       return mockResponse
     } catch (error) {
-      securityLogger.logSecurityEvent('authentication', 'error', {
+      securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.ERROR, {
         action: 'registration_failed',
         email: data.email,
         error: error instanceof Error ? error.message : 'Unknown error',
@@ -288,7 +288,7 @@ class AuthService {
 
       this.clearAuthData()
 
-      securityLogger.logSecurityEvent('authentication', 'info', {
+      securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.INFO, {
         action: 'logout_success',
         userId: user?.id,
       })
@@ -296,7 +296,7 @@ class AuthService {
       // Limpiar datos locales incluso si falla la llamada al servidor
       this.clearAuthData()
 
-      securityLogger.logSecurityEvent('authentication', 'warning', {
+      securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.WARNING, {
         action: 'logout_error',
         error: error instanceof Error ? error.message : 'Unknown error',
       })
@@ -312,12 +312,12 @@ class AuthService {
 
       await new Promise((resolve) => setTimeout(resolve, 2000))
 
-      securityLogger.logSecurityEvent('authentication', 'info', {
+      securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.INFO, {
         action: 'password_reset_requested',
         email,
       })
     } catch (error) {
-      securityLogger.logSecurityEvent('authentication', 'error', {
+      securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.ERROR, {
         action: 'password_reset_request_error',
         email,
         error: error instanceof Error ? error.message : 'Unknown error',
@@ -329,17 +329,17 @@ class AuthService {
   /**
    * Restablecer contraseña con token
    */
-  async resetPassword(token: string, newPassword: string): Promise<void> {
+  async resetPassword(_token: string, _newPassword: string): Promise<void> {
     try {
       // En producción: await api.post('/auth/reset-password', { token, password: newPassword })
 
       await new Promise((resolve) => setTimeout(resolve, 2000))
 
-      securityLogger.logSecurityEvent('authentication', 'info', {
+      securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.INFO, {
         action: 'password_reset_success',
       })
     } catch (error) {
-      securityLogger.logSecurityEvent('authentication', 'error', {
+      securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.ERROR, {
         action: 'password_reset_error',
         error: error instanceof Error ? error.message : 'Unknown error',
       })
@@ -365,13 +365,13 @@ class AuthService {
       const storage = rememberMe ? localStorage : sessionStorage
       storage.setItem(TOKEN_KEY, newToken)
 
-      securityLogger.logSecurityEvent('authentication', 'info', {
+      securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.INFO, {
         action: 'token_refreshed',
       })
 
       return newToken
     } catch (error) {
-      securityLogger.logSecurityEvent('authentication', 'warning', {
+      securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.WARNING, {
         action: 'token_refresh_error',
         error: error instanceof Error ? error.message : 'Unknown error',
       })

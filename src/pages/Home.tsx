@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { Button } from '@components/common/Button'
-import { Card, CardHeader, CardContent } from '@components/common/Card'
-import { Alert } from '@components/common/Alert'
+import { Button } from '@shared/components/ui'
+import { Card, CardHeader, CardContent } from '@shared/components/ui'
+import { Alert } from '@shared/components/ui'
 
 /**
  * Página de inicio / Home

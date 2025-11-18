@@ -11,8 +11,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { Button } from '@components/common/Button'
-import { securityLogger } from '@utils/securityLogger'
+import { Button } from '@shared/components/ui'
+import { securityLogger, SecurityEventType, SecurityLevel } from '@utils/securityLogger'
 
 // Esquema de validación para recuperación de contraseña
 const forgotPasswordSchema = z.object({
@@ -55,7 +55,7 @@ export function ForgotPassword() {
       setError(
         'Ha excedido el límite de solicitudes. Por favor, contacte al soporte técnico.'
       )
-      securityLogger.logSecurityEvent('authentication', 'high', {
+      securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.CRITICAL, {
         action: 'password_reset_blocked_max_requests',
         email: data.email,
       })
@@ -74,7 +74,7 @@ export function ForgotPassword() {
       })
 
       // Siempre mostrar mensaje de éxito (seguridad: no revelar si el email existe)
-      securityLogger.logSecurityEvent('authentication', 'info', {
+      securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.INFO, {
         action: 'password_reset_requested',
         email: data.email,
       })
@@ -86,7 +86,7 @@ export function ForgotPassword() {
         'Error al procesar la solicitud. Por favor, intente nuevamente.'
       )
 
-      securityLogger.logSecurityEvent('authentication', 'error', {
+      securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.ERROR, {
         action: 'password_reset_error',
         email: data.email,
         error: error instanceof Error ? error.message : 'Unknown error',

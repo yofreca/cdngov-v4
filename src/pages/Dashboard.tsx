@@ -11,7 +11,7 @@ import { useState, useOptimistic, useTransition } from 'react'
 import { StatsCard } from '@components/dashboard/StatsCard'
 import { DataTable } from '@components/dashboard/DataTable'
 import type { Column } from '@components/dashboard/DataTable'
-import { Button } from '@components/common/Button'
+import { Button } from '@shared/components/ui'
 
 interface UserData {
   id: number
@@ -302,12 +302,12 @@ export function Dashboard() {
             <Button
               onClick={handleExport}
               variant="secondary"
-              size="small"
+              size="sm"
               aria-label="Exportar datos a CSV"
             >
               📊 Exportar CSV
             </Button>
-            <Button variant="primary" size="small" aria-label="Agregar nuevo usuario">
+            <Button variant="primary" size="sm" aria-label="Agregar nuevo usuario">
               ➕ Nuevo Usuario
             </Button>
           </div>
