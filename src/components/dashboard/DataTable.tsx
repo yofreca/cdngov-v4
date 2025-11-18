@@ -105,11 +105,11 @@ function DataTableComponent<T extends Record<string, unknown>>({
   }, [])
 
   return (
-    <div className="w-full">
+    <div className="w-100">
       {/* Barra de búsqueda */}
       {searchable && (
         <div className="mb-4">
-          <label htmlFor="table-search" className="sr-only">
+          <label htmlFor="table-search" className="visually-hidden">
             Buscar en la tabla
           </label>
           <input
@@ -121,27 +121,34 @@ function DataTableComponent<T extends Record<string, unknown>>({
               setSearchTerm(e.target.value)
               setCurrentPage(1)
             }}
-            className="w-full max-w-md px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-govco-marino transition-colors"
+            className="form-control"
+            style={{ maxWidth: '28rem' }}
             aria-label="Buscar en la tabla"
           />
         </div>
       )}
 
       {/* Tabla */}
-      <div className="overflow-x-auto shadow-md rounded-lg">
+      <div className="table-responsive shadow rounded-3">
         <table
-          className="w-full text-sm text-left text-gray-700"
+          className="table table-hover mb-0 small text-start"
           role="table"
           aria-label="Tabla de datos"
         >
-          <thead className="text-xs uppercase bg-govco-marino text-white">
+          <thead
+            className="text-uppercase text-white"
+            style={{ backgroundColor: 'var(--color-govco-marino)' }}
+          >
             <tr>
               {columns.map((column, index) => (
                 <th
                   key={index}
                   scope="col"
-                  className={`px-6 py-3 ${column.sortable ? 'cursor-pointer hover:bg-govco-azul-oscuro transition-colors' : ''}`}
-                  style={{ width: column.width }}
+                  className={`px-3 py-3 ${column.sortable ? 'cursor-pointer' : ''}`}
+                  style={{
+                    width: column.width,
+                    cursor: column.sortable ? 'pointer' : 'default',
+                  }}
                   onClick={() => column.sortable && handleSort(column.key)}
                   aria-sort={
                     sortConfig?.key === column.key
@@ -151,15 +158,13 @@ function DataTableComponent<T extends Record<string, unknown>>({
                       : undefined
                   }
                 >
-                  <div className="flex items-center gap-2">
+                  <div className="d-flex align-items-center gap-2">
                     {column.header}
                     {column.sortable && (
                       <span
-                        className={`transition-opacity ${
-                          sortConfig?.key === column.key
-                            ? 'opacity-100'
-                            : 'opacity-50'
-                        }`}
+                        style={{
+                          opacity: sortConfig?.key === column.key ? 1 : 0.5,
+                        }}
                         aria-hidden="true"
                       >
                         {sortConfig?.key === column.key &&
@@ -178,7 +183,7 @@ function DataTableComponent<T extends Record<string, unknown>>({
               <tr>
                 <td
                   colSpan={columns.length}
-                  className="px-6 py-8 text-center text-gray-500"
+                  className="px-3 py-5 text-center text-muted"
                 >
                   {emptyMessage}
                 </td>
@@ -187,7 +192,8 @@ function DataTableComponent<T extends Record<string, unknown>>({
               paginatedData.map((item, rowIndex) => (
                 <tr
                   key={rowIndex}
-                  className={`border-b hover:bg-gray-50 transition-colors ${onRowClick ? 'cursor-pointer' : ''}`}
+                  className={onRowClick ? 'cursor-pointer' : ''}
+                  style={{ cursor: onRowClick ? 'pointer' : 'default' }}
                   onClick={() => onRowClick?.(item)}
                   role={onRowClick ? 'button' : undefined}
                   tabIndex={onRowClick ? 0 : undefined}
@@ -199,7 +205,7 @@ function DataTableComponent<T extends Record<string, unknown>>({
                   }}
                 >
                   {columns.map((column, colIndex) => (
-                    <td key={colIndex} className="px-6 py-4">
+                    <td key={colIndex} className="px-3 py-3">
                       {renderCell(item, column)}
                     </td>
                   ))}
@@ -213,16 +219,16 @@ function DataTableComponent<T extends Record<string, unknown>>({
       {/* Paginación */}
       {totalPages > 1 && (
         <div
-          className="mt-4 flex items-center justify-between"
+          className="mt-4 d-flex align-items-center justify-content-between"
           role="navigation"
           aria-label="Paginación de tabla"
         >
-          <p className="text-sm text-gray-600">
+          <p className="small text-secondary mb-0">
             Mostrando {startIndex + 1} a {Math.min(endIndex, sortedData.length)}{' '}
             de {sortedData.length} resultados
           </p>
 
-          <div className="flex gap-2">
+          <div className="d-flex gap-2">
             <Button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
@@ -248,9 +254,9 @@ function DataTableComponent<T extends Record<string, unknown>>({
                   index > 0 && array[index - 1] !== page - 1
 
                 return (
-                  <div key={page} className="flex gap-2">
+                  <div key={page} className="d-flex gap-2">
                     {showEllipsis && (
-                      <span className="px-3 py-1 text-gray-500">...</span>
+                      <span className="px-3 py-1 text-muted">...</span>
                     )}
                     <Button
                       onClick={() => handlePageChange(page)}
