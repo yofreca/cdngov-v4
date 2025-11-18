@@ -1,68 +1,71 @@
 # Arquitectura - Gov.co React App
 
-## 📋 Tabla de Contenidos
+## Tabla de Contenidos
 
-- [Visión General](#visión-general)
-- [Stack Tecnológico](#stack-tecnológico)
+- [Vision General](#vision-general)
+- [Stack Tecnologico](#stack-tecnologico)
 - [Estructura del Proyecto](#estructura-del-proyecto)
-- [Patrones de Diseño](#patrones-de-diseño)
+- [Arquitectura Modular](#arquitectura-modular)
+- [Patrones de Diseno](#patrones-de-diseno)
 - [Flujo de Datos](#flujo-de-datos)
 - [Sistema de Rutas](#sistema-de-rutas)
-- [Gestión de Estado](#gestión-de-estado)
-- [Autenticación y Autorización](#autenticación-y-autorización)
+- [Gestion de Estado](#gestion-de-estado)
+- [Autenticacion y Autorizacion](#autenticacion-y-autorizacion)
 - [Seguridad](#seguridad)
 - [Performance](#performance)
 - [Testing](#testing)
 
-## 🎯 Visión General
+## Vision General
 
-Gov.co React App es una aplicación web moderna construida con React 19, TypeScript y Vite, diseñada para el Gobierno de Colombia siguiendo estándares de accesibilidad WCAG 2.1 AA y seguridad OWASP.
+Gov.co React App es una aplicacion web moderna construida con React 19, TypeScript y Vite, disenada para el Gobierno de Colombia siguiendo estandares de accesibilidad WCAG 2.1 AA y seguridad OWASP.
 
-### Principios Arquitectónicos
+### Principios Arquitectonicos
 
-1. **Separación de Responsabilidades** - Componentes, lógica de negocio y servicios separados
-2. **Composición sobre Herencia** - Componentes funcionales reutilizables
-3. **Type Safety** - TypeScript en toda la aplicación
-4. **Performance First** - Lazy loading, code splitting, memoization
-5. **Accessibility First** - WCAG 2.1 AA compliance
-6. **Security First** - Validaciones OWASP, sanitización XSS
+1. **Arquitectura Modular por Features** - Organizacion del codigo por dominios funcionales
+2. **Separacion de Responsabilidades** - Componentes, logica de negocio y servicios separados
+3. **Composicion sobre Herencia** - Componentes funcionales reutilizables
+4. **Type Safety** - TypeScript en toda la aplicacion
+5. **Performance First** - Lazy loading, code splitting, memoization
+6. **Accessibility First** - WCAG 2.1 AA compliance
+7. **Security First** - Validaciones OWASP, sanitizacion XSS
 
-## 🛠️ Stack Tecnológico
+## Stack Tecnologico
 
 ### Core
 
-| Tecnología | Versión | Propósito |
+| Tecnologia | Version | Proposito |
 |------------|---------|-----------|
 | React | 19.2.0 | UI Library con nuevas features (use, useOptimistic) |
 | TypeScript | 5.9.3 | Type safety y mejor DX |
-| Vite | 7.2.2 | Build tool ultrarrápido |
-| React Router | 7.9.6 | Navegación client-side |
+| Vite | 7.2.2 | Build tool ultrarrapido |
+| React Router | 7.9.6 | Navegacion client-side |
 
 ### Styling
 
-| Tecnología | Versión | Propósito |
+| Tecnologia | Version | Proposito |
 |------------|---------|-----------|
-| Tailwind CSS | 4.1.17 | Utility-first CSS framework |
+| Bootstrap | 5.3.3 | CSS framework con componentes |
+| Sass | 1.77.0 | Preprocesador CSS |
 | clsx | 2.1.1 | Conditional classnames |
 
 ### Forms & Validation
 
-| Tecnología | Versión | Propósito |
+| Tecnologia | Version | Proposito |
 |------------|---------|-----------|
-| React Hook Form | 7.66.0 | Gestión de formularios |
-| Zod | 4.1.12 | Validación de schemas |
-| @hookform/resolvers | 5.2.2 | Integración RHF + Zod |
+| React Hook Form | 7.66.0 | Gestion de formularios |
+| Zod | 4.1.12 | Validacion de schemas |
+| @hookform/resolvers | 5.2.2 | Integracion RHF + Zod |
 
 ### HTTP & Security
 
-| Tecnología | Versión | Propósito |
+| Tecnologia | Version | Proposito |
 |------------|---------|-----------|
 | Axios | 1.13.2 | Cliente HTTP |
-| DOMPurify | 3.3.0 | Sanitización XSS |
+| DOMPurify | 3.3.0 | Sanitizacion XSS |
 
 ### Testing
 
-| Tecnología | Versión | Propósito |
+| Tecnologia | Version | Proposito |
 |------------|---------|-----------|
 | Vitest | 4.0.9 | Framework de testing |
 | React Testing Library | 16.3.0 | Testing de componentes |
@@ -71,124 +74,257 @@ Gov.co React App es una aplicación web moderna construida con React 19, TypeScr
 
 ### Development Tools
 
-| Tecnología | Versión | Propósito |
+| Tecnologia | Version | Proposito |
 |------------|---------|-----------|
 | ESLint | 9.39.1 | Linting |
-| Prettier | 3.6.2 | Formateo de código |
+| Prettier | 3.6.2 | Formateo de codigo |
 | @axe-core/react | 4.11.0 | Testing de accesibilidad |
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 cdngov-v4/
-├── public/                    # Assets estáticos
-│   └── vite.svg
+├── public/                    # Assets estaticos
 │
 ├── src/
-│   ├── assets/                # Recursos (imágenes, fuentes, iconos)
-│   │   ├── fonts/             # Fuentes Montserrat y Work Sans
-│   │   ├── icons/             # Iconos SVG
-│   │   └── images/            # Imágenes
+│   ├── assets/                # Recursos (imagenes, fuentes)
+│   │   └── images/            # Imagenes y logos
 │   │
-│   ├── components/            # Componentes React
-│   │   ├── common/            # Componentes reutilizables
-│   │   │   ├── Button.tsx
-│   │   │   ├── Card.tsx
-│   │   │   ├── ErrorBoundary.tsx
-│   │   │   ├── LoadingSpinner.tsx
-│   │   │   └── LazyImage.tsx
-│   │   │
+│   ├── components/            # Componentes especificos (legacy)
+│   │   ├── auth/              # Componentes de autenticacion
 │   │   ├── dashboard/         # Componentes del dashboard
 │   │   │   ├── DataTable.tsx
 │   │   │   └── StatsCard.tsx
-│   │   │
-│   │   ├── examples/          # Componentes de demostración
+│   │   ├── examples/          # Componentes de demostracion
 │   │   │   └── React19Features.tsx
-│   │   │
-│   │   ├── forms/             # Componentes de formularios
-│   │   │   ├── DatePicker.tsx
-│   │   │   ├── FileUpload.tsx
-│   │   │   └── Input.tsx
-│   │   │
-│   │   └── layout/            # Componentes de layout
-│   │       ├── AccessibilityBar.tsx
-│   │       ├── Footer.tsx
-│   │       ├── Header.tsx
-│   │       ├── MainLayout.tsx
-│   │       ├── Navbar.tsx
-│   │       └── SkipLinks.tsx
+│   │   └── forms/             # Componentes de formularios
+│   │       ├── DatePicker.tsx
+│   │       └── FileUpload.tsx
 │   │
 │   ├── context/               # React Context providers
-│   │   └── AuthContext.tsx    # Estado de autenticación global
+│   │
+│   ├── feature/               # ARQUITECTURA MODULAR POR FEATURES
+│   │   ├── auth/              # Modulo de autenticacion
+│   │   │   ├── pages/
+│   │   │   │   ├── Login.tsx
+│   │   │   │   ├── Register.tsx
+│   │   │   │   └── ForgotPassword.tsx
+│   │   │   └── index.ts
+│   │   │
+│   │   ├── dashboard/         # Modulo de dashboard
+│   │   │   ├── pages/
+│   │   │   │   └── Dashboard.tsx
+│   │   │   └── index.ts
+│   │   │
+│   │   ├── demo/              # Modulo de demostracion
+│   │   │   ├── pages/
+│   │   │   │   ├── ComponentsDemo.tsx
+│   │   │   │   ├── FormExample.tsx
+│   │   │   │   └── NotFound.tsx
+│   │   │   └── index.ts
+│   │   │
+│   │   ├── home/              # Modulo de home
+│   │   │   ├── pages/
+│   │   │   │   └── Home.tsx
+│   │   │   └── index.ts
+│   │   │
+│   │   ├── layout/            # Modulo de layout
+│   │   │   ├── components/
+│   │   │   │   ├── MainLayout.tsx
+│   │   │   │   ├── Header.tsx
+│   │   │   │   ├── Footer.tsx
+│   │   │   │   ├── SideMenu.tsx
+│   │   │   │   ├── AccessibilityBar.tsx
+│   │   │   │   ├── ScrollToTop.tsx
+│   │   │   │   └── SkipLinks.tsx
+│   │   │   └── index.ts
+│   │   │
+│   │   └── index.ts
 │   │
 │   ├── hooks/                 # Custom React hooks
-│   │   ├── useDataFetcher.ts  # Hook con use() de React 19
-│   │   └── useFormId.ts       # Generación de IDs únicos
+│   │   └── useDataFetcher.ts
 │   │
-│   ├── pages/                 # Páginas de la aplicación
-│   │   ├── ComponentsDemo.tsx
-│   │   ├── Dashboard.tsx
-│   │   ├── ForgotPassword.tsx
-│   │   ├── FormExample.tsx
-│   │   ├── Home.tsx
-│   │   ├── Login.tsx
-│   │   ├── NotFound.tsx
-│   │   └── Register.tsx
-│   │
-│   ├── routes/                # Configuración de rutas
-│   │   ├── AppRoutes.tsx      # Definición de rutas
-│   │   └── ProtectedRoute.tsx # HOC para rutas protegidas
+│   ├── routes/                # Configuracion de rutas
+│   │   ├── AppRoutes.tsx
+│   │   └── ProtectedRoute.tsx
 │   │
 │   ├── services/              # Servicios y APIs
-│   │   ├── api.ts             # Cliente Axios configurado
-│   │   └── authService.ts     # Servicio de autenticación
+│   │   ├── api.ts
+│   │   └── authService.ts
+│   │
+│   ├── shared/                # RECURSOS COMPARTIDOS
+│   │   └── components/
+│   │       └── ui/
+│   │           ├── common/    # Componentes basicos
+│   │           │   ├── Button.tsx
+│   │           │   ├── Card.tsx
+│   │           │   ├── LoadingSpinner.tsx
+│   │           │   ├── LazyImage.tsx
+│   │           │   └── ErrorBoundary.tsx
+│   │           │
+│   │           ├── forms/     # Componentes de formulario
+│   │           │   ├── Input.tsx
+│   │           │   ├── Checkbox.tsx
+│   │           │   ├── Radio.tsx
+│   │           │   ├── Select.tsx
+│   │           │   └── Textarea.tsx
+│   │           │
+│   │           ├── alerts/    # Componentes de notificacion
+│   │           │   └── Alert.tsx
+│   │           │
+│   │           └── index.ts
 │   │
 │   ├── styles/                # Estilos globales
-│   │   └── index.css          # CSS base + Tailwind
+│   │   └── main.scss          # Bootstrap + personalizaciones Gov.co
 │   │
 │   ├── test/                  # Utilidades de testing
-│   │   ├── setup.ts           # Setup de Vitest
-│   │   └── test-utils.tsx     # Helpers de testing
+│   │   └── setup.ts
 │   │
 │   ├── utils/                 # Funciones auxiliares
-│   │   ├── securityLogger.ts  # Logging de eventos de seguridad
-│   │   └── validations.ts     # Schemas de validación Zod
+│   │   ├── securityLogger.ts
+│   │   ├── validations.ts
+│   │   └── useFormId.ts
 │   │
-│   ├── App.tsx                # Componente raíz
+│   ├── App.tsx                # Componente raiz
 │   ├── main.tsx               # Entry point
-│   └── vite-env.d.ts          # Types de Vite
+│   └── vite-env.d.ts
 │
-├── docs/                      # Documentación
-│   ├── ARCHITECTURE.md        # Este archivo
-│   ├── PERFORMANCE_OPTIMIZATIONS.md
-│   ├── REACT_19_FEATURES.md
-│   └── TESTING.md
+├── docs/                      # Documentacion
 │
-├── .env                       # Variables de entorno (no en git)
-├── .env.example               # Template de variables
-├── .gitignore
-├── CONTRIBUTING.md            # Guía de contribución
-├── eslint.config.js           # Configuración de ESLint
-├── index.html                 # HTML principal
+├── eslint.config.js
+├── index.html
 ├── package.json
-├── prettier.config.js         # Configuración de Prettier
-├── README.md
-├── tailwind.config.js         # Configuración de Tailwind
-├── tsconfig.json              # Configuración de TypeScript
-└── vite.config.ts             # Configuración de Vite
+├── tsconfig.json
+├── tsconfig.app.json
+├── tsconfig.node.json
+└── vite.config.ts             # Configuracion de Vite con aliases
 ```
 
-## 🎨 Patrones de Diseño
+## Arquitectura Modular
+
+### Organizacion por Features
+
+El proyecto sigue una arquitectura modular donde cada feature contiene todo lo necesario para funcionar de forma autonoma:
+
+```
+feature/<nombre_modulo>/
+├── components/          # Componentes especificos del modulo
+├── pages/               # Paginas del modulo
+├── interfaces/          # Types e interfaces del dominio
+├── services/            # Servicios de acceso a datos
+├── utils/               # Helpers y utilidades
+└── index.ts             # Exportaciones publicas
+```
+
+### Capa Shared
+
+Recursos transversales reutilizables en toda la aplicacion:
+
+```
+shared/
+├── components/ui/       # Componentes UI reutilizables
+│   ├── common/          # Button, Card, LoadingSpinner
+│   ├── forms/           # Input, Select, Checkbox
+│   └── alerts/          # Alert, Toast
+├── constants/           # Constantes globales
+├── enums/               # Enumeradores comunes
+├── functions/           # Helpers y utilidades
+├── guards/              # HOCs de proteccion de rutas
+├── interceptors/        # Configuracion HTTP (axios)
+├── interfaces/          # Types transversales
+└── services/            # Servicios comunes
+```
+
+### Aliases de Importacion
+
+Configurados en `vite.config.ts` y `tsconfig.json`:
+
+```typescript
+import { Button } from '@shared/components/ui'
+import { Dashboard } from '@feature/dashboard/pages'
+import { useAuth } from '@hooks/useAuth'
+import { api } from '@services/api'
+```
+
+## Sistema de Estilos
+
+### Bootstrap 5 con SCSS
+
+El proyecto usa **Bootstrap 5.3.3** como sistema de estilos principal, personalizado con variables Gov.co:
+
+```scss
+// src/styles/main.scss
+
+// Variables Gov.co
+$govco-marino: #3366cc;
+$govco-azul-oscuro: #004884;
+$govco-verde: #068460;
+$govco-rojo: #f42f63;
+
+// Sobrescribir Bootstrap
+$primary: $govco-marino;
+$secondary: $govco-gris;
+$success: $govco-verde;
+$danger: $govco-rojo;
+
+// Importar Bootstrap
+@import "bootstrap/scss/bootstrap";
+```
+
+### CSS Variables
+
+Disponibles globalmente para uso en componentes:
+
+```css
+:root {
+  --govco-marino: #3366cc;
+  --govco-azul-oscuro: #004884;
+  --govco-verde: #068460;
+  --govco-rojo: #f42f63;
+}
+```
+
+### Clases Utilitarias Gov.co
+
+```scss
+// Colores de texto
+.text-govco-marino { color: $govco-marino; }
+.text-govco-azul-oscuro { color: $govco-azul-oscuro; }
+
+// Backgrounds
+.bg-govco-marino { background-color: $govco-marino; }
+
+// Botones personalizados
+.btn-govco-primary { ... }
+.btn-govco-outline { ... }
+
+// Container responsive
+.container-govco { ... }
+```
+
+### Iconos SVG Inline
+
+Los iconos usan SVG inline sin dependencias externas:
+
+```tsx
+// En lugar de react-icons
+const FacebookIcon = () => (
+  <svg fill="currentColor" viewBox="0 0 24 24" width="18" height="18">
+    <path d="M24 12.073c0-6.627..." />
+  </svg>
+)
+```
+
+## Patrones de Diseno
 
 ### 1. Component Composition Pattern
 
-Componentes pequeños y reutilizables que se componen para crear UIs complejas.
+Componentes pequenos y reutilizables que se componen para crear UIs complejas.
 
 ```typescript
-// Composición de componentes
 <Card>
   <CardHeader>
-    <h2>Título</h2>
+    <h2>Titulo</h2>
   </CardHeader>
   <CardContent>
     <p>Contenido</p>
@@ -196,46 +332,29 @@ Componentes pequeños y reutilizables que se componen para crear UIs complejas.
 </Card>
 ```
 
-### 2. Render Props Pattern
+### 2. Custom Hooks Pattern
 
-Compartir lógica entre componentes mediante funciones render.
-
-```typescript
-<DataTable
-  data={users}
-  columns={columns}
-  renderRow={(user) => <UserRow key={user.id} user={user} />}
-/>
-```
-
-### 3. Custom Hooks Pattern
-
-Encapsular lógica reutilizable en hooks personalizados.
+Encapsular logica reutilizable en hooks personalizados.
 
 ```typescript
-// useAuth hook
 function useAuth() {
   const context = useContext(AuthContext)
   if (!context) throw new Error('useAuth debe usarse dentro de AuthProvider')
   return context
 }
-
-// Uso
-const { user, isAuthenticated, login, logout } = useAuth()
 ```
 
-### 4. Higher-Order Component Pattern
+### 3. Higher-Order Component Pattern
 
 Componentes que envuelven otros componentes para agregar funcionalidad.
 
 ```typescript
-// ProtectedRoute HOC
 <ProtectedRoute requiredRole="admin">
   <Dashboard />
 </ProtectedRoute>
 ```
 
-### 5. Provider Pattern
+### 4. Provider Pattern
 
 Context API para estado global.
 
@@ -245,20 +364,7 @@ Context API para estado global.
 </AuthProvider>
 ```
 
-### 6. Compound Components Pattern
-
-Componentes que trabajan juntos compartiendo estado implícito.
-
-```typescript
-<Accordion>
-  <AccordionItem>
-    <AccordionHeader>Título</AccordionHeader>
-    <AccordionPanel>Contenido</AccordionPanel>
-  </AccordionItem>
-</Accordion>
-```
-
-## 🔄 Flujo de Datos
+## Flujo de Datos
 
 ### Arquitectura Unidireccional
 
@@ -266,44 +372,26 @@ Componentes que trabajan juntos compartiendo estado implícito.
 User Action → Event Handler → State Update → Re-render
 ```
 
-### Ejemplo: Login Flow
-
-```typescript
-// 1. Usuario envía formulario
-const handleSubmit = async (data) => {
-  // 2. Validación en cliente (Zod)
-  const validated = loginSchema.parse(data)
-
-  // 3. Llamada a servicio
-  const response = await authService.login(validated)
-
-  // 4. Actualizar contexto global
-  login(response.user, response.token)
-
-  // 5. Navegación
-  navigate('/dashboard')
-}
-```
-
 ### Estado Local vs Global
 
 | Estado | Scope | Herramienta | Ejemplo |
 |--------|-------|-------------|---------|
 | Local | Componente | useState | Valor de input, modal abierto/cerrado |
-| Global | Aplicación | Context API | Usuario autenticado, configuración |
+| Global | Aplicacion | Context API | Usuario autenticado, configuracion |
 | Servidor | Cache | React Query (futuro) | Datos de API |
 
-## 🗺️ Sistema de Rutas
+## Sistema de Rutas
 
-### Configuración (React Router 7)
+### Configuracion (React Router 7)
 
 ```typescript
 // src/routes/AppRoutes.tsx
 <Routes>
   <Route element={<MainLayout />}>
-    {/* Rutas públicas */}
+    {/* Rutas publicas */}
     <Route path="/" element={<Home />} />
     <Route path="/login" element={<Login />} />
+    <Route path="/componentes" element={<ComponentsDemo />} />
     <Route path="/react-19" element={<React19Features />} />
 
     {/* Rutas protegidas */}
@@ -325,30 +413,15 @@ Todas las rutas usan lazy loading para optimizar el bundle:
 
 ```typescript
 const Dashboard = lazy(() =>
-  import('@pages/Dashboard').then((m) => ({ default: m.Dashboard }))
+  import('@feature/dashboard/pages').then((m) => ({ default: m.Dashboard }))
 )
-
-// Suspense wrapper
-<Suspense fallback={<LoadingSpinner fullScreen />}>
-  <Routes>...</Routes>
-</Suspense>
 ```
 
-### Rutas Protegidas
-
-```typescript
-// ProtectedRoute verifica autenticación y roles
-<ProtectedRoute requiredRole="admin">
-  <AdminPanel />
-</ProtectedRoute>
-```
-
-## 🗄️ Gestión de Estado
+## Gestion de Estado
 
 ### Context API
 
 ```typescript
-// AuthContext.tsx
 interface AuthContextType {
   user: User | null
   isAuthenticated: boolean
@@ -357,23 +430,6 @@ interface AuthContextType {
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
-
-// Provider con lógica de negocio
-export function AuthProvider({ children }: Props) {
-  const [user, setUser] = useState<User | null>(null)
-
-  // Inicialización desde localStorage
-  useEffect(() => {
-    const storedUser = authService.getUser()
-    if (storedUser) setUser(storedUser)
-  }, [])
-
-  return (
-    <AuthContext.Provider value={{ user, isAuthenticated: !!user, ... }}>
-      {children}
-    </AuthContext.Provider>
-  )
-}
 ```
 
 ### React 19 Features
@@ -385,98 +441,28 @@ const [optimisticUsers, updateOptimisticUsers] = useOptimistic(
   users,
   (state, newUser) => [...state, newUser]
 )
-
-// UI se actualiza inmediatamente
-updateOptimisticUsers(newUser)
-
-// Después se confirma con el servidor
-await api.createUser(newUser)
 ```
 
 #### use() Hook
 
 ```typescript
-// Lectura directa de promises
 function UsersList() {
-  const users = use(fetchUsers())  // Suspende hasta resolverse
+  const users = use(fetchUsers())
   return <div>{users.map(...)}</div>
 }
-
-<Suspense fallback={<Loading />}>
-  <UsersList />
-</Suspense>
 ```
 
-## 🔐 Autenticación y Autorización
+## Autenticacion y Autorizacion
 
-### Flujo de Autenticación
+### Flujo de Autenticacion
 
 ```
-┌─────────────┐
-│   Login     │
-└──────┬──────┘
-       │
-       ▼
-┌──────────────────┐
-│ Validar con Zod  │
-└──────┬───────────┘
-       │
-       ▼
-┌──────────────────┐
-│ authService      │
-│ .login()         │
-└──────┬───────────┘
-       │
-       ▼
-┌──────────────────┐
-│ Guardar en       │
-│ localStorage/    │
-│ sessionStorage   │
-└──────┬───────────┘
-       │
-       ▼
-┌──────────────────┐
-│ Actualizar       │
-│ AuthContext      │
-└──────┬───────────┘
-       │
-       ▼
-┌──────────────────┐
-│ Navegar a        │
-│ /dashboard       │
-└──────────────────┘
+Login → Validar (Zod) → authService.login() → localStorage → AuthContext → Navigate
 ```
 
-### JWT Token Management
+### Proteccion de Rutas
 
 ```typescript
-class AuthService {
-  // Almacenar token
-  setAuthData(user: User, token: string, rememberMe: boolean) {
-    const storage = rememberMe ? localStorage : sessionStorage
-    storage.setItem('auth_token', token)
-    storage.setItem('auth_user', JSON.stringify(user))
-  }
-
-  // Verificar expiración
-  isTokenExpired(token: string): boolean {
-    const decoded = this.decodeToken(token)
-    return Date.now() >= decoded.exp * 1000
-  }
-
-  // Renovar token
-  async refreshAuthToken(): Promise<string | null> {
-    const refreshToken = this.getRefreshToken()
-    const response = await api.post('/auth/refresh', { refreshToken })
-    return response.data.token
-  }
-}
-```
-
-### Protección de Rutas
-
-```typescript
-// ProtectedRoute.tsx
 export function ProtectedRoute({ children, requiredRole }: Props) {
   const { isAuthenticated, user } = useAuth()
 
@@ -492,153 +478,56 @@ export function ProtectedRoute({ children, requiredRole }: Props) {
 }
 ```
 
-## 🛡️ Seguridad
+## Seguridad
 
 ### OWASP Top 10 Implementado
 
-#### A01: Broken Access Control
+- **A01: Broken Access Control** - Rutas protegidas con verificacion de roles
+- **A03: Injection** - Validacion con Zod, sanitizacion con DOMPurify
+- **A07: Authentication Failures** - Rate limiting, passwords seguros
+
+### Validaciones
+
 ```typescript
-// Rutas protegidas con verificación de roles
-<ProtectedRoute requiredRole="admin">
-  <AdminPanel />
-</ProtectedRoute>
-```
-
-#### A03: Injection (XSS, SQL Injection)
-```typescript
-// Validación con Zod
-const userInputSchema = z.string()
-  .max(255)
-  .regex(/^[a-zA-Z0-9\s]+$/)
-
-// Sanitización
-import DOMPurify from 'dompurify'
-const clean = DOMPurify.sanitize(dirty)
-
-// Detección de código malicioso
-if (containsMaliciousCode(input)) {
-  throw new Error('Input malicioso detectado')
-}
-```
-
-#### A07: Identification and Authentication Failures
-```typescript
-// Rate limiting en login
-const MAX_ATTEMPTS = 5
-if (attemptCount >= MAX_ATTEMPTS) {
-  throw new Error('Demasiados intentos')
-}
-
-// Passwords seguros
 const passwordSchema = z.string()
   .min(8)
-  .regex(/[A-Z]/)  // Al menos una mayúscula
-  .regex(/[a-z]/)  // Al menos una minúscula
-  .regex(/[0-9]/)  // Al menos un número
-  .regex(/[^A-Za-z0-9]/)  // Al menos un especial
+  .regex(/[A-Z]/)
+  .regex(/[a-z]/)
+  .regex(/[0-9]/)
+  .regex(/[^A-Za-z0-9]/)
 ```
 
-### Security Logger
-
-```typescript
-securityLogger.log(
-  SecurityEventType.LOGIN_SUCCESS,
-  SecurityLevel.INFO,
-  'Usuario autenticado exitosamente',
-  { userId: user.id }
-)
-```
-
-## ⚡ Performance
+## Performance
 
 ### Code Splitting
 
 ```typescript
-// Lazy loading de rutas
-const Dashboard = lazy(() => import('@pages/Dashboard'))
-
-// Bundle inicial: ~50KB (antes: ~150KB)
-// Reducción: 66%
+const Dashboard = lazy(() => import('@feature/dashboard/pages'))
 ```
 
 ### React.memo
 
 ```typescript
-// Componentes memoizados
 export const StatsCard = memo(function StatsCard(props) {
   return <div>...</div>
 })
-
-// Re-renders reducidos: 75%
 ```
 
-### useMemo & useCallback
-
-```typescript
-// Memoización de valores
-const sortedData = useMemo(() => {
-  return data.sort((a, b) => a.name.localeCompare(b.name))
-}, [data])
-
-// Memoización de funciones
-const handleClick = useCallback(() => {
-  console.log('clicked')
-}, [])
-```
-
-### Lazy Loading de Imágenes
-
-```typescript
-<LazyImage
-  src="/large-image.jpg"
-  alt="Descripción"
-  loading="lazy"
-/>
-
-// Usa Intersection Observer para cargar solo cuando visible
-```
-
-### Métricas
+### Metricas
 
 ```
-Bundle inicial: ~50KB (-66%)
-First Contentful Paint: ~0.8s (-68%)
-Time to Interactive: ~1.2s (-66%)
-Re-renders: -75%
+Bundle inicial: ~50KB
+First Contentful Paint: ~0.8s
+Time to Interactive: ~1.2s
 ```
 
-## 🧪 Testing
+## Testing
 
-### Pirámide de Testing
+### Piramide de Testing
 
-```
-      /\
-     /  \
-    / E2E\     ← Pocos tests, flujos críticos
-   /______\
-  /        \
- /Integration\ ← Tests de interacción entre componentes
-/______________\
-/              \
-/  Unit Tests   \  ← Mayoría de tests, componentes y funciones
-/_________________\
-```
-
-### Testing Strategy
-
-1. **Unit Tests** (60%)
-   - Componentes individuales
-   - Funciones de utilidades
-   - Hooks personalizados
-
-2. **Integration Tests** (30%)
-   - Flows de autenticación
-   - Formularios completos
-   - Navegación entre páginas
-
-3. **E2E Tests** (10%)
-   - User journeys críticos
-   - Funcionalidades principales
+1. **Unit Tests** (60%) - Componentes, funciones, hooks
+2. **Integration Tests** (30%) - Flows de autenticacion, formularios
+3. **E2E Tests** (10%) - User journeys criticos
 
 ### Coverage Goals
 
@@ -649,89 +538,49 @@ Functions: 80%
 Lines: 80%
 ```
 
-## 📊 Diagrama de Arquitectura
+## Decisiones Arquitectonicas
 
-```
-┌────────────────────────────────────────────────────────┐
-│                     Browser                             │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │              React Application                   │  │
-│  │                                                  │  │
-│  │  ┌────────────┐  ┌────────────┐  ┌───────────┐ │  │
-│  │  │   Pages    │  │ Components │  │  Layouts  │ │  │
-│  │  └─────┬──────┘  └──────┬─────┘  └─────┬─────┘ │  │
-│  │        │                │               │        │  │
-│  │        ▼                ▼               ▼        │  │
-│  │  ┌─────────────────────────────────────────┐    │  │
-│  │  │          React Router                   │    │  │
-│  │  └────────────────┬────────────────────────┘    │  │
-│  │                   │                              │  │
-│  │        ┌──────────┴──────────┐                  │  │
-│  │        ▼                     ▼                  │  │
-│  │  ┌───────────┐        ┌───────────┐            │  │
-│  │  │  Context  │        │   Hooks   │            │  │
-│  │  │  (Auth)   │        │ (Custom)  │            │  │
-│  │  └─────┬─────┘        └─────┬─────┘            │  │
-│  │        │                    │                   │  │
-│  │        └──────────┬─────────┘                   │  │
-│  │                   ▼                             │  │
-│  │            ┌─────────────┐                      │  │
-│  │            │  Services   │                      │  │
-│  │            │  (API)      │                      │  │
-│  │            └──────┬──────┘                      │  │
-│  └───────────────────┼──────────────────────────── │  │
-└────────────────────┼─┼────────────────────────────────┘
-                     │ │
-                     │ │ HTTP/HTTPS
-                     ▼ ▼
-              ┌──────────────┐
-              │   Backend    │
-              │     API      │
-              └──────────────┘
-```
+### Por que Bootstrap en lugar de Tailwind?
 
-## 🔮 Decisiones Arquitectónicas
+- Componentes pre-construidos para desarrollo rapido
+- Integracion nativa con SCSS
+- Sistema de grid robusto
+- Compatibilidad con CDN Gov.co existente
+- Menor curva de aprendizaje
 
-### ¿Por qué React 19?
+### Por que React 19?
 
 - useOptimistic() para mejor UX
 - use() hook simplifica async
 - Mejor performance y DX
 
-### ¿Por qué Vite?
+### Por que Vite?
 
-- 10x más rápido que webpack
-- HMR instantáneo
+- 10x mas rapido que webpack
+- HMR instantaneo
 - ESM nativo
 
-### ¿Por qué TypeScript?
+### Por que TypeScript?
 
 - Type safety en compile time
 - Mejor IntelliSense
-- Refactoring más seguro
+- Refactoring mas seguro
 
-### ¿Por qué Context API en lugar de Redux?
+### Por que Arquitectura Modular?
 
-- Aplicación pequeña/mediana
-- Menos boilerplate
-- Performance suficiente
-- React 19 lo hace más eficiente
+- Escalabilidad del proyecto
+- Separacion clara de dominios
+- Facilita trabajo en equipo
+- Reutilizacion de codigo
 
-### ¿Por qué Tailwind?
-
-- Desarrollo más rápido
-- Bundle optimizado
-- Design system consistente
-
-## 📚 Referencias
+## Referencias
 
 - [React Architecture](https://react.dev/learn/thinking-in-react)
-- [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
-- [SOLID Principles](https://en.wikipedia.org/wiki/SOLID)
+- [Bootstrap 5 Docs](https://getbootstrap.com/docs/5.3/)
 - [WCAG 2.1](https://www.w3.org/WAI/WCAG21/quickref/)
 - [OWASP Top 10](https://owasp.org/www-project-top-ten/)
 
 ---
 
-**Última actualización**: 2025-01-15
-**Versión**: 1.0.0
+**Ultima actualizacion**: 2025-11-18
+**Version**: 2.0.0
