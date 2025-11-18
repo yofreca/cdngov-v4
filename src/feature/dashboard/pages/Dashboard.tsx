@@ -3,7 +3,7 @@
  * - Estadísticas y métricas clave
  * - Tabla de datos con filtrado y paginación
  * - useOptimistic de React 19 para actualizaciones optimistas
- * - Diseño Gov.co
+ * - Diseño Gov.co con Bootstrap
  * - Accesibilidad WCAG 2.1 AA
  */
 
@@ -93,7 +93,6 @@ const mockUsers: UserData[] = [
 
 // Simular API call para actualizar usuario
 async function updateUserStatus(userId: number, newStatus: 'Activo' | 'Inactivo') {
-  // Simular delay de red (en producción sería una llamada al backend)
   await new Promise((resolve) => setTimeout(resolve, 1000))
   return { userId, newStatus }
 }
@@ -122,10 +121,8 @@ export function Dashboard() {
     // Transición para manejar la actualización real
     startTransition(async () => {
       try {
-        // Llamada al servidor (simulada)
         await updateUserStatus(user.id, newStatus)
 
-        // Actualizar el estado real después de la confirmación del servidor
         setUsers((prev) =>
           prev.map((u) => (u.id === user.id ? { ...u, estado: newStatus } : u))
         )
@@ -133,7 +130,6 @@ export function Dashboard() {
         console.log(`✅ Usuario ${user.nombre} ahora está ${newStatus}`)
       } catch (error) {
         console.error('❌ Error al actualizar usuario:', error)
-        // En caso de error, useOptimistic revertirá automáticamente
       }
     })
   }
@@ -162,12 +158,12 @@ export function Dashboard() {
       sortable: true,
       render: (user) => (
         <span
-          className={`px-3 py-1 rounded-full text-xs font-medium ${
+          className={`badge ${
             user.rol === 'Administrador'
-              ? 'bg-red-100 text-red-800'
+              ? 'bg-danger'
               : user.rol === 'Editor'
-                ? 'bg-yellow-100 text-yellow-800'
-                : 'bg-blue-100 text-blue-800'
+                ? 'bg-warning text-dark'
+                : 'bg-primary'
           }`}
         >
           {user.rol}
@@ -179,25 +175,21 @@ export function Dashboard() {
       header: 'Estado',
       sortable: true,
       render: (user) => (
-        <div className="flex items-center gap-2">
+        <div className="d-flex align-items-center gap-2">
           <span
-            className={`px-3 py-1 rounded-full text-xs font-medium ${
-              user.estado === 'Activo'
-                ? 'bg-green-100 text-green-800'
-                : 'bg-gray-100 text-gray-800'
+            className={`badge ${
+              user.estado === 'Activo' ? 'bg-success' : 'bg-secondary'
             }`}
           >
             {user.estado}
           </span>
           <button
             onClick={(e) => {
-              e.stopPropagation() // Evitar que se active el click de la fila
+              e.stopPropagation()
               handleToggleUserStatus(user)
             }}
             disabled={isPending}
-            className={`text-xs px-2 py-1 rounded hover:bg-gray-200 transition-colors ${
-              isPending ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
-            }`}
+            className={`btn btn-sm btn-light ${isPending ? 'opacity-50' : ''}`}
             title={`Cambiar a ${user.estado === 'Activo' ? 'Inactivo' : 'Activo'}`}
             aria-label={`Cambiar estado de ${user.nombre} a ${user.estado === 'Activo' ? 'Inactivo' : 'Activo'}`}
           >
@@ -216,11 +208,9 @@ export function Dashboard() {
 
   const handleRowClick = (user: UserData) => {
     console.log('Usuario seleccionado:', user)
-    // Aquí podrías abrir un modal o navegar a una página de detalles
   }
 
   const handleExport = () => {
-    // Generar CSV usando datos optimistas
     const headers = columns.map((col) => col.header).join(',')
     const rows = optimisticUsers.map((user) =>
       columns
@@ -240,66 +230,74 @@ export function Dashboard() {
   }
 
   return (
-    <div className="container-govco py-8">
+    <div className="container-govco py-4">
       {/* Header */}
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold text-govco-marino mb-2">
+      <header className="mb-4">
+        <h1 className="h3 fw-bold" style={{ color: 'var(--color-govco-marino)' }}>
           Dashboard
-          {isPending && <span className="ml-3 text-sm text-gray-500">⏳ Actualizando...</span>}
+          {isPending && <span className="ms-3 small text-muted">⏳ Actualizando...</span>}
         </h1>
-        <p className="text-gray-600">
+        <p className="text-muted">
           Panel de control y gestión de datos del sistema
         </p>
       </header>
 
-      {/* Stats Cards - usan optimisticUsers para reflejar cambios inmediatos */}
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <StatsCard
-          title="Total Usuarios"
-          value={optimisticUsers.length}
-          icon="👥"
-          color="blue"
-          trend={{ value: 12, isPositive: true }}
-          description="Usuarios registrados en el sistema"
-        />
-        <StatsCard
-          title="Usuarios Activos"
-          value={optimisticUsers.filter((u) => u.estado === 'Activo').length}
-          icon="✓"
-          color="green"
-          trend={{ value: 8, isPositive: true }}
-          description="Usuarios con sesión activa"
-        />
-        <StatsCard
-          title="Administradores"
-          value={optimisticUsers.filter((u) => u.rol === 'Administrador').length}
-          icon="⚙️"
-          color="yellow"
-          description="Usuarios con rol de administrador"
-        />
-        <StatsCard
-          title="Usuarios Inactivos"
-          value={optimisticUsers.filter((u) => u.estado === 'Inactivo').length}
-          icon="⊗"
-          color="red"
-          trend={{ value: 5, isPositive: false }}
-          description="Usuarios sin actividad reciente"
-        />
+      {/* Stats Cards */}
+      <section className="row g-3 mb-4">
+        <div className="col-sm-6 col-lg-3">
+          <StatsCard
+            title="Total Usuarios"
+            value={optimisticUsers.length}
+            icon="👥"
+            color="blue"
+            trend={{ value: 12, isPositive: true }}
+            description="Usuarios registrados en el sistema"
+          />
+        </div>
+        <div className="col-sm-6 col-lg-3">
+          <StatsCard
+            title="Usuarios Activos"
+            value={optimisticUsers.filter((u) => u.estado === 'Activo').length}
+            icon="✓"
+            color="green"
+            trend={{ value: 8, isPositive: true }}
+            description="Usuarios con sesión activa"
+          />
+        </div>
+        <div className="col-sm-6 col-lg-3">
+          <StatsCard
+            title="Administradores"
+            value={optimisticUsers.filter((u) => u.rol === 'Administrador').length}
+            icon="⚙️"
+            color="yellow"
+            description="Usuarios con rol de administrador"
+          />
+        </div>
+        <div className="col-sm-6 col-lg-3">
+          <StatsCard
+            title="Usuarios Inactivos"
+            value={optimisticUsers.filter((u) => u.estado === 'Inactivo').length}
+            icon="⊗"
+            color="red"
+            trend={{ value: 5, isPositive: false }}
+            description="Usuarios sin actividad reciente"
+          />
+        </div>
       </section>
 
-      {/* Data Table - usa optimisticUsers para actualizaciones instantáneas */}
-      <section className="bg-white rounded-lg p-6 shadow-md">
-        <div className="flex justify-between items-center mb-6">
+      {/* Data Table */}
+      <section className="bg-white rounded p-4 shadow-sm">
+        <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-3">
           <div>
-            <h2 className="text-xl font-bold text-govco-marino mb-1">
+            <h2 className="h5 fw-bold mb-1" style={{ color: 'var(--color-govco-marino)' }}>
               Gestión de Usuarios
             </h2>
-            <p className="text-sm text-gray-600">
+            <p className="small text-muted mb-0">
               Administra los usuarios del sistema. Click en 🔄 para cambiar el estado.
             </p>
           </div>
 
-          <div className="flex gap-3">
+          <div className="d-flex gap-2">
             <Button
               onClick={handleExport}
               variant="secondary"
@@ -324,8 +322,8 @@ export function Dashboard() {
       </section>
 
       {/* Additional Info */}
-      <footer className="mt-8 text-sm text-gray-500">
-        <p>
+      <footer className="mt-4 small text-muted">
+        <p className="mb-0">
           💡 <strong>Tip:</strong> Haz clic en 🔄 para cambiar el estado del usuario
           (React 19 useOptimistic). La UI se actualiza inmediatamente mientras se procesa
           en el servidor.

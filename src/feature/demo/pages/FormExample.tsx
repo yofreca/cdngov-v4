@@ -62,12 +62,7 @@ const departamentos = [
 
 /**
  * Página de Formulario de Ejemplo
- * Implementa todas las mejores prácticas:
- * - Validación con Zod
- * - React Hook Form
- * - Seguridad OWASP (validación de inputs)
- * - Accesibilidad WCAG 2.1 AA
- * - Mensajes de error claros
+ * Diseño Gov.co con Bootstrap
  */
 export function FormExample() {
   const [submitSuccess, setSubmitSuccess] = useState(false)
@@ -98,26 +93,22 @@ export function FormExample() {
     setIsSubmitting(true)
     setSubmitSuccess(false)
 
-    // Simulación de envío a API (sanitización en backend)
     await new Promise((resolve) => setTimeout(resolve, 1500))
 
-    // En producción, enviar a API aquí
-    // eslint-disable-next-line no-console
     console.log('Datos del formulario:', data)
 
     setIsSubmitting(false)
     setSubmitSuccess(true)
     reset()
 
-    // Ocultar mensaje de éxito después de 5 segundos
     setTimeout(() => setSubmitSuccess(false), 5000)
   }
 
   return (
-    <div className="container-govco py-12">
-      <div className="max-w-3xl mx-auto">
+    <div className="container-govco py-5">
+      <div className="mx-auto" style={{ maxWidth: '48rem' }}>
         <h1
-          className="text-3xl md:text-4xl font-bold mb-8 text-center"
+          className="h2 fw-bold mb-4 text-center"
           style={{ color: 'var(--color-govco-marino)' }}
         >
           Formulario de Contacto
@@ -128,7 +119,7 @@ export function FormExample() {
             variant="success"
             title="¡Formulario enviado exitosamente!"
             onClose={() => setSubmitSuccess(false)}
-            className="mb-6"
+            className="mb-4"
           >
             Hemos recibido tu información. Te contactaremos pronto.
           </Alert>
@@ -137,7 +128,7 @@ export function FormExample() {
         <Card variant="elevated">
           <form onSubmit={handleSubmit(onSubmit)}>
             <CardContent>
-              <div className="space-y-6">
+              <div className="d-flex flex-column gap-4">
                 {/* Nombre */}
                 <Input
                   label="Nombre completo"
@@ -161,29 +152,33 @@ export function FormExample() {
                   fullWidth
                 />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="row g-3">
                   {/* Documento */}
-                  <Input
-                    label="Número de documento"
-                    type="text"
-                    placeholder="123456789"
-                    {...register('documento')}
-                    error={errors.documento?.message}
-                    required
-                    fullWidth
-                  />
+                  <div className="col-md-6">
+                    <Input
+                      label="Número de documento"
+                      type="text"
+                      placeholder="123456789"
+                      {...register('documento')}
+                      error={errors.documento?.message}
+                      required
+                      fullWidth
+                    />
+                  </div>
 
                   {/* Teléfono */}
-                  <Input
-                    label="Teléfono móvil"
-                    type="tel"
-                    placeholder="3001234567"
-                    {...register('telefono')}
-                    error={errors.telefono?.message}
-                    helperText="10 dígitos iniciando con 3"
-                    required
-                    fullWidth
-                  />
+                  <div className="col-md-6">
+                    <Input
+                      label="Teléfono móvil"
+                      type="tel"
+                      placeholder="3001234567"
+                      {...register('telefono')}
+                      error={errors.telefono?.message}
+                      helperText="10 dígitos iniciando con 3"
+                      required
+                      fullWidth
+                    />
+                  </div>
                 </div>
 
                 {/* Departamento */}
@@ -227,7 +222,7 @@ export function FormExample() {
                 </Alert>
 
                 {/* Botones de acción */}
-                <div className="flex flex-col sm:flex-row gap-3 w-full pt-4">
+                <div className="d-flex flex-column flex-sm-row gap-2 pt-3">
                   <Button
                     type="submit"
                     variant="primary"
@@ -253,16 +248,16 @@ export function FormExample() {
         </Card>
 
         {/* Información adicional */}
-        <div className="mt-6 p-4 rounded-md" style={{ backgroundColor: 'var(--color-govco-gris-muy-claro)' }}>
-          <h3 className="text-sm font-semibold mb-2" style={{ color: 'var(--color-govco-gris-oscuro)' }}>
+        <div className="mt-4 p-3 rounded" style={{ backgroundColor: 'var(--color-govco-gris-muy-claro)' }}>
+          <h3 className="small fw-semibold mb-2" style={{ color: 'var(--color-govco-gris-oscuro)' }}>
             Características de Seguridad Implementadas:
           </h3>
-          <ul className="text-sm space-y-1" style={{ color: 'var(--color-govco-gris)' }}>
-            <li>✓ Validación de inputs con Zod (prevención de inyección)</li>
-            <li>✓ Sanitización de caracteres especiales en servidor</li>
-            <li>✓ Límites de longitud en todos los campos</li>
-            <li>✓ Validación de formato de email y teléfono</li>
-            <li>✓ Expresiones regulares para prevenir XSS</li>
+          <ul className="small mb-0 list-unstyled" style={{ color: 'var(--color-govco-gris)' }}>
+            <li className="mb-1">✓ Validación de inputs con Zod (prevención de inyección)</li>
+            <li className="mb-1">✓ Sanitización de caracteres especiales en servidor</li>
+            <li className="mb-1">✓ Límites de longitud en todos los campos</li>
+            <li className="mb-1">✓ Validación de formato de email y teléfono</li>
+            <li className="mb-1">✓ Expresiones regulares para prevenir XSS</li>
             <li>✓ Accesibilidad WCAG 2.1 AA compliant</li>
           </ul>
         </div>
