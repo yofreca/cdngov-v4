@@ -55,10 +55,15 @@ export function ForgotPassword() {
       setError(
         'Ha excedido el límite de solicitudes. Por favor, contacte al soporte técnico.'
       )
-      securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.CRITICAL, {
-        action: 'password_reset_blocked_max_requests',
-        email: data.email,
-      })
+      securityLogger.logSecurityEvent(
+        SecurityEventType.LOGIN_SUCCESS,
+        SecurityLevel.CRITICAL,
+        'Bloqueo por exceso de solicitudes de restablecimiento',
+        {
+          action: 'password_reset_blocked_max_requests',
+          email: data.email,
+        }
+      )
       return
     }
 
@@ -74,10 +79,15 @@ export function ForgotPassword() {
       })
 
       // Siempre mostrar mensaje de éxito (seguridad: no revelar si el email existe)
-      securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.INFO, {
-        action: 'password_reset_requested',
-        email: data.email,
-      })
+      securityLogger.logSecurityEvent(
+        SecurityEventType.LOGIN_SUCCESS,
+        SecurityLevel.INFO,
+        'Solicitud de restablecimiento de contraseña',
+        {
+          action: 'password_reset_requested',
+          email: data.email,
+        }
+      )
 
       setSuccess(true)
       setRequestCount(requestCount + 1)
@@ -86,11 +96,16 @@ export function ForgotPassword() {
         'Error al procesar la solicitud. Por favor, intente nuevamente.'
       )
 
-      securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.ERROR, {
-        action: 'password_reset_error',
-        email: data.email,
-        error: error instanceof Error ? error.message : 'Unknown error',
-      })
+      securityLogger.logSecurityEvent(
+        SecurityEventType.LOGIN_SUCCESS,
+        SecurityLevel.ERROR,
+        'Error al procesar solicitud de restablecimiento',
+        {
+          action: 'password_reset_error',
+          email: data.email,
+          error: error instanceof Error ? error.message : 'Unknown error',
+        }
+      )
     } finally {
       setIsSubmitting(false)
     }

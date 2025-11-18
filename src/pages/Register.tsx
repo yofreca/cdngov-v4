@@ -135,10 +135,15 @@ export function Register() {
       })
 
       // Registro exitoso
-      securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.INFO, {
-        action: 'user_registered',
-        email: data.email,
-      })
+      securityLogger.logSecurityEvent(
+        SecurityEventType.LOGIN_SUCCESS,
+        SecurityLevel.INFO,
+        'Usuario registrado exitosamente',
+        {
+          action: 'user_registered',
+          email: data.email,
+        }
+      )
 
       setRegisterSuccess(true)
 
@@ -158,11 +163,16 @@ export function Register() {
           : 'Error al registrar usuario. Por favor, intente nuevamente.'
       )
 
-      securityLogger.logSecurityEvent(SecurityEventType.LOGIN_SUCCESS, SecurityLevel.WARNING, {
-        action: 'registration_failed',
-        email: data.email,
-        error: error instanceof Error ? error.message : 'Unknown error',
-      })
+      securityLogger.logSecurityEvent(
+        SecurityEventType.LOGIN_SUCCESS,
+        SecurityLevel.WARNING,
+        'Fallo en registro de usuario',
+        {
+          action: 'registration_failed',
+          email: data.email,
+          error: error instanceof Error ? error.message : 'Unknown error',
+        }
+      )
     } finally {
       setIsSubmitting(false)
     }

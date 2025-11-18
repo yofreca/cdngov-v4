@@ -50,10 +50,11 @@ export function Card({
  * Subcomponente CardHeader
  */
 export interface CardHeaderProps {
-  title: string
+  title?: string
   subtitle?: string
   action?: ReactNode
   className?: string
+  children?: ReactNode
 }
 
 export function CardHeader({
@@ -61,11 +62,22 @@ export function CardHeader({
   subtitle,
   action,
   className = '',
+  children,
 }: CardHeaderProps) {
+  // Si hay children, renderizar directamente
+  if (children) {
+    return (
+      <div className={clsx('mb-3', className)}>
+        {children}
+      </div>
+    )
+  }
+
+  // Renderizado tradicional con title/subtitle
   return (
     <div className={clsx('d-flex align-items-start justify-content-between mb-3', className)}>
       <div>
-        <h5 className="card-title mb-1">{title}</h5>
+        {title && <h5 className="card-title mb-1">{title}</h5>}
         {subtitle && (
           <p className="card-subtitle text-muted small">{subtitle}</p>
         )}

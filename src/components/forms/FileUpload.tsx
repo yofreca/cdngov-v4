@@ -43,7 +43,7 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
     },
     ref
   ) => {
-    const id = useFormId(props.id)
+    const id = useFormId('fileupload', props.id)
     const inputRef = useRef<HTMLInputElement>(null)
     const [selectedFiles, setSelectedFiles] = useState<File[]>([])
     const [isDragging, setIsDragging] = useState(false)

@@ -145,7 +145,7 @@ export const departamentoSchema = z.enum(
     'vichada',
   ],
   {
-    errorMap: () => ({ message: 'Seleccione un departamento válido' }),
+    message: 'Seleccione un departamento válido',
   }
 )
 
@@ -270,7 +270,7 @@ export const registroUsuarioSchema = z
     password: passwordSchema,
     confirmPassword: z.string(),
     tipoDocumento: z.enum(['cedula', 'pasaporte', 'cedula_extranjeria'], {
-      errorMap: () => ({ message: 'Seleccione un tipo de documento' }),
+      message: 'Seleccione un tipo de documento',
     }),
     numeroDocumento: cedulaSchema,
     telefono: telefonoMovilSchema,

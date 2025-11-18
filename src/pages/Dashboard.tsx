@@ -20,6 +20,7 @@ interface UserData {
   rol: string
   estado: 'Activo' | 'Inactivo'
   ultimoAcceso: string
+  [key: string]: unknown
 }
 
 // Datos de ejemplo

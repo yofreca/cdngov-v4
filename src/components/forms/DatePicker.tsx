@@ -35,7 +35,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     },
     ref
   ) => {
-    const id = useFormId(props.id)
+    const id = useFormId('datepicker', props.id)
 
     return (
       <div className={clsx('form-group', fullWidth && 'w-full', className)}>
