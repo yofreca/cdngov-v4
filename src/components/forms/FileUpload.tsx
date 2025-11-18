@@ -192,11 +192,11 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
     const displayError = error || validationError
 
     return (
-      <div className={clsx('form-group', fullWidth && 'w-full', className)}>
+      <div className={clsx('mb-3', fullWidth && 'w-100', className)}>
         {label && (
-          <label htmlFor={id} className="block mb-2 font-medium text-gray-700">
+          <label htmlFor={id} className="form-label fw-medium">
             {label}
-            {required && <span className="text-red-600 ml-1">*</span>}
+            {required && <span className="text-danger ms-1">*</span>}
           </label>
         )}
 
@@ -214,19 +214,19 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
             }
           }}
           className={clsx(
-            'border-2 border-dashed rounded-lg p-6 text-center transition-colors',
-            isDragging
-              ? 'border-blue-500 bg-blue-50'
-              : 'border-gray-300 hover:border-gray-400',
-            displayError && 'border-red-500',
-            disabled && 'opacity-50 cursor-not-allowed'
+            'border border-2 border-dashed rounded-3 p-4 text-center transition',
+            isDragging && 'border-primary bg-primary bg-opacity-10',
+            !isDragging && 'border-secondary',
+            displayError && 'border-danger',
+            disabled && 'opacity-50'
           )}
+          style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}
         >
           <input
             ref={ref || inputRef}
             type="file"
             id={id}
-            className="hidden"
+            className="d-none"
             accept={acceptedTypes.join(',')}
             multiple={allowMultiple}
             onChange={handleInputChange}
@@ -241,37 +241,36 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
             {...props}
           />
 
-          <div className="space-y-2">
+          <div className="d-flex flex-column gap-2 align-items-center">
             <div
-              className="text-4xl"
+              className="fs-1"
               style={{ color: 'var(--color-govco-marino)' }}
             >
-              📁
+              <i className="bi bi-folder2-open"></i>
             </div>
             <div>
               <button
                 type="button"
                 onClick={() => inputRef.current?.click()}
                 disabled={disabled}
-                className="btn-govco-primary inline-block px-4 py-2 rounded-lg text-white font-medium hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{ backgroundColor: 'var(--color-govco-marino)' }}
+                className="btn btn-primary"
               >
                 Seleccionar archivo{allowMultiple ? 's' : ''}
               </button>
             </div>
-            <p className="text-sm text-gray-600">
+            <p className="small text-secondary mb-0">
               o arrastra {allowMultiple ? 'los archivos' : 'el archivo'} aquí
             </p>
-            <p className="text-xs text-gray-500">
+            <p className="small text-muted mb-0">
               Tipos permitidos: {getAcceptString()}
             </p>
-            <p className="text-xs text-gray-500">Tamaño máximo: {maxSize}MB</p>
+            <p className="small text-muted mb-0">Tamaño máximo: {maxSize}MB</p>
           </div>
         </div>
 
         {/* Helper text */}
         {helperText && !displayError && (
-          <p id={`${id}-helper`} className="mt-2 text-sm text-gray-600">
+          <p id={`${id}-helper`} className="form-text text-muted mt-2">
             {helperText}
           </p>
         )}
@@ -280,7 +279,7 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
         {displayError && (
           <p
             id={`${id}-error`}
-            className="mt-2 text-sm text-red-600"
+            className="form-text text-danger mt-2"
             role="alert"
           >
             {displayError}
@@ -289,35 +288,39 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
 
         {/* Preview de archivos seleccionados */}
         {showPreview && selectedFiles.length > 0 && (
-          <div className="mt-4 space-y-2">
-            <p className="text-sm font-medium text-gray-700">
+          <div className="mt-4">
+            <p className="small fw-medium text-secondary mb-2">
               {allowMultiple ? 'Archivos seleccionados:' : 'Archivo seleccionado:'}
             </p>
-            <div className="space-y-2">
+            <div className="d-flex flex-column gap-2">
               {selectedFiles.map((file, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200"
+                  className="d-flex align-items-center gap-3 p-3 bg-light rounded-3 border"
                 >
                   {/* Preview de imagen */}
                   {file.type.startsWith('image/') ? (
                     <img
                       src={getFilePreview(file) || ''}
                       alt={file.name}
-                      className="w-12 h-12 object-cover rounded"
+                      className="rounded object-fit-cover"
+                      style={{ width: '3rem', height: '3rem' }}
                     />
                   ) : (
-                    <div className="w-12 h-12 flex items-center justify-center bg-gray-200 rounded">
-                      <span className="text-2xl">📄</span>
+                    <div
+                      className="d-flex align-items-center justify-content-center bg-secondary bg-opacity-25 rounded"
+                      style={{ width: '3rem', height: '3rem' }}
+                    >
+                      <span className="fs-4">📄</span>
                     </div>
                   )}
 
                   {/* Información del archivo */}
-                  <div className="flex-grow min-w-0">
-                    <p className="text-sm font-medium text-gray-900 truncate">
+                  <div className="flex-grow-1 overflow-hidden">
+                    <p className="small fw-medium text-dark mb-0 text-truncate">
                       {file.name}
                     </p>
-                    <p className="text-xs text-gray-500">
+                    <p className="small text-muted mb-0">
                       {formatFileSize(file.size)}
                     </p>
                   </div>
@@ -326,10 +329,10 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
                   <button
                     type="button"
                     onClick={() => removeFile(index)}
-                    className="flex-shrink-0 p-2 text-red-600 hover:bg-red-50 rounded transition-colors"
+                    className="btn btn-sm btn-outline-danger flex-shrink-0"
                     aria-label={`Eliminar ${file.name}`}
                   >
-                    <span className="text-xl">✕</span>
+                    <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
               ))}
