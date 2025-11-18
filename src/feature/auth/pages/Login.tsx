@@ -2,7 +2,7 @@
  * Página de Login - Fase 6
  * - Autenticación segura con validación OWASP
  * - Accesibilidad WCAG 2.1 AA
- * - Diseño Gov.co
+ * - Diseño Gov.co con Bootstrap
  * - Protección contra ataques comunes
  */
 
@@ -185,22 +185,22 @@ export function Login() {
   }
 
   return (
-    <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+    <div className="d-flex align-items-center justify-content-center py-5 px-3">
+      <div className="w-100" style={{ maxWidth: '28rem' }}>
         {/* Encabezado */}
-        <div>
+        <div className="text-center mb-4">
           <h1
-            className="text-center text-3xl font-bold"
+            className="h3 fw-bold"
             style={{ color: 'var(--color-govco-azul-oscuro)' }}
           >
             Iniciar Sesión
           </h1>
-          <p className="mt-2 text-center text-sm text-gray-600">
+          <p className="mt-2 small text-muted">
             Sistema de Apoyo para la Reincorporación (SARA)
           </p>
           {from !== '/' && (
             <p
-              className="mt-2 text-center text-sm"
+              className="mt-2 small"
               style={{ color: 'var(--color-govco-naranja)' }}
               role="alert"
             >
@@ -211,44 +211,28 @@ export function Login() {
 
         {/* Formulario */}
         <form
-          className="mt-8 space-y-6 bg-white p-8 rounded-lg shadow-md"
+          className="bg-white p-4 rounded shadow"
           onSubmit={handleSubmit(onSubmit)}
           noValidate
         >
           {/* Error general */}
           {loginError && (
             <div
-              className="rounded-md p-4"
-              style={{ backgroundColor: '#fee2e2' }}
+              className="alert alert-danger d-flex align-items-start"
               role="alert"
               aria-live="assertive"
             >
-              <div className="flex">
-                <div className="flex-shrink-0">
-                  <span className="text-red-400" aria-hidden="true">
-                    ⚠️
-                  </span>
-                </div>
-                <div className="ml-3">
-                  <p
-                    className="text-sm font-medium"
-                    style={{ color: 'var(--color-govco-rojo)' }}
-                  >
-                    {loginError}
-                  </p>
-                </div>
-              </div>
+              <span className="flex-shrink-0 me-2" aria-hidden="true">
+                ⚠️
+              </span>
+              <div className="small fw-medium">{loginError}</div>
             </div>
           )}
 
           {/* Credenciales de prueba (solo desarrollo) */}
           {import.meta.env.DEV && (
-            <div
-              className="rounded-md p-4"
-              style={{ backgroundColor: '#e0f2fe' }}
-              role="note"
-            >
-              <p className="text-xs text-gray-700">
+            <div className="alert alert-primary" role="note">
+              <p className="small mb-0">
                 <strong>🔓 MODO DESARROLLO</strong>
                 <br />
                 ✅ Acepta cualquier email y contraseña
@@ -263,151 +247,116 @@ export function Login() {
             </div>
           )}
 
-          <div className="space-y-4">
-            {/* Email */}
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Correo electrónico
-              </label>
+          {/* Email */}
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label small fw-medium">
+              Correo electrónico
+            </label>
+            <input
+              {...register('email')}
+              type="email"
+              id="email"
+              autoComplete="email"
+              disabled={isSubmitting || attemptCount >= MAX_ATTEMPTS}
+              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+              aria-invalid={errors.email ? 'true' : 'false'}
+              aria-describedby={errors.email ? 'email-error' : undefined}
+            />
+            {errors.email && (
+              <div id="email-error" className="invalid-feedback" role="alert">
+                {errors.email.message}
+              </div>
+            )}
+          </div>
+
+          {/* Contraseña */}
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label small fw-medium">
+              Contraseña
+            </label>
+            <div className="position-relative">
               <input
-                {...register('email')}
-                type="email"
-                id="email"
-                autoComplete="email"
+                {...register('password')}
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                autoComplete="current-password"
                 disabled={isSubmitting || attemptCount >= MAX_ATTEMPTS}
-                className={`mt-1 block w-full px-3 py-2 border ${
-                  errors.email ? 'border-red-500' : 'border-gray-300'
-                } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-govco-marino focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed`}
-                aria-invalid={errors.email ? 'true' : 'false'}
-                aria-describedby={errors.email ? 'email-error' : undefined}
+                className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                aria-invalid={errors.password ? 'true' : 'false'}
+                aria-describedby={errors.password ? 'password-error' : undefined}
               />
-              {errors.email && (
-                <p
-                  id="email-error"
-                  className="mt-1 text-sm"
-                  style={{ color: 'var(--color-govco-rojo)' }}
-                  role="alert"
-                >
-                  {errors.email.message}
-                </p>
-              )}
-            </div>
-
-            {/* Contraseña */}
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                disabled={isSubmitting || attemptCount >= MAX_ATTEMPTS}
+                className="btn btn-link position-absolute top-50 end-0 translate-middle-y pe-3"
+                style={{ zIndex: 5 }}
+                aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
               >
-                Contraseña
+                <span aria-hidden="true">{showPassword ? '🙈' : '👁️'}</span>
+              </button>
+            </div>
+            {errors.password && (
+              <div id="password-error" className="invalid-feedback d-block" role="alert">
+                {errors.password.message}
+              </div>
+            )}
+          </div>
+
+          {/* Recordarme */}
+          <div className="d-flex align-items-center justify-content-between mb-4">
+            <div className="form-check">
+              <input
+                {...register('rememberMe')}
+                id="rememberMe"
+                type="checkbox"
+                disabled={isSubmitting || attemptCount >= MAX_ATTEMPTS}
+                className="form-check-input"
+              />
+              <label htmlFor="rememberMe" className="form-check-label small">
+                Recordarme
               </label>
-              <div className="mt-1 relative">
-                <input
-                  {...register('password')}
-                  type={showPassword ? 'text' : 'password'}
-                  id="password"
-                  autoComplete="current-password"
-                  disabled={isSubmitting || attemptCount >= MAX_ATTEMPTS}
-                  className={`block w-full px-3 py-2 border ${
-                    errors.password ? 'border-red-500' : 'border-gray-300'
-                  } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-govco-marino focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed`}
-                  aria-invalid={errors.password ? 'true' : 'false'}
-                  aria-describedby={
-                    errors.password ? 'password-error' : undefined
-                  }
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  disabled={isSubmitting || attemptCount >= MAX_ATTEMPTS}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
-                  aria-label={
-                    showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'
-                  }
-                >
-                  <span aria-hidden="true">{showPassword ? '🙈' : '👁️'}</span>
-                </button>
-              </div>
-              {errors.password && (
-                <p
-                  id="password-error"
-                  className="mt-1 text-sm"
-                  style={{ color: 'var(--color-govco-rojo)' }}
-                  role="alert"
-                >
-                  {errors.password.message}
-                </p>
-              )}
             </div>
 
-            {/* Recordarme */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  {...register('rememberMe')}
-                  id="rememberMe"
-                  type="checkbox"
-                  disabled={isSubmitting || attemptCount >= MAX_ATTEMPTS}
-                  className="h-4 w-4 rounded border-gray-300 focus:ring-2 focus:ring-govco-marino"
-                  style={{ accentColor: 'var(--color-govco-marino)' }}
-                />
-                <label
-                  htmlFor="rememberMe"
-                  className="ml-2 block text-sm text-gray-900"
-                >
-                  Recordarme
-                </label>
-              </div>
-
-              <div className="text-sm">
-                <Link
-                  to="/recuperar-contrasena"
-                  className="font-medium hover:underline"
-                  style={{ color: 'var(--color-govco-marino)' }}
-                >
-                  ¿Olvidó su contraseña?
-                </Link>
-              </div>
-            </div>
+            <Link
+              to="/recuperar-contrasena"
+              className="small text-decoration-none"
+              style={{ color: 'var(--color-govco-marino)' }}
+            >
+              ¿Olvidó su contraseña?
+            </Link>
           </div>
 
           {/* Botón de envío */}
-          <div>
-            <Button
-              type="submit"
-              variant="primary"
-              size="lg"
-              disabled={isSubmitting || attemptCount >= MAX_ATTEMPTS}
-              className="w-full"
-            >
-              {isSubmitting ? (
-                <>
-                  <span
-                    className="inline-block animate-spin mr-2"
-                    aria-hidden="true"
-                  >
-                    ⏳
-                  </span>
-                  Iniciando sesión...
-                </>
-              ) : attemptCount >= MAX_ATTEMPTS ? (
-                'Cuenta bloqueada temporalmente'
-              ) : (
-                'Iniciar sesión'
-              )}
-            </Button>
-          </div>
+          <Button
+            type="submit"
+            variant="primary"
+            size="lg"
+            disabled={isSubmitting || attemptCount >= MAX_ATTEMPTS}
+            className="w-100 mb-3"
+          >
+            {isSubmitting ? (
+              <>
+                <span
+                  className="spinner-border spinner-border-sm me-2"
+                  aria-hidden="true"
+                />
+                Iniciando sesión...
+              </>
+            ) : attemptCount >= MAX_ATTEMPTS ? (
+              'Cuenta bloqueada temporalmente'
+            ) : (
+              'Iniciar sesión'
+            )}
+          </Button>
 
           {/* Link de registro */}
           <div className="text-center">
-            <p className="text-sm text-gray-600">
+            <p className="small text-muted mb-0">
               ¿No tiene una cuenta?{' '}
               <Link
                 to="/registro"
-                className="font-medium hover:underline"
+                className="text-decoration-none fw-medium"
                 style={{ color: 'var(--color-govco-marino)' }}
               >
                 Regístrese aquí
@@ -417,11 +366,11 @@ export function Login() {
         </form>
 
         {/* Información de seguridad */}
-        <div className="mt-6 text-center text-xs text-gray-500">
-          <p>
+        <div className="mt-4 text-center small text-muted">
+          <p className="mb-1">
             Esta es una conexión segura protegida. Sus datos están encriptados.
           </p>
-          <p className="mt-1">
+          <p className="mb-0">
             Si tiene problemas para acceder, contacte al soporte técnico.
           </p>
         </div>

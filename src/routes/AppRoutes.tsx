@@ -5,19 +5,19 @@ import { ProtectedRoute } from '@components/auth/ProtectedRoute'
 import { LoadingSpinner } from '@shared/components/ui'
 
 // Lazy loading de páginas para mejorar performance
-const Home = lazy(() => import('@pages/Home').then((module) => ({ default: module.Home })))
+const Home = lazy(() => import('@feature/home/pages/Home').then((module) => ({ default: module.Home })))
 const ComponentsDemo = lazy(() =>
   import('@pages/ComponentsDemo').then((module) => ({ default: module.ComponentsDemo }))
 )
 const FormExample = lazy(() =>
   import('@pages/FormExample').then((module) => ({ default: module.FormExample }))
 )
-const Login = lazy(() => import('@pages/Login').then((module) => ({ default: module.Login })))
+const Login = lazy(() => import('@feature/auth/pages/Login').then((module) => ({ default: module.Login })))
 const Register = lazy(() =>
-  import('@pages/Register').then((module) => ({ default: module.Register }))
+  import('@feature/auth/pages/Register').then((module) => ({ default: module.Register }))
 )
 const ForgotPassword = lazy(() =>
-  import('@pages/ForgotPassword').then((module) => ({ default: module.ForgotPassword }))
+  import('@feature/auth/pages/ForgotPassword').then((module) => ({ default: module.ForgotPassword }))
 )
 const Dashboard = lazy(() =>
   import('@pages/Dashboard').then((module) => ({ default: module.Dashboard }))

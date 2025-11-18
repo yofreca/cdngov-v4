@@ -3,7 +3,7 @@
  * - Solicitud de restablecimiento de contraseña por email
  * - Seguridad OWASP (rate limiting, validación)
  * - Accesibilidad WCAG 2.1 AA
- * - Diseño Gov.co
+ * - Diseño Gov.co con Bootstrap
  */
 
 import { useState } from 'react'
@@ -114,39 +114,38 @@ export function ForgotPassword() {
   // Mensaje de éxito
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center py-12 px-4">
-        <div className="max-w-md w-full">
+      <div className="min-vh-100 d-flex align-items-center justify-content-center py-5 px-3">
+        <div className="w-100" style={{ maxWidth: '28rem' }}>
           <div
-            className="bg-white p-8 rounded-lg shadow-md text-center"
+            className="bg-white p-4 rounded shadow text-center"
             role="alert"
             aria-live="polite"
           >
-            <div className="text-6xl mb-4" aria-hidden="true">
+            <div className="fs-1 mb-3" aria-hidden="true">
               📧
             </div>
             <h2
-              className="text-2xl font-bold mb-4"
+              className="h4 fw-bold mb-3"
               style={{ color: 'var(--color-govco-verde)' }}
             >
               Correo enviado
             </h2>
-            <p className="text-gray-600 mb-4">
+            <p className="text-muted mb-3">
               Si existe una cuenta asociada con{' '}
-              <strong className="text-gray-800">{email}</strong>, recibirá un
+              <strong className="text-dark">{email}</strong>, recibirá un
               correo electrónico con instrucciones para restablecer su
               contraseña.
             </p>
-            <p className="text-sm text-gray-500 mb-6">
+            <p className="small text-muted mb-4">
               Por favor, revise su bandeja de entrada y la carpeta de spam. El
               enlace expirará en 1 hora.
             </p>
 
-            <div className="space-y-3">
+            <div className="d-grid gap-2">
               <Button
                 variant="primary"
                 size="md"
                 onClick={() => navigate('/login')}
-                className="w-full"
               >
                 Volver al inicio de sesión
               </Button>
@@ -154,7 +153,7 @@ export function ForgotPassword() {
               <button
                 onClick={() => setSuccess(false)}
                 disabled={requestCount >= MAX_REQUESTS}
-                className="w-full text-sm hover:underline"
+                className="btn btn-link small"
                 style={{ color: 'var(--color-govco-marino)' }}
               >
                 ¿No recibió el correo? Intentar nuevamente
@@ -163,7 +162,7 @@ export function ForgotPassword() {
 
             {requestCount >= MAX_REQUESTS && (
               <p
-                className="mt-4 text-sm"
+                className="mt-3 small"
                 style={{ color: 'var(--color-govco-rojo)' }}
               >
                 Ha alcanzado el límite de solicitudes. Por favor, contacte al
@@ -177,17 +176,17 @@ export function ForgotPassword() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+    <div className="min-vh-100 d-flex align-items-center justify-content-center py-5 px-3">
+      <div className="w-100" style={{ maxWidth: '28rem' }}>
         {/* Encabezado */}
-        <div>
+        <div className="text-center mb-4">
           <h1
-            className="text-center text-3xl font-bold"
+            className="h3 fw-bold"
             style={{ color: 'var(--color-govco-azul-oscuro)' }}
           >
             Recuperar Contraseña
           </h1>
-          <p className="mt-2 text-center text-sm text-gray-600">
+          <p className="mt-2 small text-muted">
             Ingrese su correo electrónico y le enviaremos instrucciones para
             restablecer su contraseña
           </p>
@@ -195,129 +194,93 @@ export function ForgotPassword() {
 
         {/* Formulario */}
         <form
-          className="mt-8 space-y-6 bg-white p-8 rounded-lg shadow-md"
+          className="bg-white p-4 rounded shadow"
           onSubmit={handleSubmit(onSubmit)}
           noValidate
         >
           {/* Error general */}
           {error && (
             <div
-              className="rounded-md p-4"
-              style={{ backgroundColor: '#fee2e2' }}
+              className="alert alert-danger d-flex align-items-start"
               role="alert"
               aria-live="assertive"
             >
-              <div className="flex">
-                <div className="flex-shrink-0">
-                  <span className="text-red-400" aria-hidden="true">
-                    ⚠️
-                  </span>
-                </div>
-                <div className="ml-3">
-                  <p
-                    className="text-sm font-medium"
-                    style={{ color: 'var(--color-govco-rojo)' }}
-                  >
-                    {error}
-                  </p>
-                </div>
-              </div>
+              <span className="flex-shrink-0 me-2" aria-hidden="true">
+                ⚠️
+              </span>
+              <div className="small fw-medium">{error}</div>
             </div>
           )}
 
           {/* Información de seguridad */}
-          <div
-            className="rounded-md p-4"
-            style={{ backgroundColor: '#e0f2fe' }}
-            role="note"
-          >
-            <div className="flex">
-              <div className="flex-shrink-0">
-                <span
-                  className="text-blue-400"
-                  aria-hidden="true"
-                  style={{ color: 'var(--color-govco-marino)' }}
-                >
-                  ℹ️
-                </span>
-              </div>
-              <div className="ml-3">
-                <p className="text-sm text-gray-700">
-                  Por razones de seguridad, no revelamos si un correo
-                  electrónico está registrado en nuestro sistema. Si su correo
-                  está registrado, recibirá un email con instrucciones.
-                </p>
-              </div>
+          <div className="alert alert-primary" role="note">
+            <div className="d-flex">
+              <span
+                className="flex-shrink-0 me-2"
+                aria-hidden="true"
+                style={{ color: 'var(--color-govco-marino)' }}
+              >
+                ℹ️
+              </span>
+              <p className="small mb-0 text-dark">
+                Por razones de seguridad, no revelamos si un correo
+                electrónico está registrado en nuestro sistema. Si su correo
+                está registrado, recibirá un email con instrucciones.
+              </p>
             </div>
           </div>
 
-          <div className="space-y-4">
-            {/* Email */}
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Correo electrónico
-              </label>
-              <input
-                {...register('email')}
-                type="email"
-                id="email"
-                autoComplete="email"
-                disabled={isSubmitting || requestCount >= MAX_REQUESTS}
-                className={`mt-1 block w-full px-3 py-2 border ${
-                  errors.email ? 'border-red-500' : 'border-gray-300'
-                } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-govco-marino focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed`}
-                aria-invalid={errors.email ? 'true' : 'false'}
-                aria-describedby={errors.email ? 'email-error' : undefined}
-                placeholder="correo@ejemplo.com"
-              />
-              {errors.email && (
-                <p
-                  id="email-error"
-                  className="mt-1 text-sm"
-                  style={{ color: 'var(--color-govco-rojo)' }}
-                  role="alert"
-                >
-                  {errors.email.message}
-                </p>
-              )}
-            </div>
+          {/* Email */}
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label small fw-medium">
+              Correo electrónico
+            </label>
+            <input
+              {...register('email')}
+              type="email"
+              id="email"
+              autoComplete="email"
+              disabled={isSubmitting || requestCount >= MAX_REQUESTS}
+              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+              aria-invalid={errors.email ? 'true' : 'false'}
+              aria-describedby={errors.email ? 'email-error' : undefined}
+              placeholder="correo@ejemplo.com"
+            />
+            {errors.email && (
+              <div id="email-error" className="invalid-feedback" role="alert">
+                {errors.email.message}
+              </div>
+            )}
           </div>
 
           {/* Botón de envío */}
-          <div>
-            <Button
-              type="submit"
-              variant="primary"
-              size="lg"
-              disabled={isSubmitting || requestCount >= MAX_REQUESTS}
-              className="w-full"
-            >
-              {isSubmitting ? (
-                <>
-                  <span
-                    className="inline-block animate-spin mr-2"
-                    aria-hidden="true"
-                  >
-                    ⏳
-                  </span>
-                  Enviando correo...
-                </>
-              ) : requestCount >= MAX_REQUESTS ? (
-                'Límite de solicitudes alcanzado'
-              ) : (
-                'Enviar instrucciones'
-              )}
-            </Button>
-          </div>
+          <Button
+            type="submit"
+            variant="primary"
+            size="lg"
+            disabled={isSubmitting || requestCount >= MAX_REQUESTS}
+            className="w-100 mb-3"
+          >
+            {isSubmitting ? (
+              <>
+                <span
+                  className="spinner-border spinner-border-sm me-2"
+                  aria-hidden="true"
+                />
+                Enviando correo...
+              </>
+            ) : requestCount >= MAX_REQUESTS ? (
+              'Límite de solicitudes alcanzado'
+            ) : (
+              'Enviar instrucciones'
+            )}
+          </Button>
 
           {/* Links de navegación */}
-          <div className="flex items-center justify-between text-sm">
+          <div className="d-flex align-items-center justify-content-between small">
             <Link
               to="/login"
-              className="font-medium hover:underline"
+              className="text-decoration-none fw-medium"
               style={{ color: 'var(--color-govco-marino)' }}
             >
               ← Volver al inicio de sesión
@@ -325,7 +288,7 @@ export function ForgotPassword() {
 
             <Link
               to="/registro"
-              className="font-medium hover:underline"
+              className="text-decoration-none fw-medium"
               style={{ color: 'var(--color-govco-marino)' }}
             >
               Crear cuenta
@@ -334,8 +297,8 @@ export function ForgotPassword() {
         </form>
 
         {/* Información adicional */}
-        <div className="text-center text-xs text-gray-500">
-          <p>
+        <div className="text-center mt-3 small text-muted">
+          <p className="mb-0">
             Si no recibe el correo en unos minutos, verifique su carpeta de spam
             o contacte al soporte técnico.
           </p>
