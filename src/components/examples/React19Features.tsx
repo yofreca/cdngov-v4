@@ -3,6 +3,7 @@
  * - Hook use() para leer promises
  * - Suspense mejorado
  * - Integración perfecta con async
+ * - Convertido a Bootstrap 5
  */
 
 import { Suspense } from 'react'
@@ -22,28 +23,31 @@ function UsersList() {
   const users = useDataFetcher()
 
   return (
-    <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-govco-marino">
+    <div className="d-flex flex-column gap-4">
+      <h3 className="h5 fw-semibold" style={{ color: 'var(--color-govco-marino)' }}>
         Usuarios cargados con use() hook
       </h3>
-      <div className="grid gap-3">
+      <div className="d-flex flex-column gap-3">
         {users.map((user) => (
           <div
             key={user.id}
-            className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+            className="p-3 border rounded-3"
+            style={{ transition: 'background-color 0.2s ease' }}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#f8f9fa'}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
           >
-            <div className="flex items-center justify-between">
+            <div className="d-flex align-items-center justify-content-between">
               <div>
-                <h4 className="font-medium text-gray-900">{user.name}</h4>
-                <p className="text-sm text-gray-600">{user.email}</p>
+                <h4 className="fw-medium text-dark mb-0">{user.name}</h4>
+                <p className="small text-secondary mb-0">{user.email}</p>
               </div>
               <span
-                className={`px-3 py-1 rounded-full text-xs font-medium ${
+                className={`badge ${
                   user.role === 'admin'
-                    ? 'bg-red-100 text-red-800'
+                    ? 'bg-danger'
                     : user.role === 'editor'
-                      ? 'bg-yellow-100 text-yellow-800'
-                      : 'bg-blue-100 text-blue-800'
+                      ? 'bg-warning text-dark'
+                      : 'bg-primary'
                 }`}
               >
                 {user.role}
@@ -67,33 +71,33 @@ export function React19Features() {
   }
 
   return (
-    <div className="container-govco py-8">
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold text-govco-marino mb-2">
+    <div className="container-govco py-5">
+      <header className="mb-5">
+        <h1 className="display-5 fw-bold mb-2" style={{ color: 'var(--color-govco-marino)' }}>
           Features React 19
         </h1>
-        <p className="text-gray-600">
+        <p className="text-secondary">
           Demostración de las nuevas características de React 19
         </p>
       </header>
 
-      <div className="grid gap-6">
+      <div className="d-flex flex-column gap-4">
         {/* Hook use() Example */}
         <Card>
           <CardHeader>
-            <h2 className="text-xl font-bold text-govco-marino">
+            <h2 className="h4 fw-bold" style={{ color: 'var(--color-govco-marino)' }}>
               Hook use() - Lectura de Promises
             </h2>
-            <p className="text-sm text-gray-600 mt-1">
+            <p className="small text-secondary mt-1 mb-0">
               El hook use() permite leer promises directamente, simplificando el código async
             </p>
           </CardHeader>
           <CardContent>
-            <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-              <h4 className="font-semibold text-blue-900 mb-2">
-                ✨ Ventajas del hook use():
+            <div className="mb-4 p-3 rounded-3 alert alert-info border-0">
+              <h4 className="fw-semibold mb-2">
+                Ventajas del hook use():
               </h4>
-              <ul className="text-sm text-blue-800 space-y-1 list-disc list-inside">
+              <ul className="small mb-0 ps-3">
                 <li>Puede ser llamado condicionalmente (rompe reglas tradicionales de hooks)</li>
                 <li>Lee promises directamente sin useEffect</li>
                 <li>Se integra perfectamente con Suspense</li>
@@ -111,9 +115,9 @@ export function React19Features() {
               <UsersList />
             </Suspense>
 
-            <div className="mt-4 pt-4 border-t border-gray-200">
+            <div className="mt-4 pt-4 border-top">
               <Button onClick={handleRefresh} variant="outline" size="sm">
-                🔄 Refrescar datos
+                Refrescar datos
               </Button>
             </div>
           </CardContent>
@@ -122,12 +126,14 @@ export function React19Features() {
         {/* Code Example */}
         <Card>
           <CardHeader>
-            <h2 className="text-xl font-bold text-govco-marino">Ejemplo de Código</h2>
+            <h2 className="h4 fw-bold" style={{ color: 'var(--color-govco-marino)' }}>
+              Ejemplo de Código
+            </h2>
           </CardHeader>
           <CardContent>
-            <div className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
-              <pre className="text-sm">
-                <code>{`// ❌ React 18 - Código complejo
+            <div className="bg-dark text-light p-4 rounded-3 overflow-auto">
+              <pre className="small mb-0">
+                <code>{`// React 18 - Código complejo
 function UsersList() {
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
@@ -147,7 +153,7 @@ function UsersList() {
   return <UserList users={users} />
 }
 
-// ✅ React 19 - Código simple con use()
+// React 19 - Código simple con use()
 function UsersList() {
   const users = use(fetchUsers()) // ¡Así de simple!
   return <UserList users={users} />
@@ -165,14 +171,14 @@ function UsersList() {
         {/* useOptimistic Example Link */}
         <Card>
           <CardHeader>
-            <h2 className="text-xl font-bold text-govco-marino">
+            <h2 className="h4 fw-bold" style={{ color: 'var(--color-govco-marino)' }}>
               useOptimistic - Ya implementado
             </h2>
           </CardHeader>
           <CardContent>
-            <p className="text-gray-600 mb-4">
+            <p className="text-secondary mb-4">
               El hook useOptimistic() ya está implementado en el Dashboard. Ve al Dashboard
-              y prueba el botón 🔄 para cambiar el estado de los usuarios de forma
+              y prueba el botón para cambiar el estado de los usuarios de forma
               optimista.
             </p>
             <Button variant="primary" size="sm" onClick={() => (window.location.href = '/dashboard')}>
