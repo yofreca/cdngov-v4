@@ -1,8 +1,8 @@
 import { lazy, Suspense } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { MainLayout } from '@components/layout/MainLayout'
+import { MainLayout } from '@feature/layout'
 import { ProtectedRoute } from '@components/auth/ProtectedRoute'
-import { LoadingSpinner } from '@components/common/LoadingSpinner'
+import { LoadingSpinner } from '@shared/components/ui'
 
 // Lazy loading de páginas para mejorar performance
 const Home = lazy(() => import('@pages/Home').then((module) => ({ default: module.Home })))

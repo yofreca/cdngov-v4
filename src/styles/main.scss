@@ -1,0 +1,333 @@
+// =============================================================================
+// ESTILOS PRINCIPALES - GOV.CO con Bootstrap 5
+// =============================================================================
+
+// Importar fuentes de Gov.co
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap');
+
+// =============================================================================
+// VARIABLES PERSONALIZADAS GOV.CO
+// =============================================================================
+
+// Colores GOV.CO
+$govco-marino: #3366cc;
+$govco-azul-oscuro: #004884;
+$govco-verde: #068460;
+$govco-rojo: #f42f63;
+$govco-naranja: #f3561f;
+$govco-amarillo: #f7c924;
+$govco-gris-oscuro: #2c2c2c;
+$govco-gris: #4b4b4b;
+$govco-gris-claro: #d2d2d2;
+$govco-gris-muy-claro: #f2f2f2;
+
+// Sobrescribir variables de Bootstrap
+$primary: $govco-marino;
+$secondary: $govco-gris;
+$success: $govco-verde;
+$danger: $govco-rojo;
+$warning: $govco-amarillo;
+$info: $govco-azul-oscuro;
+$light: $govco-gris-muy-claro;
+$dark: $govco-gris-oscuro;
+
+// Tipografía
+$font-family-sans-serif: 'Work Sans', sans-serif;
+$headings-font-family: 'Montserrat', sans-serif;
+$headings-font-weight: 600;
+
+// Tamaños de fuente
+$font-size-base: 1rem;
+$h1-font-size: 2.5rem;
+$h2-font-size: 2rem;
+$h3-font-size: 1.75rem;
+$h4-font-size: 1.5rem;
+$h5-font-size: 1.25rem;
+$h6-font-size: 1rem;
+
+// Border radius
+$border-radius: 0.375rem;
+$border-radius-sm: 0.25rem;
+$border-radius-lg: 0.5rem;
+
+// Botones
+$btn-padding-y: 0.75rem;
+$btn-padding-x: 1.5rem;
+$btn-font-weight: 500;
+
+// Inputs
+$input-padding-y: 0.75rem;
+$input-padding-x: 1rem;
+$input-border-color: $govco-gris-claro;
+$input-focus-border-color: $govco-marino;
+$input-focus-box-shadow: 0 0 0 0.2rem rgba($govco-marino, 0.25);
+
+// Cards
+$card-border-color: $govco-gris-claro;
+$card-cap-bg: $govco-gris-muy-claro;
+
+// =============================================================================
+// IMPORTAR BOOTSTRAP
+// =============================================================================
+@import "bootstrap/scss/bootstrap";
+
+// =============================================================================
+// ESTILOS BASE PERSONALIZADOS
+// =============================================================================
+
+:root {
+  // CSS Variables para uso en componentes
+  --govco-marino: #{$govco-marino};
+  --govco-azul-oscuro: #{$govco-azul-oscuro};
+  --govco-verde: #{$govco-verde};
+  --govco-rojo: #{$govco-rojo};
+  --govco-naranja: #{$govco-naranja};
+  --govco-amarillo: #{$govco-amarillo};
+  --govco-gris-oscuro: #{$govco-gris-oscuro};
+  --govco-gris: #{$govco-gris};
+  --govco-gris-claro: #{$govco-gris-claro};
+  --govco-gris-muy-claro: #{$govco-gris-muy-claro};
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  color: $govco-gris-oscuro;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+// =============================================================================
+// UTILIDADES PERSONALIZADAS GOV.CO
+// =============================================================================
+
+// Container personalizado
+.container-govco {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  @media (min-width: 576px) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  @media (min-width: 992px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+// Colores de texto GOV.CO
+.text-govco-marino { color: $govco-marino !important; }
+.text-govco-azul-oscuro { color: $govco-azul-oscuro !important; }
+.text-govco-verde { color: $govco-verde !important; }
+.text-govco-rojo { color: $govco-rojo !important; }
+.text-govco-naranja { color: $govco-naranja !important; }
+.text-govco-amarillo { color: $govco-amarillo !important; }
+
+// Backgrounds GOV.CO
+.bg-govco-marino { background-color: $govco-marino !important; }
+.bg-govco-azul-oscuro { background-color: $govco-azul-oscuro !important; }
+.bg-govco-verde { background-color: $govco-verde !important; }
+.bg-govco-rojo { background-color: $govco-rojo !important; }
+.bg-govco-naranja { background-color: $govco-naranja !important; }
+.bg-govco-amarillo { background-color: $govco-amarillo !important; }
+
+// Botones GOV.CO personalizados
+.btn-govco {
+  @extend .btn;
+  padding: $btn-padding-y $btn-padding-x;
+  font-weight: $btn-font-weight;
+  border-radius: $border-radius;
+  transition: all 0.2s ease-in-out;
+
+  &:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 4px $govco-marino;
+  }
+}
+
+.btn-govco-primary {
+  @extend .btn-govco;
+  background-color: $govco-marino;
+  border-color: $govco-marino;
+  color: white;
+
+  &:hover {
+    background-color: $govco-azul-oscuro;
+    border-color: $govco-azul-oscuro;
+    color: white;
+  }
+}
+
+.btn-govco-secondary {
+  @extend .btn-govco;
+  background-color: $govco-verde;
+  border-color: $govco-verde;
+  color: white;
+
+  &:hover {
+    background-color: darken($govco-verde, 10%);
+    border-color: darken($govco-verde, 10%);
+    color: white;
+  }
+}
+
+.btn-govco-outline {
+  @extend .btn-govco;
+  background-color: transparent;
+  border: 2px solid $govco-marino;
+  color: $govco-marino;
+
+  &:hover {
+    background-color: $govco-marino;
+    color: white;
+  }
+}
+
+// =============================================================================
+// FOCUS VISIBLE PARA ACCESIBILIDAD
+// =============================================================================
+
+*:focus-visible {
+  outline: 2px solid $govco-marino;
+  outline-offset: 2px;
+}
+
+// =============================================================================
+// MODO DE ALTO CONTRASTE PARA ACCESIBILIDAD
+// =============================================================================
+
+body.high-contrast main {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+}
+
+body.high-contrast main * {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+  border-color: #ffff00 !important;
+}
+
+body.high-contrast main a {
+  color: #00ffff !important;
+  text-decoration: underline !important;
+}
+
+body.high-contrast main button,
+body.high-contrast main .btn {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+}
+
+body.high-contrast main input,
+body.high-contrast main textarea,
+body.high-contrast main select,
+body.high-contrast main .form-control,
+body.high-contrast main .form-select {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+}
+
+body.high-contrast main img,
+body.high-contrast main svg {
+  opacity: 0.8 !important;
+  filter: grayscale(100%) contrast(1.2) !important;
+}
+
+// Barra de accesibilidad mantiene su diseño original
+body.high-contrast .accessibility-bar,
+body.high-contrast .accessibility-bar * {
+  background-color: $govco-marino !important;
+  color: white !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+body.high-contrast .accessibility-bar button:hover {
+  background-color: $govco-azul-oscuro !important;
+}
+
+// ScrollToTop mantiene su diseño
+body.high-contrast .scroll-to-top,
+body.high-contrast .scroll-to-top * {
+  background-color: $govco-marino !important;
+  color: white !important;
+}
+
+// SkipLinks mantiene su diseño
+body.high-contrast .skip-links,
+body.high-contrast .skip-links *,
+body.high-contrast .skip-link {
+  background-color: $govco-marino !important;
+  color: white !important;
+  border-color: white !important;
+}
+
+// =============================================================================
+// MODOS DE DALTONISMO PARA ACCESIBILIDAD
+// =============================================================================
+
+// Protanopia (deficiencia de rojo)
+body.colorblind-protanopia {
+  filter: url('#protanopia-filter');
+}
+
+// Deuteranopia (deficiencia de verde)
+body.colorblind-deuteranopia {
+  filter: grayscale(0.3) hue-rotate(180deg) saturate(0.8);
+}
+
+// Tritanopia (deficiencia de azul)
+body.colorblind-tritanopia {
+  filter: grayscale(0.2) hue-rotate(90deg) saturate(0.7);
+}
+
+// =============================================================================
+// UTILIDADES ADICIONALES
+// =============================================================================
+
+// Sombras personalizadas
+.shadow-govco {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.shadow-govco-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+// Transiciones
+.transition-all {
+  transition: all 0.2s ease-in-out;
+}
+
+// Truncate text
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// =============================================================================
+// RESPONSIVE UTILITIES ADICIONALES
+// =============================================================================
+
+// Ocultar en pantallas pequeñas
+.hide-mobile {
+  @media (max-width: 767.98px) {
+    display: none !important;
+  }
+}
+
+// Mostrar solo en móvil
+.show-mobile {
+  @media (min-width: 768px) {
+    display: none !important;
+  }
+}

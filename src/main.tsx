@@ -1,6 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
+// Bootstrap JS
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+// Estilos personalizados con Bootstrap
+import './styles/main.scss'
 import App from './App.tsx'
 
 // Configurar axe-core para pruebas de accesibilidad en desarrollo
