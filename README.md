@@ -1,47 +1,48 @@
 # Gov.co React App
 
-Aplicación React 19 con diseño y componentes del estilo Gov.co (Gobierno de Colombia).
+Aplicacion React 19 con diseno y componentes del estilo Gov.co (Gobierno de Colombia).
 
-## 🚀 Tecnologías
+## Tecnologias
 
-- **React 19.2.0** - Última versión con nuevas características
-- **TypeScript** - Type safety y mejor DX
-- **Vite 7** - Build tool ultrarrápido
-- **Tailwind CSS** - Estilos con paleta Gov.co
-- **React Router 7** - Navegación y rutas
-- **React Hook Form + Zod** - Formularios con validación
+- **React 19.2.0** - Ultima version con nuevas caracteristicas
+- **TypeScript 5.9.3** - Type safety y mejor DX
+- **Vite 7.2.2** - Build tool ultrarapido
+- **Bootstrap 5.3.3** - Framework CSS con componentes Gov.co
+- **Sass** - Preprocesador CSS
+- **React Router 7** - Navegacion y rutas
+- **React Hook Form + Zod** - Formularios con validacion
 - **Axios** - Cliente HTTP
-- **DOMPurify** - Sanitización XSS
+- **DOMPurify** - Sanitizacion XSS
 - **ESLint 9 + Prettier** - Linting y formateo
 
-## 📋 Requisitos
+## Requisitos
 
-⚠️ **Importante:** Este proyecto requiere Node.js 20.19+ o 22.12+ para el build de producción.
+**Importante:** Este proyecto requiere Node.js 20.19+ o 22.12+ para el build de produccion.
 
 - Node.js: v20.19+ (recomendado) o v22.12+
 - npm: v9.0.0+
 
-Para desarrollo con Node 18, el servidor de desarrollo (`npm run dev`) debería funcionar, pero el build puede fallar.
+Para desarrollo con Node 18, el servidor de desarrollo (`npm run dev`) deberia funcionar, pero el build puede fallar.
 
-## 🛠️ Instalación
+## Instalacion
 
 ```bash
 # Clonar el repositorio
 git clone https://github.com/yofreca/cdngov-v4.git
 cd cdngov-v4
 
-# Instalar dependencias (IMPORTANTE: ejecutar siempre después de clonar)
+# Instalar dependencias (IMPORTANTE: ejecutar siempre despues de clonar)
 npm install
 
 # Iniciar servidor de desarrollo
 npm run dev
 ```
 
-El servidor se abrirá automáticamente en http://localhost:5173
+El servidor se abrira automaticamente en http://localhost:3000
 
-⚠️ **Solución de Problemas:**
+**Solucion de Problemas:**
 
-Si recibes el error `Failed to resolve import "@axe-core/react"`:
+Si recibes errores de dependencias:
 ```bash
 # Ejecuta npm install para instalar todas las dependencias
 npm install
@@ -51,55 +52,95 @@ rm -rf node_modules package-lock.json
 npm install
 ```
 
-## 📜 Scripts Disponibles
+## Scripts Disponibles
 
 ```bash
 npm run dev          # Servidor de desarrollo (puerto 3000)
-npm run build        # Build de producción (requiere Node 20+)
+npm run build        # Build de produccion (requiere Node 20+)
 npm run preview      # Preview del build
 npm run lint         # Ejecutar ESLint
 npm run lint:fix     # Corregir errores de ESLint
-npm run format       # Formatear código con Prettier
+npm run format       # Formatear codigo con Prettier
 npm run format:check # Verificar formateo
 npm run test         # Ejecutar tests en modo watch
-npm run test:ui      # Ejecutar tests con interfaz gráfica
+npm run test:ui      # Ejecutar tests con interfaz grafica
 npm run test:run     # Ejecutar todos los tests una vez
 npm run test:coverage # Generar reporte de cobertura
 ```
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
-govco-react-app/
+cdngov-v4/
 ├── src/
-│   ├── assets/          # Imágenes, fuentes, iconos
-│   │   ├── fonts/
-│   │   ├── icons/
+│   ├── assets/              # Imagenes y recursos
 │   │   └── images/
-│   ├── components/      # Componentes reutilizables
-│   │   ├── common/      # Botones, inputs, cards
-│   │   ├── forms/       # Componentes de formularios
-│   │   └── layout/      # Header, Footer, Sidebar
-│   ├── context/         # Context API providers
-│   ├── hooks/           # Custom hooks
-│   ├── pages/           # Páginas de la aplicación
-│   ├── routes/          # Configuración de rutas
-│   ├── services/        # APIs y servicios
-│   ├── styles/          # Estilos globales
-│   ├── utils/           # Funciones auxiliares
-│   ├── App.tsx          # Componente principal
-│   ├── main.tsx         # Entry point
-│   └── index.css        # Estilos base + Tailwind
-├── .env                 # Variables de entorno
-├── .env.example         # Ejemplo de variables
-├── .prettierrc          # Configuración Prettier
-├── eslint.config.js     # Configuración ESLint
-├── tailwind.config.js   # Configuración Tailwind
-├── tsconfig.json        # Configuración TypeScript
-└── vite.config.ts       # Configuración Vite
+│   │
+│   ├── components/          # Componentes especificos
+│   │   ├── auth/            # Autenticacion
+│   │   ├── dashboard/       # Dashboard (StatsCard, DataTable)
+│   │   ├── examples/        # Demos (React19Features)
+│   │   └── forms/           # Formularios (FileUpload, DatePicker)
+│   │
+│   ├── context/             # Context API providers
+│   │
+│   ├── feature/             # ARQUITECTURA MODULAR
+│   │   ├── auth/            # Modulo autenticacion
+│   │   │   └── pages/       # Login, Register, ForgotPassword
+│   │   ├── dashboard/       # Modulo dashboard
+│   │   │   └── pages/       # Dashboard
+│   │   ├── demo/            # Modulo demos
+│   │   │   └── pages/       # ComponentsDemo, FormExample
+│   │   ├── home/            # Modulo home
+│   │   │   └── pages/       # Home
+│   │   └── layout/          # Modulo layout
+│   │       └── components/  # Header, Footer, SideMenu, etc.
+│   │
+│   ├── hooks/               # Custom hooks
+│   ├── routes/              # Configuracion de rutas
+│   ├── services/            # APIs y servicios
+│   │
+│   ├── shared/              # COMPONENTES COMPARTIDOS
+│   │   └── components/ui/
+│   │       ├── common/      # Button, Card, LoadingSpinner
+│   │       ├── forms/       # Input, Select, Checkbox
+│   │       └── alerts/      # Alert
+│   │
+│   ├── styles/              # Estilos globales
+│   │   └── main.scss        # Bootstrap + Gov.co
+│   │
+│   ├── utils/               # Funciones auxiliares
+│   ├── App.tsx              # Componente principal
+│   └── main.tsx             # Entry point
+│
+├── docs/                    # Documentacion
+├── eslint.config.js
+├── tsconfig.json
+└── vite.config.ts           # Configuracion Vite con aliases
 ```
 
-## 🎨 Sistema de Diseño Gov.co
+## Arquitectura Modular
+
+El proyecto usa una arquitectura modular por features:
+
+### Feature Modules (`src/feature/`)
+Cada modulo funcional contiene todo lo necesario:
+- `pages/` - Paginas del modulo
+- `components/` - Componentes especificos
+- `services/` - Servicios de datos
+- `index.ts` - Exportaciones publicas
+
+### Shared (`src/shared/`)
+Recursos transversales reutilizables en todo el proyecto.
+
+### Aliases de Importacion
+```typescript
+import { Button } from '@shared/components/ui'
+import { Dashboard } from '@feature/dashboard/pages'
+import { api } from '@services/api'
+```
+
+## Sistema de Diseno Gov.co
 
 ### Paleta de Colores
 
@@ -119,7 +160,7 @@ govco-gris-claro: #d2d2d2
 govco-gris-muy-claro: #f2f2f2
 ```
 
-### Tipografía
+### Tipografia
 
 - **Headings:** Montserrat (SemiBold)
 - **Body:** Work Sans (Regular)
@@ -130,31 +171,50 @@ govco-gris-muy-claro: #f2f2f2
 <!-- Contenedor -->
 <div class="container-govco">...</div>
 
-<!-- Botones -->
-<button class="btn-govco-primary">Primario</button>
-<button class="btn-govco-secondary">Secundario</button>
-<button class="btn-govco-outline">Outline</button>
+<!-- Botones Bootstrap -->
+<button class="btn btn-primary">Primario</button>
+<button class="btn btn-secondary">Secundario</button>
+<button class="btn btn-outline-primary">Outline</button>
+
+<!-- Botones Gov.co personalizados -->
+<button class="btn-govco-primary">Primario Gov.co</button>
+
+<!-- Colores de texto -->
+<p class="text-govco-marino">Texto azul marino</p>
+<p class="text-govco-azul-oscuro">Texto azul oscuro</p>
 ```
 
-## 🔒 Seguridad
+### CSS Variables
 
-El proyecto implementa prácticas de seguridad OWASP:
+```css
+:root {
+  --govco-marino: #3366cc;
+  --govco-azul-oscuro: #004884;
+  --govco-verde: #068460;
+  --govco-rojo: #f42f63;
+}
+```
 
-- ✅ Validación de inputs con Zod
-- ✅ Sanitización XSS con DOMPurify
-- ✅ TypeScript para type safety
-- ✅ ESLint con reglas de seguridad
-- ✅ Variables de entorno para configuración
+## Seguridad
 
-## ♿ Accesibilidad
+El proyecto implementa practicas de seguridad OWASP:
+
+- Validacion de inputs con Zod
+- Sanitizacion XSS con DOMPurify
+- TypeScript para type safety
+- ESLint con reglas de seguridad
+- Variables de entorno para configuracion
+
+## Accesibilidad
 
 - WCAG 2.1 AA compliance
 - ESLint plugin jsx-a11y activado
 - Focus visible personalizado
-- Navegación por teclado
+- Navegacion por teclado
 - ARIA labels y roles
+- Barra de accesibilidad con alto contraste y modos de daltonismo
 
-## 🌐 Variables de Entorno
+## Variables de Entorno
 
 Copia `.env.example` a `.env` y configura:
 
@@ -166,26 +226,19 @@ VITE_ENABLE_ANALYTICS=false
 VITE_ENABLE_DEBUG=true
 ```
 
-## ⚡ Optimizaciones de Performance
-
-La aplicación implementa múltiples optimizaciones para garantizar el mejor rendimiento:
+## Optimizaciones de Performance
 
 ### Code Splitting y Lazy Loading
-- **Rutas lazy-loaded**: Todas las páginas se cargan bajo demanda
+- **Rutas lazy-loaded**: Todas las paginas se cargan bajo demanda
 - **Bundle inicial reducido en 66%**: ~50KB vs ~150KB
-- **React.Suspense**: Loading states optimizados durante la carga
+- **React.Suspense**: Loading states optimizados
 
 ### React Optimizations
 - **React.memo**: Componentes memoizados (StatsCard, DataTable)
-- **useMemo**: Cálculos costosos cacheados (filtrado, ordenamiento)
+- **useMemo**: Calculos costosos cacheados
 - **useCallback**: Funciones estables para evitar re-renders
 
-### Assets Optimization
-- **LazyImage**: Lazy loading de imágenes con Intersection Observer
-- **LoadingSpinner**: Componente de carga reutilizable
-- **ErrorBoundary**: Manejo robusto de errores sin romper la app
-
-### Métricas de Performance
+### Metricas de Performance
 ```
 Bundle inicial: ~50KB (-66%)
 First Contentful Paint: ~0.8s (-68%)
@@ -193,232 +246,106 @@ Time to Interactive: ~1.2s (-66%)
 Re-renders reducidos: -75%
 ```
 
-📚 **Documentación completa**: [docs/PERFORMANCE_OPTIMIZATIONS.md](docs/PERFORMANCE_OPTIMIZATIONS.md)
+Documentacion completa: [docs/PERFORMANCE_OPTIMIZATIONS.md](docs/PERFORMANCE_OPTIMIZATIONS.md)
 
-## ⚛️ Features React 19
-
-La aplicación aprovecha las últimas características de React 19 para mejorar la experiencia de usuario:
+## Features React 19
 
 ### useOptimistic() - Actualizaciones Optimistas
-- **Dashboard con actualizaciones instantáneas**: Toggle de estado de usuarios sin esperar
-- **UI responsive**: Cambios visibles en <50ms vs ~1s antes
-- **Reversión automática**: Si falla el servidor, vuelve al estado anterior
-- **Mejor UX**: Sensación de aplicación rápida y fluida
+- Dashboard con actualizaciones instantaneas
+- UI responsive: Cambios visibles en <50ms
 
 ### use() Hook - Lectura de Promises
-- **Código simplificado**: 1 línea vs 20 líneas de useEffect + useState
-- **Suspense integrado**: Loading states automáticos
-- **Hook personalizado useDataFetcher**: Ejemplo real de implementación
-- **Rompe reglas tradicionales**: Puede usarse condicionalmente
+- Codigo simplificado: 1 linea vs 20 lineas
+- Suspense integrado: Loading states automaticos
 
-### useTransition() - Transiciones Suaves
-- **Integrado con useOptimistic**: Manejo de estados pendientes
-- **UI no bloqueante**: La interfaz permanece responsive
-- **Feedback visual**: Indicador de "⏳ Actualizando..." mientras procesa
-
-### Comparación React 18 vs React 19
+### Comparacion React 18 vs React 19
 ```typescript
-// React 18 - Código complejo ❌
+// React 18 - Codigo complejo
 function UsersList() {
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    fetchUsers()
-      .then(data => { setUsers(data); setLoading(false) })
-      .catch(err => setError(err))
-  }, [])
-
+  useEffect(() => { ... }, [])
   if (loading) return <Loading />
-  if (error) return <Error />
   return <UserList users={users} />
 }
 
-// React 19 - Código simple ✅
+// React 19 - Codigo simple
 function UsersList() {
-  const users = use(fetchUsers()) // ¡Así de simple!
+  const users = use(fetchUsers())
   return <UserList users={users} />
 }
 ```
 
-### Mejoras Medidas
-| Métrica | React 18 | React 19 | Mejora |
-|---------|----------|----------|--------|
-| Tiempo percibido de respuesta | ~1s | <50ms | **95%** |
-| Código para async data | ~20 líneas | 1 línea | **95%** |
-| Re-renders por actualización | 3-4 | 1-2 | **50%** |
+Documentacion completa: [docs/REACT_19_FEATURES.md](docs/REACT_19_FEATURES.md)
 
-### Demo Interactiva
-- **Ruta**: `/react-19` - Página con ejemplos interactivos
-- **Dashboard**: Prueba useOptimistic cambiando estados de usuarios
-- **Código de ejemplo**: Comparaciones lado a lado de React 18 vs 19
-
-📚 **Documentación completa**: [docs/REACT_19_FEATURES.md](docs/REACT_19_FEATURES.md)
-
-## 🧪 Testing
-
-La aplicación implementa una estrategia completa de testing con Vitest y React Testing Library:
+## Testing
 
 ### Stack de Testing
-- **Vitest** (v4.0.9) - Framework de testing ultrarrápido
-- **React Testing Library** (v16.3.0) - Testing de componentes React 19
-- **@testing-library/jest-dom** - Matchers adicionales
-- **@testing-library/user-event** - Simulación de interacciones
+- **Vitest** (v4.0.9) - Framework de testing
+- **React Testing Library** (v16.3.0) - Testing de componentes
 
-### Estadísticas
+### Estadisticas
 ```
 Tests Totales: 106
 Tests Pasando: 91 (85.8%)
 Cobertura Actual: ~40% (objetivo: 80%)
 ```
 
-### Tests Implementados
-- ✅ **Button Component** (27 tests) - Variantes, tamaños, estados, accesibilidad
-- ✅ **LoadingSpinner Component** (19 tests) - Tamaños, fullScreen, accesibilidad
-- ✅ **Validaciones** (60 tests) - OWASP, validaciones colombianas, sanitización XSS
-
 ### Scripts de Testing
 ```bash
 npm run test         # Modo watch interactivo
-npm run test:ui      # Interfaz gráfica
+npm run test:ui      # Interfaz grafica
 npm run test:run     # Ejecutar una vez
 npm run test:coverage # Reporte de cobertura
 ```
 
-### Tipos de Tests
-1. **Tests Unitarios** - Componentes y funciones individuales
-2. **Tests de Seguridad** - Validaciones OWASP, sanitización XSS
-3. **Tests de Accesibilidad** - WCAG 2.1 AA compliance
-4. **Tests de Integración** - (próximamente) Flows completos
+Documentacion completa: [docs/TESTING.md](docs/TESTING.md)
 
-📚 **Documentación completa**: [docs/TESTING.md](docs/TESTING.md)
+## Documentacion
 
-## 📚 Documentación
+### Guias de Desarrollo
 
-### Guías de Desarrollo
-
-- **[docs/CONTRIBUTING.md](docs/CONTRIBUTING.md)** - Guía para contribuidores
-  - Código de conducta
-  - Flujo de trabajo de desarrollo
-  - Estándares de código y estilo
-  - Testing y Pull Requests
-  - Conventional commits
-
+- **[docs/CONTRIBUTING.md](docs/CONTRIBUTING.md)** - Guia para contribuidores
 - **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** - Arquitectura del proyecto
-  - Stack tecnológico
-  - Estructura del proyecto
-  - Patrones de diseño
-  - Flujo de datos
-  - Decisiones arquitectónicas
+- **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** - Guia de deployment
 
-- **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** - Guía de deployment
-  - Build de producción
-  - Deployment en Netlify, Vercel, AWS, Nginx
-  - CI/CD con GitHub Actions
-  - Monitoreo y optimizaciones
-  - Troubleshooting
-
-### Documentación Técnica
+### Documentacion Tecnica
 
 - **[docs/TESTING.md](docs/TESTING.md)** - Estrategia de testing
-  - Configuración de Vitest
-  - Mejores prácticas
-  - Coverage y métricas
-
 - **[docs/PERFORMANCE_OPTIMIZATIONS.md](docs/PERFORMANCE_OPTIMIZATIONS.md)** - Optimizaciones
-  - Lazy loading y code splitting
-  - React.memo y hooks
-  - Métricas de performance
-
 - **[docs/REACT_19_FEATURES.md](docs/REACT_19_FEATURES.md)** - Features React 19
-  - useOptimistic()
-  - use() hook
-  - useTransition()
-  - Ejemplos y patrones
+- **[docs/SEGURIDAD_OWASP.md](docs/SEGURIDAD_OWASP.md)** - Seguridad OWASP
 
 ### Historial
 
 - **[docs/CHANGELOG.md](docs/CHANGELOG.md)** - Historial de versiones
-  - Todos los cambios por versión
-  - Semantic versioning
 
-## 🚧 Estado de las Fases
+## Estado de las Fases
 
-- ✅ Fase 1: Configuración Inicial (COMPLETADA)
-- ✅ Fase 2: Sistema de Diseño y Componentes (COMPLETADA)
-- ✅ Fase 3: Arquitectura y Rutas (COMPLETADA)
-- ✅ Fase 4: Seguridad OWASP y Componentes Avanzados (COMPLETADA)
-  - FileUpload con validación completa
-  - DatePicker accesible
-  - Servicio de API con interceptors de seguridad
-  - Sistema de logging de seguridad
-  - Validaciones avanzadas con Zod
-- ✅ Fase 5: Barra de Accesibilidad y WCAG 2.1 AA (COMPLETADA)
-  - AccessibilityBar con diseño Gov.co (azul con iconos blancos)
-  - Modos de alto contraste y tamaño de fuente
-  - Modos de daltonismo (protanopia, deuteranopia, tritanopia)
-  - SkipLinks para navegación por teclado
-  - Integración de @axe-core/react para testing
-  - Cumplimiento completo WCAG 2.1 AA
-- ✅ Fase 6: Sistema de Autenticación Completo (COMPLETADA)
-  - Página de Login con validación y protección contra fuerza bruta
-  - Página de Registro con validación completa de datos colombianos
-  - Recuperación de contraseña con rate limiting
-  - Servicio de autenticación con JWT (mock para desarrollo)
-  - AuthContext mejorado con persistencia y renovación automática
-  - ProtectedRoute para rutas privadas con verificación de roles
-  - Manejo seguro de sesiones (localStorage/sessionStorage)
-- ✅ Fase 7: Dashboard y Gestión de Datos (COMPLETADA)
-  - Dashboard principal con métricas y estadísticas clave
-  - StatsCard component con indicadores de tendencia
-  - DataTable component reutilizable con ordenamiento, filtrado y paginación
-  - Exportación de datos a CSV
-  - Gestión de usuarios con datos de ejemplo
-  - Diseño responsive y accesible WCAG 2.1 AA
-  - Integración completa con sistema de autenticación
-- ✅ Fase 8: Optimizaciones de Performance (COMPLETADA)
-  - Lazy loading de rutas con React.lazy() y code splitting
-  - React.memo en componentes (StatsCard, DataTable, LoadingSpinner, LazyImage)
-  - useMemo y useCallback para optimizar re-renders
-  - ErrorBoundary para manejo robusto de errores
-  - LazyImage con Intersection Observer para carga diferida de imágenes
-  - LoadingSpinner reutilizable con diseño Gov.co
-  - Reducción de bundle inicial en 66% (~150KB → ~50KB)
-  - Mejora de First Contentful Paint en 68% (~2.5s → ~0.8s)
-  - Documentación completa de optimizaciones
-- ✅ Fase 9: Features React 19 (COMPLETADA)
-  - Hook useOptimistic() en Dashboard para actualizaciones optimistas instantáneas
-  - Hook use() implementado en useDataFetcher para lectura directa de promises
-  - useTransition() integrado con useOptimistic para transiciones suaves
-  - Página demo React19Features (/react-19) con ejemplos interactivos
-  - Comparación React 18 vs React 19 con código y mejores prácticas
-  - Mejora del 95% en tiempo de respuesta percibido (1s → <50ms)
-  - Reducción del 95% de código para operaciones async
-  - Documentación completa de todas las features implementadas
-- 🔄 Fase 10: Testing Completo (75% - EN PROGRESO)
-  - Vitest configurado con React Testing Library
-  - 106 tests implementados (91 pasando, 85.8% éxito)
-  - Tests unitarios para Button, LoadingSpinner, validaciones
-  - Setup completo con mocks de localStorage, sessionStorage, IntersectionObserver
-  - Scripts: test, test:ui, test:run, test:coverage
-  - Documentación completa de estrategia de testing
-  - Pendiente: Tests de servicios, hooks y componentes restantes
-- ✅ Fase 11: Documentación Final (COMPLETADA)
-  - CONTRIBUTING.md - Guía completa para contribuidores
-  - docs/ARCHITECTURE.md - Arquitectura y patrones de diseño
-  - docs/DEPLOYMENT.md - Guía de deployment para múltiples plataformas
-  - CHANGELOG.md - Historial completo de versiones
-  - Documentación de todas las fases anteriores
-  - README actualizado con todos los links
-- ⏳ Fase 12: Deploy y CI/CD (PENDIENTE)
+- Fase 1: Configuracion Inicial (COMPLETADA)
+- Fase 2: Sistema de Diseno y Componentes (COMPLETADA)
+- Fase 3: Arquitectura y Rutas (COMPLETADA)
+- Fase 4: Seguridad OWASP y Componentes Avanzados (COMPLETADA)
+- Fase 5: Barra de Accesibilidad y WCAG 2.1 AA (COMPLETADA)
+- Fase 6: Sistema de Autenticacion Completo (COMPLETADA)
+- Fase 7: Dashboard y Gestion de Datos (COMPLETADA)
+- Fase 8: Optimizaciones de Performance (COMPLETADA)
+- Fase 9: Features React 19 (COMPLETADA)
+- Fase 10: Testing Completo (75% - EN PROGRESO)
+- Fase 11: Documentacion Final (COMPLETADA)
+- Fase 12: Migracion Bootstrap y Arquitectura Modular (COMPLETADA)
+  - Migracion completa de Tailwind CSS a Bootstrap 5.3.3
+  - Arquitectura modular por features (src/feature)
+  - Capa compartida (src/shared)
+  - Iconos SVG inline sin dependencias externas
+  - Documentacion actualizada
 
-**Progreso Total: 91% (11 de 12 fases)**
+**Progreso Total: 92% (11.5 de 12 fases)**
 
-## 📝 Licencia
+## Licencia
 
 Proyecto para el Gobierno de Colombia
 
-## 👨‍💻 Desarrollo
+## Desarrollo
 
-Generado con Claude Code siguiendo las mejores prácticas de React 19
+Generado con Claude Code siguiendo las mejores practicas de React 19
