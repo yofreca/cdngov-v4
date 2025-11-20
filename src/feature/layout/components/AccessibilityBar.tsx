@@ -237,6 +237,7 @@ export function AccessibilityBar() {
             right: '1rem',
             bottom: '2rem',
             width: '3rem',
+            padding: 0,
             height: '3rem',
             zIndex: 1020
           }}

@@ -190,7 +190,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-primary rounded-circle d-flex align-items-center justify-content-center"
-                  style={{ width: '2.5rem', height: '2.5rem' }}
+                  style={{ width: '2.5rem', height: '2.5rem', padding: '0' }}
                   title="Facebook ARN Colombia"
                   aria-label="Facebook ARN Colombia"
                 >
@@ -201,7 +201,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-primary rounded-circle d-flex align-items-center justify-content-center"
-                  style={{ width: '2.5rem', height: '2.5rem' }}
+                  style={{ width: '2.5rem', height: '2.5rem', padding: '0' }}
                   title="Twitter ARN Colombia"
                   aria-label="Twitter ARN Colombia"
                 >
@@ -212,7 +212,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-primary rounded-circle d-flex align-items-center justify-content-center"
-                  style={{ width: '2.5rem', height: '2.5rem' }}
+                  style={{ width: '2.5rem', height: '2.5rem', padding: '0' }}
                   title="Instagram ARN Colombia"
                   aria-label="Instagram ARN Colombia"
                 >
@@ -223,7 +223,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-primary rounded-circle d-flex align-items-center justify-content-center"
-                  style={{ width: '2.5rem', height: '2.5rem' }}
+                  style={{ width: '2.5rem', height: '2.5rem', padding: '0' }}
                   title="YouTube ARN Colombia"
                   aria-label="YouTube ARN Colombia"
                 >

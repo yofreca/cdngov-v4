@@ -35,7 +35,7 @@ export function ScrollToTop() {
         <div className="scroll-to-top position-fixed" style={{ bottom: '2rem', right: '1rem', zIndex: 1020 }}>
           <button
             onClick={scrollToTop}
-            className="btn btn-primary rounded-circle shadow d-flex align-items-center justify-content-center"
+            className="btn btn-primary rounded-circle shadow d-flex align-items-center justify-content-center p-0"
             style={{ width: '3rem', height: '3rem' }}
             aria-label="Volver arriba"
             title="Volver arriba"
