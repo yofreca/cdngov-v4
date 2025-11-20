@@ -243,7 +243,7 @@ export function AccessibilityBar() {
           }}
           aria-label="Volver arriba"
         >
-          <FaArrowUp className="fs-5" aria-hidden="true" />
+          <FaArrowUp size={20} aria-hidden="true" />
         </button>
       )}
     </>

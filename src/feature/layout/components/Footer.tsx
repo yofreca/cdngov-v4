@@ -4,10 +4,10 @@ import colombiaSvg from '@assets/images/CO.svg'
 import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa'
 
 // Iconos de redes sociales usando react-icons/fa (Font Awesome)
-const FacebookIcon = () => <FaFacebook className="fs-5" aria-hidden="true" />
-const TwitterIcon = () => <FaTwitter className="fs-5" aria-hidden="true" />
-const InstagramIcon = () => <FaInstagram className="fs-5" aria-hidden="true" />
-const YouTubeIcon = () => <FaYoutube className="fs-5" aria-hidden="true" />
+const FacebookIcon = () => <FaFacebook size={20} aria-hidden="true" />
+const TwitterIcon = () => <FaTwitter size={20} aria-hidden="true" />
+const InstagramIcon = () => <FaInstagram size={20} aria-hidden="true" />
+const YouTubeIcon = () => <FaYoutube size={20} aria-hidden="true" />
 
 /**
  * Componente Footer siguiendo el diseno Gov.co/ARN
