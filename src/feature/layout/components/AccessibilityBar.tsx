@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { FaArrowUp } from 'react-icons/fa'
 
 type ColorBlindMode = 'none' | 'protanopia' | 'deuteranopia' | 'tritanopia'
 
@@ -242,7 +243,7 @@ export function AccessibilityBar() {
           }}
           aria-label="Volver arriba"
         >
-          <span aria-hidden="true" className="fs-4">&#8593;</span>
+          <FaArrowUp className="fs-5" aria-hidden="true" />
         </button>
       )}
     </>
