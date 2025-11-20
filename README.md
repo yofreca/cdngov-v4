@@ -74,12 +74,11 @@ npm run test:coverage # Generar reporte de cobertura
 cdngov-v4/
 ├── src/
 │   ├── assets/              # Imagenes y recursos
-│   │   └── images/
+│   │   ├── images/          # CO.svg, header_govco.png, logo-arn.png, sara_icon_square.png
+│   │   └── react.svg
 │   │
-│   ├── components/          # Componentes especificos
-│   │   ├── auth/            # Autenticacion
+│   ├── components/          # Componentes especificos (legacy - en migracion a feature/)
 │   │   ├── dashboard/       # Dashboard (StatsCard, DataTable)
-│   │   ├── examples/        # Demos (React19Features)
 │   │   └── forms/           # Formularios (FileUpload, DatePicker)
 │   │
 │   ├── context/             # Context API providers
@@ -90,15 +89,16 @@ cdngov-v4/
 │   │   ├── dashboard/       # Modulo dashboard
 │   │   │   └── pages/       # Dashboard
 │   │   ├── demo/            # Modulo demos
-│   │   │   └── pages/       # ComponentsDemo, FormExample
+│   │   │   └── pages/       # ComponentsDemo, FormExample, React19Features, NotFound
 │   │   ├── home/            # Modulo home
 │   │   │   └── pages/       # Home
 │   │   └── layout/          # Modulo layout
 │   │       └── components/  # Header, Footer, SideMenu, etc.
 │   │
-│   ├── hooks/               # Custom hooks
-│   ├── routes/              # Configuracion de rutas
-│   ├── services/            # APIs y servicios
+│   ├── hooks/               # Custom hooks (useDataFetcher)
+│   ├── pages/               # Re-exports de paginas (legacy)
+│   ├── routes/              # Configuracion de rutas (AppRoutes, ProtectedRoute)
+│   ├── services/            # APIs y servicios (api, authService)
 │   │
 │   ├── shared/              # COMPONENTES COMPARTIDOS
 │   │   └── components/ui/
@@ -109,9 +109,11 @@ cdngov-v4/
 │   ├── styles/              # Estilos globales
 │   │   └── main.scss        # Bootstrap + Gov.co
 │   │
-│   ├── utils/               # Funciones auxiliares
+│   ├── test/                # Utilidades de testing (setup, test-utils)
+│   ├── utils/               # Funciones auxiliares (validations, securityLogger, useFormId)
 │   ├── App.tsx              # Componente principal
-│   └── main.tsx             # Entry point
+│   ├── main.tsx             # Entry point
+│   └── vite-env.d.ts        # Tipos de Vite
 │
 ├── docs/                    # Documentacion
 ├── eslint.config.js

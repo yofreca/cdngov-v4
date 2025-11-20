@@ -88,15 +88,17 @@ cdngov-v4/
 │
 ├── src/
 │   ├── assets/                # Recursos (imagenes, fuentes)
-│   │   └── images/            # Imagenes y logos
+│   │   ├── images/            # Imagenes y logos
+│   │   │   ├── CO.svg
+│   │   │   ├── header_govco.png
+│   │   │   ├── logo-arn.png
+│   │   │   └── sara_icon_square.png
+│   │   └── react.svg          # Logo React
 │   │
-│   ├── components/            # Componentes especificos (legacy)
-│   │   ├── auth/              # Componentes de autenticacion
+│   ├── components/            # Componentes especificos (legacy - en proceso de migracion)
 │   │   ├── dashboard/         # Componentes del dashboard
 │   │   │   ├── DataTable.tsx
 │   │   │   └── StatsCard.tsx
-│   │   ├── examples/          # Componentes de demostracion
-│   │   │   └── React19Features.tsx
 │   │   └── forms/             # Componentes de formularios
 │   │       ├── DatePicker.tsx
 │   │       └── FileUpload.tsx
@@ -120,6 +122,7 @@ cdngov-v4/
 │   │   │   ├── pages/
 │   │   │   │   ├── ComponentsDemo.tsx
 │   │   │   │   ├── FormExample.tsx
+│   │   │   │   ├── React19Features.tsx
 │   │   │   │   └── NotFound.tsx
 │   │   │   └── index.ts
 │   │   │
@@ -143,6 +146,9 @@ cdngov-v4/
 │   │
 │   ├── hooks/                 # Custom React hooks
 │   │   └── useDataFetcher.ts
+│   │
+│   ├── pages/                 # Re-exports de paginas (legacy)
+│   │   └── index.ts
 │   │
 │   ├── routes/                # Configuracion de rutas
 │   │   ├── AppRoutes.tsx
@@ -178,11 +184,13 @@ cdngov-v4/
 │   │   └── main.scss          # Bootstrap + personalizaciones Gov.co
 │   │
 │   ├── test/                  # Utilidades de testing
-│   │   └── setup.ts
+│   │   ├── setup.ts
+│   │   └── test-utils.tsx
 │   │
 │   ├── utils/                 # Funciones auxiliares
 │   │   ├── securityLogger.ts
 │   │   ├── validations.ts
+│   │   ├── validations.test.ts
 │   │   └── useFormId.ts
 │   │
 │   ├── App.tsx                # Componente raiz
@@ -582,5 +590,5 @@ Lines: 80%
 
 ---
 
-**Ultima actualizacion**: 2025-11-18
-**Version**: 2.0.0
+**Ultima actualizacion**: 2025-11-20
+**Version**: 2.0.1
