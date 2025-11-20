@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { FaArrowUp } from 'react-icons/fa'
 
 type ColorBlindMode = 'none' | 'protanopia' | 'deuteranopia' | 'tritanopia'
 
@@ -243,7 +242,7 @@ export function AccessibilityBar() {
           }}
           aria-label="Volver arriba"
         >
-          <FaArrowUp size={20} aria-hidden="true" />
+          <span className="govco-icon govco-icon-shortu-arrow-n btn-svg-up-hover" aria-hidden="true"></span>
         </button>
       )}
     </>

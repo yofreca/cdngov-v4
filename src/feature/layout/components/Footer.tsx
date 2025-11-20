@@ -1,13 +1,12 @@
 import logoArnImg from '@assets/images/logo-arn.png'
 import headerGovcoImg from '@assets/images/header_govco.png'
 import colombiaSvg from '@assets/images/CO.svg'
-import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa'
 
-// Iconos de redes sociales usando react-icons/fa (Font Awesome)
-const FacebookIcon = () => <FaFacebook size={20} aria-hidden="true" />
-const TwitterIcon = () => <FaTwitter size={20} aria-hidden="true" />
-const InstagramIcon = () => <FaInstagram size={20} aria-hidden="true" />
-const YouTubeIcon = () => <FaYoutube size={20} aria-hidden="true" />
+// Iconos de redes sociales usando Font Awesome CDN
+const FacebookIcon = () => <i className="fa fa-facebook" aria-hidden="true"></i>
+const TwitterIcon = () => <i className="fa fa-twitter" aria-hidden="true"></i>
+const InstagramIcon = () => <i className="fa fa-instagram" aria-hidden="true"></i>
+const YouTubeIcon = () => <i className="fa fa-youtube-play" aria-hidden="true"></i>
 
 /**
  * Componente Footer siguiendo el diseno Gov.co/ARN

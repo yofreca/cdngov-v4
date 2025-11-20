@@ -5,6 +5,18 @@
 // Importar fuentes de Gov.co
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap');
 
+// Fuente de iconos Gov.co
+@font-face {
+  font-family: 'govco-icon';
+  src: url('/src/assets/fonts/govco/govco-fontv2.eot');
+  src: url('/src/assets/fonts/govco/govco-fontv2.eot?#iefix') format('embedded-opentype'),
+       url('/src/assets/fonts/govco/govco-fontv2.woff2') format('woff2'),
+       url('/src/assets/fonts/govco/govco-fontv2.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
 // =============================================================================
 // VARIABLES PERSONALIZADAS GOV.CO
 // =============================================================================
@@ -352,5 +364,36 @@ body.colorblind-tritanopia {
 .show-mobile {
   @media (min-width: 768px) {
     display: none !important;
+  }
+}
+
+// =============================================================================
+// ICONOS GOV.CO
+// =============================================================================
+
+// Clase base para iconos govco
+.govco-icon {
+  font-family: 'govco-icon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Icono flecha hacia arriba
+.govco-icon-shortu-arrow-n:before {
+  content: "\e92b";
+}
+
+// Hover para botón SVG
+.btn-svg-up-hover {
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
   }
 }
