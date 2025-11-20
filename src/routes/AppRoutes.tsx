@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { MainLayout } from '@feature/layout'
-import { ProtectedRoute } from '@components/auth/ProtectedRoute'
+import { ProtectedRoute } from './ProtectedRoute'
 import { LoadingSpinner } from '@shared/components/ui'
 
 // Lazy loading de páginas para mejorar performance
@@ -26,7 +26,7 @@ const NotFound = lazy(() =>
   import('@feature/demo/pages/NotFound').then((module) => ({ default: module.NotFound }))
 )
 const React19Features = lazy(() =>
-  import('@components/examples/React19Features').then((module) => ({
+  import('@feature/demo/pages/React19Features').then((module) => ({
     default: module.React19Features,
   }))
 )

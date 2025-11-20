@@ -203,24 +203,34 @@ body {
 // MODO DE ALTO CONTRASTE PARA ACCESIBILIDAD
 // =============================================================================
 
-body.high-contrast main {
+body.high-contrast main,
+body.high-contrast header,
+body.high-contrast footer {
   background-color: #000 !important;
-  color: #ffff00 !important;
+  color: #004884 !important;
 }
 
-body.high-contrast main * {
+body.high-contrast main *,
+body.high-contrast header *,
+body.high-contrast footer * {
   background-color: #000 !important;
   color: #ffff00 !important;
   border-color: #ffff00 !important;
 }
 
-body.high-contrast main a {
+body.high-contrast main a,
+body.high-contrast header a,
+body.high-contrast footer a {
   color: #00ffff !important;
   text-decoration: underline !important;
 }
 
 body.high-contrast main button,
-body.high-contrast main .btn {
+body.high-contrast main .btn,
+body.high-contrast header button,
+body.high-contrast header .btn,
+body.high-contrast footer button,
+body.high-contrast footer .btn {
   background-color: #000 !important;
   color: #ffff00 !important;
   border: 2px solid #ffff00 !important;
@@ -230,14 +240,28 @@ body.high-contrast main input,
 body.high-contrast main textarea,
 body.high-contrast main select,
 body.high-contrast main .form-control,
-body.high-contrast main .form-select {
+body.high-contrast main .form-select,
+body.high-contrast header input,
+body.high-contrast header textarea,
+body.high-contrast header select,
+body.high-contrast header .form-control,
+body.high-contrast header .form-select,
+body.high-contrast footer input,
+body.high-contrast footer textarea,
+body.high-contrast footer select,
+body.high-contrast footer .form-control,
+body.high-contrast footer .form-select {
   background-color: #000 !important;
   color: #ffff00 !important;
   border: 2px solid #ffff00 !important;
 }
 
 body.high-contrast main img,
-body.high-contrast main svg {
+body.high-contrast main svg,
+body.high-contrast header img,
+body.high-contrast header svg,
+body.high-contrast footer img,
+body.high-contrast footer svg {
   opacity: 0.8 !important;
   filter: grayscale(100%) contrast(1.2) !important;
 }
@@ -245,19 +269,19 @@ body.high-contrast main svg {
 // Barra de accesibilidad mantiene su diseño original
 body.high-contrast .accessibility-bar,
 body.high-contrast .accessibility-bar * {
-  background-color: $govco-marino !important;
+  background-color: #000 !important;
   color: white !important;
   border-color: rgba(255, 255, 255, 0.2) !important;
 }
 
 body.high-contrast .accessibility-bar button:hover {
-  background-color: $govco-azul-oscuro !important;
+  background-color: #000 !important;
 }
 
 // ScrollToTop mantiene su diseño
 body.high-contrast .scroll-to-top,
 body.high-contrast .scroll-to-top * {
-  background-color: $govco-marino !important;
+  background-color: #000 !important;
   color: white !important;
 }
 
@@ -265,7 +289,6 @@ body.high-contrast .scroll-to-top * {
 body.high-contrast .skip-links,
 body.high-contrast .skip-links *,
 body.high-contrast .skip-link {
-  background-color: $govco-marino !important;
   color: white !important;
   border-color: white !important;
 }
